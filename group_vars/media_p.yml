@@ -1,0 +1,21 @@
+vars_files:
+    - group_vars/vault.yml  # Adjust the path based on your directory structure
+
+custom_groups:
+  - name: media
+    gid: 1776
+    state: present
+
+mount_points:
+  - { mount_point: "mp0: /media/storage,mp=/media/storage" }
+dynamic_container_ids: ["101", "102", "103"] # Adjust as needed
+
+managed_users:
+  - name: bill    
+    groups: ['media']
+    append: yes
+  - name: hal
+    groups: ['media']
+    append: yes
+
+users: "{{ managed_users }}"

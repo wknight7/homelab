@@ -1,0 +1,65 @@
+managed_users:
+  - name: bill    
+    groups: ['docs', 'media']
+    directories:
+      - /home/bill/Code
+      - /home/bill/Configs      
+      - /home/bill/Media
+      - /home/bill/Configs/user_bill
+  - name: lily
+    password: "{{ user_passwords.lily }}"
+    uid: 1002
+    state: present
+    groups: ['docs', 'media']
+    home: /home/lily
+    directories:
+      - /home/lily/Configs      
+      - /home/lily/Media
+      - /home/lily/Configs/user_lily
+
+users: "{{ managed_users }}"
+
+custom_groups:
+  - name: media
+    gid: 1776
+    state: present
+  - name: docs
+    gid: 1787
+    state: present
+
+fstab_entries:
+  mounts:    
+    - { server: "192.168.86.90", remote_path: "/mnt/Data/media", path: "/home/bill/Media" }
+    - { server: "192.168.86.90", remote_path: "/mnt/Data/media", path: "/home/lily/Media" }
+    - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Code", path: "/home/bill/Code" }
+    - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Configs", path: "/home/bill/Configs" }
+    - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Documents", path: "/home/bill/Documents" }
+    - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Downloads", path: "/home/bill/Downloads" }
+
+remove_directories:
+  - /home/bill/Videos
+  - /home/bill/Templates
+  - /home/bill/Pictures
+  - /home/bill/Books
+  - /home/bill/fileshare
+  - /home/bill/'Calibre Library'
+  - /home/bill/data
+  - /home/bill/media
+  - /home/bill/paperless
+  - /home/bill/Public
+  - /home/bill/files
+  - /home/bill/Music
+  - /home/lily/Videos
+  - /home/lily/Templates
+  - /home/lily/Pictures
+  - /home/lily/Books
+  - /home/lily/Public
+  - /home/lily/Music
+
+workstation_snap_packages:
+  - libreoffice
+
+workstation_apt_packages:
+  - vim-nox
+  - git
+  - ansible

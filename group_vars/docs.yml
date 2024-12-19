@@ -1,0 +1,21 @@
+custom_groups:
+  - name: docs
+    gid: 1787
+    state: present
+
+managed_users:
+  - name: bill    
+    groups: ['docs']
+    append: yes
+  - name: hal
+    groups: ['docs']
+    append: yes
+
+users: "{{ managed_users }}"
+
+ensure_directories:
+  - /mnt/docs
+
+mount_points:
+  - { mount_point: "mp0: /mnt/docs,mp=/mnt/docs" }
+dynamic_container_ids: ["101", "102", "103"] # Adjust as needed

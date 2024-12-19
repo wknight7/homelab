@@ -1,0 +1,24 @@
+ansible_user: hal
+
+common_packages:
+  - curl
+  - git
+  - htop
+  - rsync
+  - colordiff
+  - build-essential
+  - ubuntu-minimal
+  - deadsnakes
+  - task-essential
+
+managed_users:
+  - name: bill
+    password: "{{ user_passwords.bill }}"
+    state: present
+    home: /home/bill
+    groups: ['docs', 'media']
+  - name: hal
+    uid: 1999
+    state: present
+    groups: ['sudo']
+    home: /home/hal
