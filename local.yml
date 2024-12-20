@@ -1,51 +1,62 @@
----
-- name: Apply common configurations
-  hosts: all
+# tasks to complete before running roles
+- hosts: all
+  tags: always
+  become: true
   vars_files:
-    - group_vars/common.yml
-    - group_vars/vault.yml
- 
-- name: Apply group-specific configurations
-  hosts: all
-  roles:
-    - setup_groups
+    - ~/git/homelab/group_vars/vault.yml
+  pre_tasks:
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
 
-- name: Manage users and groups
-  hosts: all
+# run roles
+- hosts: all
+  tags: base
+  become: true
   roles:
-    - manage_users
+    - common
 
-- name: Manage system files
-  hosts: all
-  roles:
-    - manage_sys_files
+# - hosts: workstation
+#   tags: workstation
+#   become: true
+#   roles:
+#     - workstation
 
-- name: Manage directories
-  hosts: all
-  roles:
-    - manage_directories
+# - hosts: server
+#   tags: server
+#   become: true
+#   roles:
+#     - server
 
-- name: Manage LXC containers and clean up fstab entries
-  hosts: docs, media_h, media_p
-  roles:
-    - manage_lxc
+# # end of run cleanup and reporting
+# - hosts: all
+#   become: true
+#   tasks:
+#   - name: cleanup package cache (debian and ubuntu)
+#     tags: always
+#     apt:
+#       autoclean: yes
+#     changed_when: false
+#     when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-- name: Manage user photo
-  hosts: workstations
-  roles:
-    - manage_user_photo
+#   - name: autoremove orphan packages (debian and ubuntu)
+#     tags: always
+#     apt:
+#       autoremove: yes
+#       purge: yes
+#     when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-- name: Manage wallpaper on workstations
-  hosts: workstations
-  roles:
-    - manage_wallpaper
+#   - name: send completion alert
+#     include_tasks: playbooks/send_completion_alert.yml
+#     tags: always
+#     when:
+#       - task_failed is not defined
 
-- name: Install software on workstations
-  hosts: workstations
-  roles:
-    - install_software
-
-- name: Manage fstab entries
-  hosts: workstations, proxmox
-  roles:
-    - fstab
+#   - name: send failure alert
+#     include_tasks: playbooks/send_failure_alert.yml
+#     tags: always
+#     when:
+#       - task_failed is defined
+#       - task_failed == true
