@@ -1,0 +1,39 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: update systems
+    tags: always
+    package:
+      update_cache: yes
+      upgrade: dist
+    when: ansible_distribution in ["Debian", "Ubuntu"]
+
+  - name: remove authorized keys file
+    ansible.builtin.file:
+      path: /home/hal/.ssh/authorized_keys
+      state: absent
+
+  - name: recreate authorized keys file
+    ansible.builtin.file:
+      path: /home/hal/.ssh/authorized_keys
+      state: touch
+      mode: 0644
+  
+  
+  - name: add ssh key for hal
+    tags: always
+    authorized_key: 
+      user: hal
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible"
+
+  # - name: add ssh key for bill
+  #   tags: always
+  #   authorized_key: 
+  #     user: bill
+  #     key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkdzXCp480fWqPU0pMP4BLtrSEG/V399GAXr+Y4ZTVK bill"
+  #   notify: 
+  #     - Ensure .ssh directory exists
+

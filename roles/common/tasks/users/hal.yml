@@ -12,12 +12,12 @@
     user: hal
     key: "{{ item }}"
   with_file:
-    - users/hal/ssh/hal_id_ed25519.pub
+    - /home/bill/.ssh/hal2.pub
 
 - name: users | hal | add sudoers file
   tags: settings,hal,sudo,system,users
   copy:
-    src: users/sudoers_hal
+    src: ~/git/homelab/roles/common/files/users/hal/sudoer_hal
     dest: /etc/sudoers.d/hal
     owner: root
     group: root
