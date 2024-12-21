@@ -1,33 +1,47 @@
-Banner /etc/issue.net
-PrintMOTD no
+# Enable root login for initial ansible run
+PermitRootLogin yes
 
-Port {{ ssh_port |default(22) }}
+# Limit authentication methods to prevent brute-force attacks
+PasswordAuthentication yes
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+
+# Use public key authentication
+PubkeyAuthentication yes
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Set login grace time
+LoginGraceTime 1m
+
+# Disable unused authentication methods
+UsePAM yes
+KerberosAuthentication no
+GSSAPIAuthentication no
+
+# Define allowed users (if you have a specific set of users)
+AllowUsers bill hal root
+
+# Disable X11 forwarding unless necessary
+X11Forwarding no
+
+# Disable TCP forwarding unless necessary
+AllowTcpForwarding no
+
+# Set a maximum number of authentication attempts
+MaxAuthTries 3
+
+# Define SSH protocol version
 Protocol 2
 
-# Authentication:
-AllowUsers {{ ssh_users | default("jay simone") }}
-ChallengeResponseAuthentication no
-HostbasedAuthentication no
-LoginGraceTime 120
-PasswordAuthentication {{ passwd_auth | default("no") }}
-PermitEmptyPasswords no
-PermitRootLogin no
-PubkeyAuthentication yes
-StrictModes yes
-UsePAM yes
+# Use privilege separation for added security
+# UsePrivilegeSeparation sandbox  # Remove or comment this line
 
-# Security
-HostKey /etc/ssh/ssh_host_dsa_key
-HostKey /etc/ssh/ssh_host_ecdsa_key
-HostKey /etc/ssh/ssh_host_ed25519_key
-HostKey /etc/ssh/ssh_host_rsa_key
-IgnoreRhosts yes
+# Set client and server alive intervals to keep connections alive and detect dead sessions
+ClientAliveInterval 300
+ClientAliveCountMax 2
 
-# Misc. options
-AcceptEnv LANG LC_*
-TCPKeepAlive yes
-Subsystem sftp {{ sftp_path }}
+# Specify a banner file for legal notices (optional)
+Banner /etc/issue.net
 
-# Logging
-SyslogFacility AUTH
-LogLevel INFO
+# Logging settings
+LogLevel VERBOSE

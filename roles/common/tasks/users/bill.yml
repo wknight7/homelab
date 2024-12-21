@@ -26,13 +26,14 @@
     mode: 0440
 
 - name: users | bill | create .ssh directory
+  become_user: bill
   tags: dotfiles,bill,ssh,users
   file:
     path: "{{ item.dir }}"
     state: directory
     owner: bill
     group: bill
-    mode: 0700
+    mode: 0700  
   with_items:
     - { dir: '/home/bill/.ssh' }
 
