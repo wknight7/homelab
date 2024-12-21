@@ -1,6 +1,7 @@
 [workstations]
 ubuntu_test_desk ansible_host=192.168.86.102 container_id=116 vm_type=vm
 ubuntu_test_desk_2 ansible_host=192.168.86.104 container_id=121 vm_type=vm
+ubuntu_test_desk_3 ansible_host=192.168.86.83 container_id=103 vm_type=vm
 
 [docs]
 test_lxc ansible_host=192.168.86.103 container_id=112
