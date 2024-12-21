@@ -1,0 +1,22 @@
+---
+
+# GNOME stuff
+- name: gnome_tracker_clean_cache
+  tags: gnome,tracker
+  file:
+    path: /home/jay/.cache/tracker
+    state: absent
+
+- name: gnome_tracker_clean_local_cache
+  tags: gnome,tracker
+  file:
+    path: /home/jay/.local/share/tracker
+    state: absent
+
+- name: enable_gnome_extensions
+  include_tasks: handlers/enable_gnome_extensions.yml
+
+- name: update_xdg
+  tags: users,config,xdg
+  become_user: jay
+  command: /usr/bin/xdg-user-dirs-update

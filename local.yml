@@ -18,11 +18,11 @@
   roles:
     - common
 
-# - hosts: workstation
-#   tags: workstation
-#   become: true
-#   roles:
-#     - workstation
+- hosts: workstations
+  tags: workstation
+  become: true
+  roles:
+    - workstations
 
 # - hosts: server
 #   tags: server

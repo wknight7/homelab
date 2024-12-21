@@ -1,0 +1,75 @@
+- name: users | bill | remove preinstalled clutter from home directory
+  file:
+    path: /home/bill/{{ item }}
+    state: absent
+  with_items:
+    - examples.desktop
+    - Desktop
+    - Documents
+    - Downloads
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: users | bill | create personal config directories
+  tags: dotfiles,dotfiles-bill
+  file:
+    path: /home/bill/{{ item.dir }}
+    state: directory
+    owner: bill
+    group: bill
+    mode: 0700
+  with_items:
+    - { dir: .config }
+    - { dir: .config/autostart }
+    - { dir: .config/bpytop }
+    - { dir: .config/gtk-3.0 }
+    - { dir: .config/terminator }
+    - { dir: .local }
+    - { dir: .local/share }
+    - { dir: .local/share/applications }
+    - { dir: bin }
+    - { dir: desktop }
+    - { dir: documents }
+    - { dir: downloads }
+    - { dir: projects }
+    - { dir: templates }
+
+- name: users | bill | copy user-dirs.dirs
+  tags: dotfiles,dotfiles-bill
+  copy:
+    src: users/bill/user-dirs.dirs
+    dest: /home/bill/.config/user-dirs.dirs
+    owner: bill
+    group: bill
+    mode: 0600
+  notify: update_xdg
+
+# - name: users | bill | copy personal config files
+#   tags: dotfiles,dotfiles-bill
+#   copy:
+#     src: users/bill/{{ item.src }}
+#     dest: /home/bill/{{ item.dest }}
+#     owner: bill
+#     group: bill
+#     mode: 0600
+#   with_items:
+#     - { src: 'asunder', dest: '.asunder' }
+#     - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
+#     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
+#     - { src: 'gvimrc', dest: '.gvimrc' }
+#     - { src: 'linode-cli', dest: '.config/linode-cli' }
+#     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
+#     - { src: 'ssh_client_config', dest: '.ssh/config' }
+#     - { src: 'terminator_config', dest: '.config/terminator/config' }
+
+- name: users | bill | copy profile image
+  tags: dotfiles,dotfiles-bill
+  copy:
+    src: users/bill/profile_image.png
+    dest: /var/lib/AccountsService/icons/bill.png
+    owner: root
+    group: root
+    mode: 0644
