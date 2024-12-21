@@ -3119,10 +3119,10 @@ The offending line appears to be:
 2024-12-20 19:17:34,475 p=48699 u=bill n=ansible | changed: [test_media_p]
 2024-12-20 19:17:34,705 p=48699 u=bill n=ansible | changed: [test_media_h]
 2024-12-20 19:17:34,710 p=48699 u=bill n=ansible | TASK [common : ansible setup | create ansible log file] ***********************************************************************************************************************************
-2024-12-20 19:17:34,880 p=48699 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user simone", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
-2024-12-20 19:17:34,890 p=48699 u=bill n=ansible | fatal: [ubuntu_test_desk_2]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user simone", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
-2024-12-20 19:17:34,905 p=48699 u=bill n=ansible | fatal: [test_media_h]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user simone", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
-2024-12-20 19:17:34,910 p=48699 u=bill n=ansible | fatal: [test_media_p]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user simone", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
+2024-12-20 19:17:34,880 p=48699 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user hal", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
+2024-12-20 19:17:34,890 p=48699 u=bill n=ansible | fatal: [ubuntu_test_desk_2]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user hal", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
+2024-12-20 19:17:34,905 p=48699 u=bill n=ansible | fatal: [test_media_h]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user hal", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
+2024-12-20 19:17:34,910 p=48699 u=bill n=ansible | fatal: [test_media_p]: FAILED! => {"changed": false, "gid": 0, "group": "root", "mode": "0644", "msg": "chown failed: failed to look up user hal", "owner": "root", "path": "/var/log/ansible.log", "size": 0, "state": "file", "uid": 0}
 2024-12-20 19:17:34,915 p=48699 u=bill n=ansible | TASK [common : set_fact] ******************************************************************************************************************************************************************
 2024-12-20 19:17:34,927 p=48699 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-20 19:17:34,961 p=48699 u=bill n=ansible | ok: [ubuntu_test_desk_2]
@@ -5835,12 +5835,12 @@ out
 2024-12-20 22:19:12,842 p=66554 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *************************************************************************************************************************
 2024-12-20 22:19:17,819 p=66554 u=bill n=ansible | changed: [ubuntu_test_desk]
 2024-12-20 22:19:17,824 p=66554 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ****************************************************************************************************************
-2024-12-20 22:19:17,935 p=66554 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-20 22:19:17,935 p=66554 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-20 22:19:17,940 p=66554 u=bill n=ansible | TASK [workstations : set_fact] ************************************************************************************************************************************************************
 2024-12-20 22:19:17,951 p=66554 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-20 22:19:17,956 p=66554 u=bill n=ansible | ok: [ubuntu_test_desk_2]
 2024-12-20 22:19:17,985 p=66554 u=bill n=ansible | RUNNING HANDLER [workstations : update_xdg] ***********************************************************************************************************************************************
-2024-12-20 22:19:18,094 p=66554 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-20 22:19:18,094 p=66554 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-20 22:19:18,095 p=66554 u=bill n=ansible | PLAY RECAP ********************************************************************************************************************************************************************************
 2024-12-20 22:19:18,095 p=66554 u=bill n=ansible | test_lxc                   : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
 2024-12-20 22:19:18,096 p=66554 u=bill n=ansible | test_media_h               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
@@ -6138,7 +6138,7 @@ Connection refused
 2024-12-21 11:29:53,867 p=85179 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *****************************************************************************************************************
 2024-12-21 11:29:54,473 p=85179 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 11:29:54,478 p=85179 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ********************************************************************************************************
-2024-12-21 11:29:54,781 p=85179 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 11:29:54,781 p=85179 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-21 11:29:54,785 p=85179 u=bill n=ansible | TASK [workstations : set_fact] ****************************************************************************************************************************************************
 2024-12-21 11:29:54,796 p=85179 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 11:29:54,801 p=85179 u=bill n=ansible | ok: [ubuntu_test_desk_2]
@@ -6440,7 +6440,7 @@ Connection refused
 2024-12-21 11:43:12,608 p=87020 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *****************************************************************************************************************
 2024-12-21 11:43:13,198 p=87020 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 11:43:13,204 p=87020 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ********************************************************************************************************
-2024-12-21 11:43:13,322 p=87020 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 11:43:13,322 p=87020 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-21 11:43:13,328 p=87020 u=bill n=ansible | TASK [workstations : set_fact] ****************************************************************************************************************************************************
 2024-12-21 11:43:13,344 p=87020 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 11:43:13,349 p=87020 u=bill n=ansible | ok: [ubuntu_test_desk_2]
@@ -6742,7 +6742,7 @@ Connection refused
 2024-12-21 12:32:21,621 p=90271 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *****************************************************************************************************************
 2024-12-21 12:32:22,219 p=90271 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 12:32:22,224 p=90271 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ********************************************************************************************************
-2024-12-21 12:32:22,333 p=90271 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 12:32:22,333 p=90271 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-21 12:32:22,338 p=90271 u=bill n=ansible | TASK [workstations : set_fact] ****************************************************************************************************************************************************
 2024-12-21 12:32:22,348 p=90271 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 12:32:22,353 p=90271 u=bill n=ansible | ok: [ubuntu_test_desk_2]
@@ -7148,14 +7148,14 @@ the remote_tmp dir with the correct permissions manually
 2024-12-21 13:30:06,289 p=93357 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 13:30:09,526 p=93357 u=bill n=ansible | changed: [ubuntu_test_desk_3]
 2024-12-21 13:30:09,531 p=93357 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ********************************************************************************************************
-2024-12-21 13:30:09,652 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
-2024-12-21 13:30:09,653 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 13:30:09,652 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 13:30:09,653 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-21 13:30:09,660 p=93357 u=bill n=ansible | TASK [workstations : set_fact] ****************************************************************************************************************************************************
 2024-12-21 13:30:09,671 p=93357 u=bill n=ansible | ok: [ubuntu_test_desk]
 2024-12-21 13:30:09,682 p=93357 u=bill n=ansible | ok: [ubuntu_test_desk_2]
 2024-12-21 13:30:09,688 p=93357 u=bill n=ansible | ok: [ubuntu_test_desk_3]
 2024-12-21 13:30:09,742 p=93357 u=bill n=ansible | RUNNING HANDLER [workstations : update_xdg] ***************************************************************************************************************************************
-2024-12-21 13:30:09,853 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user jay\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 13:30:09,853 p=93357 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
 2024-12-21 13:30:09,854 p=93357 u=bill n=ansible | PLAY RECAP ************************************************************************************************************************************************************************
 2024-12-21 13:30:09,855 p=93357 u=bill n=ansible | test_lxc                   : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
 2024-12-21 13:30:09,855 p=93357 u=bill n=ansible | test_media_h               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
@@ -7163,3 +7163,1191 @@ the remote_tmp dir with the correct permissions manually
 2024-12-21 13:30:09,855 p=93357 u=bill n=ansible | ubuntu_test_desk           : ok=43   changed=1    unreachable=0    failed=0    skipped=9    rescued=1    ignored=0   
 2024-12-21 13:30:09,855 p=93357 u=bill n=ansible | ubuntu_test_desk_2         : ok=38   changed=1    unreachable=0    failed=0    skipped=4    rescued=1    ignored=0   
 2024-12-21 13:30:09,856 p=93357 u=bill n=ansible | ubuntu_test_desk_3         : ok=45   changed=20   unreachable=0    failed=1    skipped=8    rescued=1    ignored=0   
+2024-12-21 15:30:59,841 p=100113 u=bill n=ansible | [WARNING]: Collection ansible.posix does not support Ansible version 2.14.16
+
+2024-12-21 15:30:59,854 p=100113 u=bill n=ansible | [WARNING]: Collection community.general does not support Ansible version 2.14.16
+
+2024-12-21 15:30:59,931 p=100113 u=bill n=ansible | [WARNING]: Skipping callback plugin 'email_notifications', unable to load
+
+2024-12-21 15:30:59,987 p=100113 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:31:00,012 p=100113 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:31:01,665 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:31:01,702 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:31:01,935 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:31:02,285 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:31:04,092 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:31:04,706 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:31:04,731 p=100113 u=bill n=ansible | TASK [pre-run | update package cache (debian, etc)] ***************************************************************************************************************************************
+2024-12-21 15:31:08,764 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:31:14,732 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:31:27,989 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:10,086 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:14,723 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:16,107 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:16,959 p=100113 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:32:16,973 p=100113 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:32:17,596 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:17,599 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:17,608 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:17,988 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:18,046 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:18,227 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:18,283 p=100113 u=bill n=ansible | TASK [common : Load vault variables] ******************************************************************************************************************************************************
+2024-12-21 15:32:18,382 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:18,391 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:18,391 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:18,392 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:18,409 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:18,420 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:18,426 p=100113 u=bill n=ansible | TASK [common : Debug bill_password] *******************************************************************************************************************************************************
+2024-12-21 15:32:18,438 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,446 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,455 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,466 p=100113 u=bill n=ansible | ok: [test_lxc] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,475 p=100113 u=bill n=ansible | ok: [test_media_h] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,482 p=100113 u=bill n=ansible | ok: [test_media_p] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:32:18,487 p=100113 u=bill n=ansible | TASK [common : include_vars] **************************************************************************************************************************************************************
+2024-12-21 15:32:18,504 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:18,514 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:18,527 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:18,536 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:18,537 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:18,544 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:18,549 p=100113 u=bill n=ansible | TASK [common : users | bill | create group] ***********************************************************************************************************************************************
+2024-12-21 15:32:18,771 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:18,788 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:18,816 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:18,819 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:18,831 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:18,930 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:18,936 p=100113 u=bill n=ansible | TASK [common : users | bill | create user] ************************************************************************************************************************************************
+2024-12-21 15:32:19,822 p=100113 u=bill n=ansible | changed: [test_lxc]
+2024-12-21 15:32:19,823 p=100113 u=bill n=ansible | changed: [ubuntu_test_desk_2]
+2024-12-21 15:32:19,825 p=100113 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:32:19,836 p=100113 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:32:19,868 p=100113 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:32:20,228 p=100113 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:32:20,234 p=100113 u=bill n=ansible | TASK [common : users | bill | bill | add sudoers file] ************************************************************************************************************************************
+2024-12-21 15:32:20,832 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:20,836 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:20,853 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:20,875 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:20,886 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:21,170 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:21,175 p=100113 u=bill n=ansible | TASK [common : users | bill | create .ssh directory] **************************************************************************************************************************************
+2024-12-21 15:32:21,343 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:32:21,364 p=100113 u=bill n=ansible | failed: [test_lxc] (item={'dir': '/home/bill/.ssh'}) => {"ansible_loop_var": "item", "changed": false, "gid": 65534, "group": "nogroup", "item": {"dir": "/home/bill/.ssh"}, "mode": "0700", "msg": "chown failed: [Errno 1] Operation not permitted: b'/home/bill/.ssh'", "owner": "nobody", "path": "/home/bill/.ssh", "size": 4096, "state": "directory", "uid": 65534}
+2024-12-21 15:32:21,368 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:32:21,422 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:32:21,455 p=100113 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:32:21,519 p=100113 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:32:21,526 p=100113 u=bill n=ansible | TASK [common : users | bill | add public key] *********************************************************************************************************************************************
+2024-12-21 15:32:21,882 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:32:21,900 p=100113 u=bill n=ansible | ok: [test_media_h] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:32:21,912 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:32:21,999 p=100113 u=bill n=ansible | ok: [test_media_p] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:32:21,999 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:32:22,005 p=100113 u=bill n=ansible | TASK [common : users | bill | create config directories] **********************************************************************************************************************************
+2024-12-21 15:32:22,174 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.bash'})
+2024-12-21 15:32:22,202 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.bash'})
+2024-12-21 15:32:22,227 p=100113 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.bash'})
+2024-12-21 15:32:22,250 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.bash'})
+2024-12-21 15:32:22,294 p=100113 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.bash'})
+2024-12-21 15:32:22,330 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:32:22,362 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.config'})
+2024-12-21 15:32:22,438 p=100113 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.config'})
+2024-12-21 15:32:22,451 p=100113 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.config'})
+2024-12-21 15:32:22,455 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:32:22,461 p=100113 u=bill n=ansible | TASK [common : users | bill | copy bashrc] ************************************************************************************************************************************************
+2024-12-21 15:32:22,848 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:22,879 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:22,913 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:22,922 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:22,965 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:22,971 p=100113 u=bill n=ansible | TASK [common : users | hal | create user] *************************************************************************************************************************************************
+2024-12-21 15:32:23,175 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:23,202 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:23,242 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:23,254 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:23,281 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:23,286 p=100113 u=bill n=ansible | TASK [common : users | hal | add public key] **********************************************************************************************************************************************
+2024-12-21 15:32:23,538 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:32:23,562 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:32:23,572 p=100113 u=bill n=ansible | ok: [test_media_h] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:32:23,629 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:32:23,653 p=100113 u=bill n=ansible | ok: [test_media_p] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:32:23,659 p=100113 u=bill n=ansible | TASK [common : users | hal | add sudoers file] ********************************************************************************************************************************************
+2024-12-21 15:32:24,043 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:24,049 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:24,072 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:24,102 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:24,141 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:24,147 p=100113 u=bill n=ansible | TASK [common : ansible setup | ensure group ansible exists] *******************************************************************************************************************************
+2024-12-21 15:32:24,307 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:24,330 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:24,335 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:24,362 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:24,369 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:24,376 p=100113 u=bill n=ansible | TASK [common : ansible setup | ensure ansible is the latest version] **********************************************************************************************************************
+2024-12-21 15:32:25,163 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:25,203 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:25,332 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:25,336 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:25,372 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:25,378 p=100113 u=bill n=ansible | TASK [common : ansible setup | install required packages] *********************************************************************************************************************************
+2024-12-21 15:32:26,194 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:26,239 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:26,280 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:26,346 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:26,355 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:26,361 p=100113 u=bill n=ansible | TASK [common : ansible setup | install acl package] ***************************************************************************************************************************************
+2024-12-21 15:32:27,250 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:27,309 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:27,316 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:27,366 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:27,392 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:27,401 p=100113 u=bill n=ansible | TASK [common : ansible setup | create ansible log file] ***********************************************************************************************************************************
+2024-12-21 15:32:27,603 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:27,649 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:27,666 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:27,671 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:27,699 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:27,705 p=100113 u=bill n=ansible | TASK [common : ansible setup | add logrotate config for ansible log file] *****************************************************************************************************************
+2024-12-21 15:32:28,164 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:28,201 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:28,208 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:28,219 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:28,270 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:28,277 p=100113 u=bill n=ansible | TASK [common : ansible setup | remove default ansible directory (/etc/ansible) from host] *************************************************************************************************
+2024-12-21 15:32:28,478 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:28,492 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:28,516 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:28,524 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:28,536 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:28,543 p=100113 u=bill n=ansible | TASK [common : ansible setup | generate provision script from template] *******************************************************************************************************************
+2024-12-21 15:32:29,028 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:29,029 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:29,126 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:29,135 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:29,136 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:29,144 p=100113 u=bill n=ansible | TASK [common : system setup | utilities | install utility packages] ***********************************************************************************************************************
+2024-12-21 15:32:30,181 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:30,183 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:30,204 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:30,242 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:30,324 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:30,330 p=100113 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (ubuntu)] *****************************************************************************************************************
+2024-12-21 15:32:31,276 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:31,422 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:31,436 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:31,436 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:31,540 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:31,546 p=100113 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (debian)] *****************************************************************************************************************
+2024-12-21 15:32:31,571 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:31,580 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:32:31,589 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:31,636 p=100113 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:32:31,646 p=100113 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:32:31,652 p=100113 u=bill n=ansible | TASK [common : system setup | clock | start and enable systemd-timesyncd] *****************************************************************************************************************
+2024-12-21 15:32:32,226 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:32,266 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:32,317 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:32,327 p=100113 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:32:32,335 p=100113 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:32:32,343 p=100113 u=bill n=ansible | TASK [common : system setup | clock | set time zone] **************************************************************************************************************************************
+2024-12-21 15:32:32,705 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:32,707 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:32,722 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:32,735 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:32,758 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:32,763 p=100113 u=bill n=ansible | TASK [common : system setup | locale | add en_US] *****************************************************************************************************************************************
+2024-12-21 15:32:33,095 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:33,115 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:33,141 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:33,160 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:33,169 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:33,175 p=100113 u=bill n=ansible | TASK [common : system setup | locale | set locale to en_US] *******************************************************************************************************************************
+2024-12-21 15:32:33,410 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:33,421 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:33,431 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:33,460 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:33,465 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:33,472 p=100113 u=bill n=ansible | TASK [common : system setup | locale | set en_US as default locale] ***********************************************************************************************************************
+2024-12-21 15:32:33,487 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:33,498 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:32:33,510 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:33,533 p=100113 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:32:33,539 p=100113 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:32:33,545 p=100113 u=bill n=ansible | TASK [common : system setup | locale | remove en_GB] **************************************************************************************************************************************
+2024-12-21 15:32:33,560 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:33,573 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:32:33,590 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:33,603 p=100113 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:32:33,609 p=100113 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:32:33,618 p=100113 u=bill n=ansible | TASK [common : system setup | logging | adjust retention period] **************************************************************************************************************************
+2024-12-21 15:32:33,919 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:33,932 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:33,957 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:33,978 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:33,978 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:33,984 p=100113 u=bill n=ansible | TASK [common : system setup | logging | restart journald (config changed)] ****************************************************************************************************************
+2024-12-21 15:32:33,996 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:34,005 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:32:34,013 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:34,030 p=100113 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:32:34,036 p=100113 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:32:34,042 p=100113 u=bill n=ansible | TASK [common : system setup | openssh | install or update daemon package] *****************************************************************************************************************
+2024-12-21 15:32:34,971 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:35,044 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:35,050 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:35,183 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:35,237 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:35,243 p=100113 u=bill n=ansible | TASK [common : system setup | openssh | enable daemon] ************************************************************************************************************************************
+2024-12-21 15:32:35,580 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:35,603 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:35,605 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:35,613 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:35,932 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:35,938 p=100113 u=bill n=ansible | TASK [common : system setup | openssh | generate sshd_config file from template] **********************************************************************************************************
+2024-12-21 15:32:36,460 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:36,463 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:36,467 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:36,491 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:37,234 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:37,240 p=100113 u=bill n=ansible | TASK [common : system setup | openssh | copy issue.net] ***********************************************************************************************************************************
+2024-12-21 15:32:37,714 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:37,726 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:37,805 p=100113 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:32:37,874 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:37,921 p=100113 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:32:37,942 p=100113 u=bill n=ansible | TASK [common : set_fact] ******************************************************************************************************************************************************************
+2024-12-21 15:32:37,953 p=100113 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:32:38,094 p=100113 u=bill n=ansible | PLAY [workstations] ***********************************************************************************************************************************************************************
+2024-12-21 15:32:38,125 p=100113 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:32:38,756 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:38,765 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:38,868 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:38,902 p=100113 u=bill n=ansible | TASK [workstations : include_vars] ********************************************************************************************************************************************************
+2024-12-21 15:32:38,922 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:38,924 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:38,933 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:38,940 p=100113 u=bill n=ansible | TASK [workstations : users | bill | remove preinstalled clutter from home directory] ******************************************************************************************************
+2024-12-21 15:32:39,109 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=examples.desktop)
+2024-12-21 15:32:39,118 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=examples.desktop)
+2024-12-21 15:32:39,121 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=examples.desktop)
+2024-12-21 15:32:39,261 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Desktop)
+2024-12-21 15:32:39,264 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Desktop)
+2024-12-21 15:32:39,272 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Desktop)
+2024-12-21 15:32:39,415 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Documents)
+2024-12-21 15:32:39,416 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Documents)
+2024-12-21 15:32:39,421 p=100113 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Documents) => {"ansible_loop_var": "item", "changed": false, "item": "Documents", "msg": "rmtree failed: [Errno 16] Device or resource busy: '/home/bill/Documents'"}
+2024-12-21 15:32:39,569 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Downloads)
+2024-12-21 15:32:39,576 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Downloads)
+2024-12-21 15:32:39,604 p=100113 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Downloads) => {"ansible_loop_var": "item", "changed": false, "item": "Downloads", "msg": "rmtree failed: [Errno 13] Permission denied: 'log.txt'"}
+2024-12-21 15:32:39,728 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Music)
+2024-12-21 15:32:39,738 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Music)
+2024-12-21 15:32:39,748 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Music)
+2024-12-21 15:32:39,878 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Pictures)
+2024-12-21 15:32:39,893 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Pictures)
+2024-12-21 15:32:39,900 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Pictures)
+2024-12-21 15:32:40,029 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Public)
+2024-12-21 15:32:40,047 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Public)
+2024-12-21 15:32:40,055 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Public)
+2024-12-21 15:32:40,177 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Templates)
+2024-12-21 15:32:40,205 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Templates)
+2024-12-21 15:32:40,213 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Templates)
+2024-12-21 15:32:40,321 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Videos)
+2024-12-21 15:32:40,359 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Videos)
+2024-12-21 15:32:40,370 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Videos)
+2024-12-21 15:32:40,378 p=100113 u=bill n=ansible | TASK [workstations : users | bill | create personal config directories] *******************************************************************************************************************
+2024-12-21 15:32:40,541 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:32:40,559 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:32:40,694 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/autostart'})
+2024-12-21 15:32:40,823 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/autostart'})
+2024-12-21 15:32:40,844 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:32:40,972 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:32:41,002 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:32:41,125 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:32:41,149 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/terminator'})
+2024-12-21 15:32:41,274 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/terminator'})
+2024-12-21 15:32:41,294 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local'})
+2024-12-21 15:32:41,432 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local'})
+2024-12-21 15:32:41,440 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share'})
+2024-12-21 15:32:41,592 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share'})
+2024-12-21 15:32:41,597 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:32:41,736 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:32:41,742 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'bin'})
+2024-12-21 15:32:41,882 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'bin'})
+2024-12-21 15:32:41,890 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'desktop'})
+2024-12-21 15:32:42,032 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'desktop'})
+2024-12-21 15:32:42,040 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'documents'})
+2024-12-21 15:32:42,178 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'documents'})
+2024-12-21 15:32:42,194 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'downloads'})
+2024-12-21 15:32:42,329 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'downloads'})
+2024-12-21 15:32:42,336 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'projects'})
+2024-12-21 15:32:42,477 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'templates'})
+2024-12-21 15:32:42,480 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'projects'})
+2024-12-21 15:32:42,626 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'templates'})
+2024-12-21 15:32:42,633 p=100113 u=bill n=ansible | TASK [workstations : users | bill | copy user-dirs.dirs] **********************************************************************************************************************************
+2024-12-21 15:32:42,945 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:42,964 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:42,969 p=100113 u=bill n=ansible | TASK [workstations : users | bill | copy profile image] ***********************************************************************************************************************************
+2024-12-21 15:32:43,282 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:43,482 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,487 p=100113 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:32:43,501 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:43,509 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,515 p=100113 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:32:43,529 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:43,537 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,542 p=100113 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:32:43,556 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:43,565 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,570 p=100113 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:32:43,584 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:43,592 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,599 p=100113 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:32:43,612 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:32:43,621 p=100113 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:32:43,627 p=100113 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *************************************************************************************************************************
+2024-12-21 15:32:44,288 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:44,316 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:44,322 p=100113 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ****************************************************************************************************************
+2024-12-21 15:32:44,445 p=100113 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 15:32:44,454 p=100113 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 15:32:44,459 p=100113 u=bill n=ansible | TASK [workstations : set_fact] ************************************************************************************************************************************************************
+2024-12-21 15:32:44,469 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:32:44,476 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:32:44,481 p=100113 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:32:44,538 p=100113 u=bill n=ansible | PLAY RECAP ********************************************************************************************************************************************************************************
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | test_lxc                   : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | test_media_h               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | test_media_p               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | ubuntu_test_desk           : ok=43   changed=1    unreachable=0    failed=0    skipped=9    rescued=1    ignored=0   
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | ubuntu_test_desk_2         : ok=38   changed=1    unreachable=0    failed=0    skipped=4    rescued=1    ignored=0   
+2024-12-21 15:32:44,539 p=100113 u=bill n=ansible | ubuntu_test_desk_3         : ok=43   changed=1    unreachable=0    failed=0    skipped=9    rescued=1    ignored=0   
+2024-12-21 15:36:07,141 p=101885 u=bill n=ansible | [WARNING]: Collection ansible.posix does not support Ansible version 2.14.16
+
+2024-12-21 15:36:07,154 p=101885 u=bill n=ansible | [WARNING]: Collection community.general does not support Ansible version 2.14.16
+
+2024-12-21 15:36:07,231 p=101885 u=bill n=ansible | [WARNING]: Skipping callback plugin 'email_notifications', unable to load
+
+2024-12-21 15:36:07,287 p=101885 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:36:07,312 p=101885 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:36:08,746 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:08,822 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:08,901 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:08,926 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:08,974 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:09,786 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:09,813 p=101885 u=bill n=ansible | TASK [pre-run | update package cache (debian, etc)] ***************************************************************************************************************************************
+2024-12-21 15:36:11,595 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:11,607 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:11,628 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:11,767 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:11,831 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:13,134 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:14,008 p=101885 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:36:14,028 p=101885 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:36:14,721 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:14,761 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:14,798 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:14,823 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:14,900 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:15,382 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:15,453 p=101885 u=bill n=ansible | TASK [common : Load vault variables] ******************************************************************************************************************************************************
+2024-12-21 15:36:15,519 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:15,549 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:15,552 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:15,556 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:15,559 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:15,582 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:15,588 p=101885 u=bill n=ansible | TASK [common : Debug bill_password] *******************************************************************************************************************************************************
+2024-12-21 15:36:15,608 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,621 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,632 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,646 p=101885 u=bill n=ansible | ok: [test_lxc] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,647 p=101885 u=bill n=ansible | ok: [test_media_h] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,655 p=101885 u=bill n=ansible | ok: [test_media_p] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:36:15,661 p=101885 u=bill n=ansible | TASK [common : include_vars] **************************************************************************************************************************************************************
+2024-12-21 15:36:15,681 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:15,693 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:15,705 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:15,717 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:15,720 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:15,725 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:15,731 p=101885 u=bill n=ansible | TASK [common : users | bill | create group] ***********************************************************************************************************************************************
+2024-12-21 15:36:15,985 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:15,996 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:16,024 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:16,059 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:16,069 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:16,142 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:16,148 p=101885 u=bill n=ansible | TASK [common : users | bill | create user] ************************************************************************************************************************************************
+2024-12-21 15:36:17,501 p=101885 u=bill n=ansible | changed: [test_lxc]
+2024-12-21 15:36:17,565 p=101885 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:36:17,598 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk_2]
+2024-12-21 15:36:17,603 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:36:17,606 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:36:17,945 p=101885 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:36:17,954 p=101885 u=bill n=ansible | TASK [common : users | bill | bill | add sudoers file] ************************************************************************************************************************************
+2024-12-21 15:36:18,564 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:18,571 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:18,609 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:18,626 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:18,630 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:18,951 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:18,959 p=101885 u=bill n=ansible | TASK [common : users | bill | create .ssh directory] **************************************************************************************************************************************
+2024-12-21 15:36:19,167 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:36:19,186 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:36:19,216 p=101885 u=bill n=ansible | failed: [test_lxc] (item={'dir': '/home/bill/.ssh'}) => {"ansible_loop_var": "item", "changed": false, "gid": 65534, "group": "nogroup", "item": {"dir": "/home/bill/.ssh"}, "mode": "0700", "msg": "chown failed: [Errno 1] Operation not permitted: b'/home/bill/.ssh'", "owner": "nobody", "path": "/home/bill/.ssh", "size": 4096, "state": "directory", "uid": 65534}
+2024-12-21 15:36:19,218 p=101885 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:36:19,226 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:36:19,348 p=101885 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:36:19,355 p=101885 u=bill n=ansible | TASK [common : users | bill | add public key] *********************************************************************************************************************************************
+2024-12-21 15:36:19,781 p=101885 u=bill n=ansible | ok: [test_media_p] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:36:19,796 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:36:19,837 p=101885 u=bill n=ansible | ok: [test_media_h] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:36:19,844 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:36:19,847 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:36:19,854 p=101885 u=bill n=ansible | TASK [common : users | bill | create config directories] **********************************************************************************************************************************
+2024-12-21 15:36:20,045 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.bash'})
+2024-12-21 15:36:20,078 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.bash'})
+2024-12-21 15:36:20,091 p=101885 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.bash'})
+2024-12-21 15:36:20,140 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.bash'})
+2024-12-21 15:36:20,158 p=101885 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.bash'})
+2024-12-21 15:36:20,255 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:36:20,275 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:36:20,311 p=101885 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.config'})
+2024-12-21 15:36:20,336 p=101885 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.config'})
+2024-12-21 15:36:20,337 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.config'})
+2024-12-21 15:36:20,344 p=101885 u=bill n=ansible | TASK [common : users | bill | copy bashrc] ************************************************************************************************************************************************
+2024-12-21 15:36:20,783 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:20,826 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:20,847 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:20,915 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:20,916 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:20,921 p=101885 u=bill n=ansible | TASK [common : users | hal | create user] *************************************************************************************************************************************************
+2024-12-21 15:36:21,199 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:21,207 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:21,227 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:21,229 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:21,233 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:21,240 p=101885 u=bill n=ansible | TASK [common : users | hal | add public key] **********************************************************************************************************************************************
+2024-12-21 15:36:21,526 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:36:21,544 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:36:21,572 p=101885 u=bill n=ansible | ok: [test_media_p] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:36:21,574 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:36:21,603 p=101885 u=bill n=ansible | ok: [test_media_h] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:36:21,610 p=101885 u=bill n=ansible | TASK [common : users | hal | add sudoers file] ********************************************************************************************************************************************
+2024-12-21 15:36:22,089 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:22,094 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:22,101 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:22,118 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:22,159 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:22,164 p=101885 u=bill n=ansible | TASK [common : ansible setup | ensure group ansible exists] *******************************************************************************************************************************
+2024-12-21 15:36:22,351 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:22,366 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:22,420 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:22,425 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:22,446 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:22,452 p=101885 u=bill n=ansible | TASK [common : ansible setup | ensure ansible is the latest version] **********************************************************************************************************************
+2024-12-21 15:36:23,503 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:23,513 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:23,529 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:23,556 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:23,556 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:23,564 p=101885 u=bill n=ansible | TASK [common : ansible setup | install required packages] *********************************************************************************************************************************
+2024-12-21 15:36:24,483 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:24,590 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:24,651 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:24,670 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:24,796 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:24,804 p=101885 u=bill n=ansible | TASK [common : ansible setup | install acl package] ***************************************************************************************************************************************
+2024-12-21 15:36:25,715 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:25,725 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:25,735 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:25,745 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:25,798 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:25,803 p=101885 u=bill n=ansible | TASK [common : ansible setup | create ansible log file] ***********************************************************************************************************************************
+2024-12-21 15:36:25,983 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:25,985 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:26,011 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:26,037 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:26,060 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:26,066 p=101885 u=bill n=ansible | TASK [common : ansible setup | add logrotate config for ansible log file] *****************************************************************************************************************
+2024-12-21 15:36:26,454 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:26,471 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:26,482 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:26,510 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:26,514 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:26,519 p=101885 u=bill n=ansible | TASK [common : ansible setup | remove default ansible directory (/etc/ansible) from host] *************************************************************************************************
+2024-12-21 15:36:26,697 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:26,708 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:26,793 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:26,793 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:26,801 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:26,809 p=101885 u=bill n=ansible | TASK [common : ansible setup | generate provision script from template] *******************************************************************************************************************
+2024-12-21 15:36:27,327 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:27,345 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:27,373 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:27,378 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:27,413 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:27,420 p=101885 u=bill n=ansible | TASK [common : system setup | utilities | install utility packages] ***********************************************************************************************************************
+2024-12-21 15:36:28,438 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:28,455 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:28,648 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:28,679 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:29,640 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:29,645 p=101885 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (ubuntu)] *****************************************************************************************************************
+2024-12-21 15:36:30,667 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:30,812 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:30,842 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:30,848 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:30,883 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:30,889 p=101885 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (debian)] *****************************************************************************************************************
+2024-12-21 15:36:30,901 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:30,916 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:36:30,924 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:30,934 p=101885 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:36:30,940 p=101885 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:36:30,946 p=101885 u=bill n=ansible | TASK [common : system setup | clock | start and enable systemd-timesyncd] *****************************************************************************************************************
+2024-12-21 15:36:31,515 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:31,539 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:31,560 p=101885 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:36:31,616 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:31,617 p=101885 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:36:31,623 p=101885 u=bill n=ansible | TASK [common : system setup | clock | set time zone] **************************************************************************************************************************************
+2024-12-21 15:36:32,000 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:32,007 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:32,016 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:32,029 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:32,035 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:32,041 p=101885 u=bill n=ansible | TASK [common : system setup | locale | add en_US] *****************************************************************************************************************************************
+2024-12-21 15:36:32,403 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:32,427 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:32,443 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:32,458 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:32,459 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:32,467 p=101885 u=bill n=ansible | TASK [common : system setup | locale | set locale to en_US] *******************************************************************************************************************************
+2024-12-21 15:36:32,699 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:32,708 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:32,780 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:32,790 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:32,804 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:32,810 p=101885 u=bill n=ansible | TASK [common : system setup | locale | set en_US as default locale] ***********************************************************************************************************************
+2024-12-21 15:36:32,822 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:32,830 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:36:32,839 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:32,856 p=101885 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:36:32,863 p=101885 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:36:32,870 p=101885 u=bill n=ansible | TASK [common : system setup | locale | remove en_GB] **************************************************************************************************************************************
+2024-12-21 15:36:32,881 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:32,890 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:36:32,898 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:32,915 p=101885 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:36:32,922 p=101885 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:36:32,929 p=101885 u=bill n=ansible | TASK [common : system setup | logging | adjust retention period] **************************************************************************************************************************
+2024-12-21 15:36:33,237 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:33,242 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:33,259 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:33,284 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:33,284 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:33,292 p=101885 u=bill n=ansible | TASK [common : system setup | logging | restart journald (config changed)] ****************************************************************************************************************
+2024-12-21 15:36:33,307 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:33,367 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:36:33,376 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:33,389 p=101885 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:36:33,396 p=101885 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:36:33,403 p=101885 u=bill n=ansible | TASK [common : system setup | openssh | install or update daemon package] *****************************************************************************************************************
+2024-12-21 15:36:34,318 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:34,379 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:34,380 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:34,389 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:34,426 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:34,431 p=101885 u=bill n=ansible | TASK [common : system setup | openssh | enable daemon] ************************************************************************************************************************************
+2024-12-21 15:36:34,739 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:34,760 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:34,762 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:34,775 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:34,782 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:34,787 p=101885 u=bill n=ansible | TASK [common : system setup | openssh | generate sshd_config file from template] **********************************************************************************************************
+2024-12-21 15:36:35,176 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:35,188 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:35,252 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:35,287 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:35,308 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:35,314 p=101885 u=bill n=ansible | TASK [common : system setup | openssh | copy issue.net] ***********************************************************************************************************************************
+2024-12-21 15:36:35,752 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:35,762 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:35,793 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:35,833 p=101885 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:36:35,835 p=101885 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:36:35,853 p=101885 u=bill n=ansible | TASK [common : set_fact] ******************************************************************************************************************************************************************
+2024-12-21 15:36:35,864 p=101885 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:36:36,048 p=101885 u=bill n=ansible | PLAY [workstations] ***********************************************************************************************************************************************************************
+2024-12-21 15:36:36,083 p=101885 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:36:36,701 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:36,728 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:36,741 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:36,772 p=101885 u=bill n=ansible | TASK [workstations : include_vars] ********************************************************************************************************************************************************
+2024-12-21 15:36:36,787 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:36,797 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:36,807 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:36,815 p=101885 u=bill n=ansible | TASK [workstations : users | bill | remove preinstalled clutter from home directory] ******************************************************************************************************
+2024-12-21 15:36:37,004 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=examples.desktop)
+2024-12-21 15:36:37,006 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=examples.desktop)
+2024-12-21 15:36:37,030 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=examples.desktop)
+2024-12-21 15:36:37,179 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Desktop)
+2024-12-21 15:36:37,195 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Desktop)
+2024-12-21 15:36:37,219 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Desktop)
+2024-12-21 15:36:37,361 p=101885 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Documents) => {"ansible_loop_var": "item", "changed": false, "item": "Documents", "msg": "rmtree failed: [Errno 16] Device or resource busy: '/home/bill/Documents'"}
+2024-12-21 15:36:37,368 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Documents)
+2024-12-21 15:36:37,393 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Documents)
+2024-12-21 15:36:37,584 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Downloads)
+2024-12-21 15:36:37,605 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Downloads)
+2024-12-21 15:36:37,643 p=101885 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Downloads) => {"ansible_loop_var": "item", "changed": false, "item": "Downloads", "msg": "rmtree failed: [Errno 13] Permission denied: 'log.txt'"}
+2024-12-21 15:36:37,776 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Music)
+2024-12-21 15:36:37,798 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Music)
+2024-12-21 15:36:37,815 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Music)
+2024-12-21 15:36:37,953 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Pictures)
+2024-12-21 15:36:37,975 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Pictures)
+2024-12-21 15:36:38,035 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Pictures)
+2024-12-21 15:36:38,139 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Public)
+2024-12-21 15:36:38,155 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Public)
+2024-12-21 15:36:38,249 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Public)
+2024-12-21 15:36:38,322 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Templates)
+2024-12-21 15:36:38,368 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Templates)
+2024-12-21 15:36:38,427 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Templates)
+2024-12-21 15:36:38,500 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Videos)
+2024-12-21 15:36:38,579 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Videos)
+2024-12-21 15:36:38,603 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Videos)
+2024-12-21 15:36:38,611 p=101885 u=bill n=ansible | TASK [workstations : users | bill | create personal config directories] *******************************************************************************************************************
+2024-12-21 15:36:38,816 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:36:38,817 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:36:39,035 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/autostart'})
+2024-12-21 15:36:39,036 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/autostart'})
+2024-12-21 15:36:39,147 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:36:39,204 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:36:39,328 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:36:39,365 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:36:39,511 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/terminator'})
+2024-12-21 15:36:39,523 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/terminator'})
+2024-12-21 15:36:39,671 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local'})
+2024-12-21 15:36:39,680 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local'})
+2024-12-21 15:36:39,841 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share'})
+2024-12-21 15:36:39,874 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share'})
+2024-12-21 15:36:39,995 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:36:40,036 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:36:40,164 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'bin'})
+2024-12-21 15:36:40,204 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'bin'})
+2024-12-21 15:36:40,324 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'desktop'})
+2024-12-21 15:36:40,383 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'desktop'})
+2024-12-21 15:36:40,487 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'documents'})
+2024-12-21 15:36:40,548 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'documents'})
+2024-12-21 15:36:40,651 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'downloads'})
+2024-12-21 15:36:40,718 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'downloads'})
+2024-12-21 15:36:40,814 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'projects'})
+2024-12-21 15:36:40,908 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'projects'})
+2024-12-21 15:36:40,992 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'templates'})
+2024-12-21 15:36:41,067 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'templates'})
+2024-12-21 15:36:41,075 p=101885 u=bill n=ansible | TASK [workstations : users | bill | copy user-dirs.dirs] **********************************************************************************************************************************
+2024-12-21 15:36:41,436 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:41,470 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,478 p=101885 u=bill n=ansible | TASK [workstations : users | bill | copy profile image] ***********************************************************************************************************************************
+2024-12-21 15:36:41,834 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,843 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:41,849 p=101885 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:36:41,863 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:41,872 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,878 p=101885 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:36:41,891 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:41,901 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,907 p=101885 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:36:41,921 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:41,931 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,936 p=101885 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:36:41,949 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:41,958 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,964 p=101885 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:36:41,977 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:41,986 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:41,993 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *************************************************************************************************************************
+2024-12-21 15:36:42,658 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:42,669 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:42,674 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ****************************************************************************************************************
+2024-12-21 15:36:43,613 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:36:43,721 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:36:43,727 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | install snapd] *******************************************************************************************************************************
+2024-12-21 15:36:44,421 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:44,446 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:44,452 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | install/update core snap] ********************************************************************************************************************
+2024-12-21 15:36:55,631 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:36:56,563 p=101885 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:36:56,569 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | install xorg (archlinux)] ********************************************************************************************************************
+2024-12-21 15:36:56,580 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:56,593 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:56,599 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | install nvidia gpu packages (arch)] **********************************************************************************************************
+2024-12-21 15:36:56,607 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:56,618 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:56,624 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | install vbox gpu packages (arch)] ************************************************************************************************************
+2024-12-21 15:36:56,637 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:36:56,646 p=101885 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:36:56,652 p=101885 u=bill n=ansible | TASK [workstations : system setup | tweaks | add exceptions for earlyoom] *****************************************************************************************************************
+2024-12-21 15:36:56,803 p=101885 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "msg": "Destination /etc/default/earlyoom does not exist !", "rc": 257}
+2024-12-21 15:36:56,812 p=101885 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "msg": "Destination /etc/default/earlyoom does not exist !", "rc": 257}
+2024-12-21 15:36:56,817 p=101885 u=bill n=ansible | TASK [workstations : set_fact] ************************************************************************************************************************************************************
+2024-12-21 15:36:56,829 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:36:56,838 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:36:56,844 p=101885 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | PLAY RECAP ********************************************************************************************************************************************************************************
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | test_lxc                   : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | test_media_h               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | test_media_p               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | ubuntu_test_desk           : ok=46   changed=3    unreachable=0    failed=0    skipped=12   rescued=1    ignored=0   
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | ubuntu_test_desk_2         : ok=38   changed=1    unreachable=0    failed=0    skipped=4    rescued=1    ignored=0   
+2024-12-21 15:36:56,929 p=101885 u=bill n=ansible | ubuntu_test_desk_3         : ok=46   changed=3    unreachable=0    failed=0    skipped=12   rescued=1    ignored=0   
+2024-12-21 15:37:39,593 p=103364 u=bill n=ansible | [WARNING]: Collection ansible.posix does not support Ansible version 2.14.16
+
+2024-12-21 15:37:39,605 p=103364 u=bill n=ansible | [WARNING]: Collection community.general does not support Ansible version 2.14.16
+
+2024-12-21 15:37:39,680 p=103364 u=bill n=ansible | [WARNING]: Skipping callback plugin 'email_notifications', unable to load
+
+2024-12-21 15:37:39,735 p=103364 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:37:39,758 p=103364 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:37:40,571 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:40,572 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:40,851 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:40,914 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:40,945 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:41,459 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:41,505 p=103364 u=bill n=ansible | TASK [pre-run | update package cache (debian, etc)] ***************************************************************************************************************************************
+2024-12-21 15:37:42,906 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:42,943 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:43,053 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:43,180 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:43,251 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:44,130 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:44,938 p=103364 u=bill n=ansible | PLAY [all] ********************************************************************************************************************************************************************************
+2024-12-21 15:37:44,952 p=103364 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:37:45,554 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:45,572 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:45,621 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:45,639 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:45,707 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:46,198 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:46,254 p=103364 u=bill n=ansible | TASK [common : Load vault variables] ******************************************************************************************************************************************************
+2024-12-21 15:37:46,296 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:46,337 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:46,338 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:46,345 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:46,357 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:46,365 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:46,371 p=103364 u=bill n=ansible | TASK [common : Debug bill_password] *******************************************************************************************************************************************************
+2024-12-21 15:37:46,390 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,401 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,412 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,423 p=103364 u=bill n=ansible | ok: [test_lxc] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,423 p=103364 u=bill n=ansible | ok: [test_media_h] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,430 p=103364 u=bill n=ansible | ok: [test_media_p] => {
+    "msg": "The password is Jackson0317!"
+}
+2024-12-21 15:37:46,436 p=103364 u=bill n=ansible | TASK [common : include_vars] **************************************************************************************************************************************************************
+2024-12-21 15:37:46,453 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:46,464 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:46,475 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:46,486 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:46,487 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:46,494 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:46,499 p=103364 u=bill n=ansible | TASK [common : users | bill | create group] ***********************************************************************************************************************************************
+2024-12-21 15:37:46,745 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:46,768 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:46,776 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:46,793 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:46,798 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:46,897 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:46,903 p=103364 u=bill n=ansible | TASK [common : users | bill | create user] ************************************************************************************************************************************************
+2024-12-21 15:37:47,751 p=103364 u=bill n=ansible | changed: [test_lxc]
+2024-12-21 15:37:47,778 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:37:47,789 p=103364 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:37:47,794 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:37:47,806 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_2]
+2024-12-21 15:37:48,184 p=103364 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:37:48,189 p=103364 u=bill n=ansible | TASK [common : users | bill | bill | add sudoers file] ************************************************************************************************************************************
+2024-12-21 15:37:48,683 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:37:48,707 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:48,717 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:48,718 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:48,724 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:49,021 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:49,026 p=103364 u=bill n=ansible | TASK [common : users | bill | create .ssh directory] **************************************************************************************************************************************
+2024-12-21 15:37:49,197 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:37:49,208 p=103364 u=bill n=ansible | failed: [test_lxc] (item={'dir': '/home/bill/.ssh'}) => {"ansible_loop_var": "item", "changed": false, "gid": 65534, "group": "nogroup", "item": {"dir": "/home/bill/.ssh"}, "mode": "0700", "msg": "chown failed: [Errno 1] Operation not permitted: b'/home/bill/.ssh'", "owner": "nobody", "path": "/home/bill/.ssh", "size": 4096, "state": "directory", "uid": 65534}
+2024-12-21 15:37:49,226 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:37:49,231 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:37:49,248 p=103364 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:37:49,370 p=103364 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '/home/bill/.ssh'})
+2024-12-21 15:37:49,378 p=103364 u=bill n=ansible | TASK [common : users | bill | add public key] *********************************************************************************************************************************************
+2024-12-21 15:37:49,794 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:37:49,802 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:37:49,804 p=103364 u=bill n=ansible | ok: [test_media_h] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:37:49,805 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:37:49,809 p=103364 u=bill n=ansible | ok: [test_media_p] => (item=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7ypmxD6oZrhC5/W7UBxM2xvNOE7GbxAgbTIwMvaOMyMYBNeQ1LHmdzmzinhQIEpmYvLMh4GOlpqeI54XJ69zAWwFPONJelJ028fvDt30RmUtKNU3G41+C/Io6E0vgJE3aLn+TgU/GFBxXk4eWOt5LHrWXOtQkoT5u4B4I1LqjwtN+gNeROTRzpES35SwwHY6v4Upc35DTwGbjN1BAzlTxBjJ7KHIkbnc02xtgnZlWhIqzrsJ2hGqIpMBPFIKADKUQRSUxKM90KO+H0pRMDtby/F6hzCltRzmZAJoZR6sYrUS30kvN1nOBTkWpX8iGkjKa6HCcINSYjr5PGBaWBkLKkafs3DjGXT4+X+BCQIHSRerEJ5M7SM+X/JqN3bAm+EKPsVS9yN5qm0r+VeZmfpKEiG1BrNHeC+cEtMpu6NxM6TOawUqlgSSfBkIsslUEL5uTHcV+KZJXQpjWZppUk4lS40B6n8dqcCJ/I40El4pE00U1VYtp/zWpMQckJ1Ulsjk= bill@semaphore)
+2024-12-21 15:37:49,816 p=103364 u=bill n=ansible | TASK [common : users | bill | create config directories] **********************************************************************************************************************************
+2024-12-21 15:37:49,996 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.bash'})
+2024-12-21 15:37:50,031 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.bash'})
+2024-12-21 15:37:50,035 p=103364 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.bash'})
+2024-12-21 15:37:50,041 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.bash'})
+2024-12-21 15:37:50,042 p=103364 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.bash'})
+2024-12-21 15:37:50,157 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:37:50,186 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item={'dir': '.config'})
+2024-12-21 15:37:50,191 p=103364 u=bill n=ansible | ok: [test_media_h] => (item={'dir': '.config'})
+2024-12-21 15:37:50,196 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:37:50,203 p=103364 u=bill n=ansible | ok: [test_media_p] => (item={'dir': '.config'})
+2024-12-21 15:37:50,209 p=103364 u=bill n=ansible | TASK [common : users | bill | copy bashrc] ************************************************************************************************************************************************
+2024-12-21 15:37:50,596 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:50,607 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:50,628 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:50,652 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:50,682 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:50,688 p=103364 u=bill n=ansible | TASK [common : users | hal | create user] *************************************************************************************************************************************************
+2024-12-21 15:37:50,903 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:50,914 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:50,919 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:50,947 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:50,948 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:50,953 p=103364 u=bill n=ansible | TASK [common : users | hal | add public key] **********************************************************************************************************************************************
+2024-12-21 15:37:51,189 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:37:51,218 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:37:51,219 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:37:51,273 p=103364 u=bill n=ansible | ok: [test_media_h] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:37:51,276 p=103364 u=bill n=ansible | ok: [test_media_p] => (item=ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINEgcmZPiPGXw7C+HO5mncDkRbLuX+OWWnVuPFqquAHo ansible)
+2024-12-21 15:37:51,282 p=103364 u=bill n=ansible | TASK [common : users | hal | add sudoers file] ********************************************************************************************************************************************
+2024-12-21 15:37:51,651 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:51,660 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:51,683 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:51,706 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:51,722 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:51,727 p=103364 u=bill n=ansible | TASK [common : ansible setup | ensure group ansible exists] *******************************************************************************************************************************
+2024-12-21 15:37:51,912 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:51,932 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:51,963 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:51,979 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:51,980 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:51,985 p=103364 u=bill n=ansible | TASK [common : ansible setup | ensure ansible is the latest version] **********************************************************************************************************************
+2024-12-21 15:37:52,807 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:52,898 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:52,918 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:52,929 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:52,934 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:52,940 p=103364 u=bill n=ansible | TASK [common : ansible setup | install required packages] *********************************************************************************************************************************
+2024-12-21 15:37:53,708 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:53,823 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:53,849 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:53,860 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:53,924 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:53,930 p=103364 u=bill n=ansible | TASK [common : ansible setup | install acl package] ***************************************************************************************************************************************
+2024-12-21 15:37:54,681 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:54,703 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:54,850 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:54,861 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:54,920 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:54,925 p=103364 u=bill n=ansible | TASK [common : ansible setup | create ansible log file] ***********************************************************************************************************************************
+2024-12-21 15:37:55,088 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:55,111 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:55,116 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:55,130 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:55,146 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:55,151 p=103364 u=bill n=ansible | TASK [common : ansible setup | add logrotate config for ansible log file] *****************************************************************************************************************
+2024-12-21 15:37:55,533 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:55,586 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:55,608 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:55,609 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:55,621 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:55,626 p=103364 u=bill n=ansible | TASK [common : ansible setup | remove default ansible directory (/etc/ansible) from host] *************************************************************************************************
+2024-12-21 15:37:55,809 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:55,833 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:55,841 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:55,856 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:55,880 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:55,886 p=103364 u=bill n=ansible | TASK [common : ansible setup | generate provision script from template] *******************************************************************************************************************
+2024-12-21 15:37:56,321 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:56,321 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:56,324 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:56,362 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:56,368 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:56,374 p=103364 u=bill n=ansible | TASK [common : system setup | utilities | install utility packages] ***********************************************************************************************************************
+2024-12-21 15:37:57,162 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:57,166 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:57,202 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:57,256 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:57,273 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:57,278 p=103364 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (ubuntu)] *****************************************************************************************************************
+2024-12-21 15:37:58,094 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:58,159 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:58,194 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:58,237 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:58,274 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:58,280 p=103364 u=bill n=ansible | TASK [common : system setup | clock | install systemd-timesyncd (debian)] *****************************************************************************************************************
+2024-12-21 15:37:58,291 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:37:58,299 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:37:58,313 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:37:58,323 p=103364 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:37:58,329 p=103364 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:37:58,335 p=103364 u=bill n=ansible | TASK [common : system setup | clock | start and enable systemd-timesyncd] *****************************************************************************************************************
+2024-12-21 15:37:58,803 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:58,811 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:58,815 p=103364 u=bill n=ansible | changed: [test_media_p]
+2024-12-21 15:37:58,824 p=103364 u=bill n=ansible | changed: [test_media_h]
+2024-12-21 15:37:58,826 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:58,832 p=103364 u=bill n=ansible | TASK [common : system setup | clock | set time zone] **************************************************************************************************************************************
+2024-12-21 15:37:59,179 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:59,197 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:59,203 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:59,223 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:59,223 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:59,229 p=103364 u=bill n=ansible | TASK [common : system setup | locale | add en_US] *****************************************************************************************************************************************
+2024-12-21 15:37:59,518 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:59,535 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:59,535 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:59,546 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:59,548 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:59,553 p=103364 u=bill n=ansible | TASK [common : system setup | locale | set locale to en_US] *******************************************************************************************************************************
+2024-12-21 15:37:59,759 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:37:59,761 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:37:59,776 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:37:59,779 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:37:59,834 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:37:59,839 p=103364 u=bill n=ansible | TASK [common : system setup | locale | set en_US as default locale] ***********************************************************************************************************************
+2024-12-21 15:37:59,849 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:37:59,857 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:37:59,864 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:37:59,881 p=103364 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:37:59,887 p=103364 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:37:59,892 p=103364 u=bill n=ansible | TASK [common : system setup | locale | remove en_GB] **************************************************************************************************************************************
+2024-12-21 15:37:59,903 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:37:59,912 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:37:59,927 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:37:59,939 p=103364 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:37:59,944 p=103364 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:37:59,950 p=103364 u=bill n=ansible | TASK [common : system setup | logging | adjust retention period] **************************************************************************************************************************
+2024-12-21 15:38:00,224 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:38:00,230 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:00,232 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:38:00,236 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:00,239 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:00,244 p=103364 u=bill n=ansible | TASK [common : system setup | logging | restart journald (config changed)] ****************************************************************************************************************
+2024-12-21 15:38:00,255 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:00,264 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_2]
+2024-12-21 15:38:00,280 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:00,290 p=103364 u=bill n=ansible | skipping: [test_media_h]
+2024-12-21 15:38:00,296 p=103364 u=bill n=ansible | skipping: [test_media_p]
+2024-12-21 15:38:00,301 p=103364 u=bill n=ansible | TASK [common : system setup | openssh | install or update daemon package] *****************************************************************************************************************
+2024-12-21 15:38:01,088 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:01,096 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:01,164 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:38:01,165 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:01,179 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:38:01,185 p=103364 u=bill n=ansible | TASK [common : system setup | openssh | enable daemon] ************************************************************************************************************************************
+2024-12-21 15:38:01,531 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:01,532 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:01,532 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:01,535 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:38:01,541 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:38:01,547 p=103364 u=bill n=ansible | TASK [common : system setup | openssh | generate sshd_config file from template] **********************************************************************************************************
+2024-12-21 15:38:01,956 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:01,959 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:01,980 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:02,017 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:38:02,020 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:38:02,026 p=103364 u=bill n=ansible | TASK [common : system setup | openssh | copy issue.net] ***********************************************************************************************************************************
+2024-12-21 15:38:02,410 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:02,414 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:02,432 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:02,451 p=103364 u=bill n=ansible | ok: [test_media_h]
+2024-12-21 15:38:02,468 p=103364 u=bill n=ansible | ok: [test_media_p]
+2024-12-21 15:38:02,488 p=103364 u=bill n=ansible | TASK [common : set_fact] ******************************************************************************************************************************************************************
+2024-12-21 15:38:02,507 p=103364 u=bill n=ansible | ok: [test_lxc]
+2024-12-21 15:38:02,635 p=103364 u=bill n=ansible | PLAY [workstations] ***********************************************************************************************************************************************************************
+2024-12-21 15:38:02,665 p=103364 u=bill n=ansible | TASK [Gathering Facts] ********************************************************************************************************************************************************************
+2024-12-21 15:38:03,260 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:03,271 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:03,302 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:03,328 p=103364 u=bill n=ansible | TASK [workstations : include_vars] ********************************************************************************************************************************************************
+2024-12-21 15:38:03,342 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:03,351 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:38:03,358 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:03,363 p=103364 u=bill n=ansible | TASK [workstations : users | bill | remove preinstalled clutter from home directory] ******************************************************************************************************
+2024-12-21 15:38:03,523 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=examples.desktop)
+2024-12-21 15:38:03,541 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=examples.desktop)
+2024-12-21 15:38:03,550 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=examples.desktop)
+2024-12-21 15:38:03,667 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Desktop)
+2024-12-21 15:38:03,690 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Desktop)
+2024-12-21 15:38:03,710 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Desktop)
+2024-12-21 15:38:03,822 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Documents)
+2024-12-21 15:38:03,837 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Documents)
+2024-12-21 15:38:03,860 p=103364 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Documents) => {"ansible_loop_var": "item", "changed": false, "item": "Documents", "msg": "rmtree failed: [Errno 16] Device or resource busy: '/home/bill/Documents'"}
+2024-12-21 15:38:03,972 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Downloads)
+2024-12-21 15:38:03,986 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Downloads)
+2024-12-21 15:38:04,060 p=103364 u=bill n=ansible | failed: [ubuntu_test_desk_2] (item=Downloads) => {"ansible_loop_var": "item", "changed": false, "item": "Downloads", "msg": "rmtree failed: [Errno 13] Permission denied: 'log.txt'"}
+2024-12-21 15:38:04,124 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Music)
+2024-12-21 15:38:04,150 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Music)
+2024-12-21 15:38:04,214 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Music)
+2024-12-21 15:38:04,282 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Pictures)
+2024-12-21 15:38:04,301 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Pictures)
+2024-12-21 15:38:04,369 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Pictures)
+2024-12-21 15:38:04,440 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Public)
+2024-12-21 15:38:04,451 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Public)
+2024-12-21 15:38:04,519 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Public)
+2024-12-21 15:38:04,590 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Templates)
+2024-12-21 15:38:04,608 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Templates)
+2024-12-21 15:38:04,670 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Templates)
+2024-12-21 15:38:04,741 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item=Videos)
+2024-12-21 15:38:04,758 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item=Videos)
+2024-12-21 15:38:04,817 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2] => (item=Videos)
+2024-12-21 15:38:04,823 p=103364 u=bill n=ansible | TASK [workstations : users | bill | create personal config directories] *******************************************************************************************************************
+2024-12-21 15:38:04,979 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config'})
+2024-12-21 15:38:04,998 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config'})
+2024-12-21 15:38:05,130 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/autostart'})
+2024-12-21 15:38:05,139 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/autostart'})
+2024-12-21 15:38:05,276 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:38:05,282 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/bpytop'})
+2024-12-21 15:38:05,419 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:38:05,437 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/gtk-3.0'})
+2024-12-21 15:38:05,560 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.config/terminator'})
+2024-12-21 15:38:05,583 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.config/terminator'})
+2024-12-21 15:38:05,704 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local'})
+2024-12-21 15:38:05,732 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local'})
+2024-12-21 15:38:05,845 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share'})
+2024-12-21 15:38:05,878 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share'})
+2024-12-21 15:38:05,985 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:38:06,025 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': '.local/share/applications'})
+2024-12-21 15:38:06,129 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'bin'})
+2024-12-21 15:38:06,172 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'bin'})
+2024-12-21 15:38:06,273 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'desktop'})
+2024-12-21 15:38:06,318 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'desktop'})
+2024-12-21 15:38:06,416 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'documents'})
+2024-12-21 15:38:06,471 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'documents'})
+2024-12-21 15:38:06,564 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'downloads'})
+2024-12-21 15:38:06,618 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'downloads'})
+2024-12-21 15:38:06,706 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'projects'})
+2024-12-21 15:38:06,762 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'projects'})
+2024-12-21 15:38:06,848 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk] => (item={'dir': 'templates'})
+2024-12-21 15:38:06,905 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3] => (item={'dir': 'templates'})
+2024-12-21 15:38:06,911 p=103364 u=bill n=ansible | TASK [workstations : users | bill | copy user-dirs.dirs] **********************************************************************************************************************************
+2024-12-21 15:38:07,228 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:07,246 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,252 p=103364 u=bill n=ansible | TASK [workstations : users | bill | copy profile image] ***********************************************************************************************************************************
+2024-12-21 15:38:07,590 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:07,603 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,608 p=103364 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:38:07,623 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:07,632 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,638 p=103364 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:38:07,652 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:07,660 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,665 p=103364 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:38:07,678 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:07,690 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,697 p=103364 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:38:07,710 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:07,719 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,724 p=103364 u=bill n=ansible | TASK [workstations : include_tasks] *******************************************************************************************************************************************************
+2024-12-21 15:38:07,737 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:07,746 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:07,751 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | add flatpak support] *************************************************************************************************************************
+2024-12-21 15:38:08,447 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:08,453 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:08,458 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | flatpak | add flathub remote] ****************************************************************************************************************
+2024-12-21 15:38:08,719 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:08,721 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:08,726 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | install snapd] *******************************************************************************************************************************
+2024-12-21 15:38:09,346 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:09,382 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:09,388 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | install/update core snap] ********************************************************************************************************************
+2024-12-21 15:38:10,116 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:38:10,127 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:38:10,132 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | install xorg (archlinux)] ********************************************************************************************************************
+2024-12-21 15:38:10,145 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:10,150 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:10,156 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | install nvidia gpu packages (arch)] **********************************************************************************************************
+2024-12-21 15:38:10,169 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:10,174 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:10,180 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | install vbox gpu packages (arch)] ************************************************************************************************************
+2024-12-21 15:38:10,193 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:10,199 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:10,204 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | disable apport in config on ubuntu-based hosts] **********************************************************************************************
+2024-12-21 15:38:10,349 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:38:10,367 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:38:10,372 p=103364 u=bill n=ansible | TASK [workstations : system setup | tweaks | disable and stop apport service on ubuntu-based hosts] ***************************************************************************************
+2024-12-21 15:38:11,602 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,611 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:38:11,617 p=103364 u=bill n=ansible | TASK [workstations : software | audacious | install package] ******************************************************************************************************************************
+2024-12-21 15:38:11,631 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:11,640 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,646 p=103364 u=bill n=ansible | TASK [workstations : software | audacity | install package] *******************************************************************************************************************************
+2024-12-21 15:38:11,660 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:11,669 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,675 p=103364 u=bill n=ansible | TASK [workstations : software | authy | install package] **********************************************************************************************************************************
+2024-12-21 15:38:11,690 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:11,700 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,705 p=103364 u=bill n=ansible | TASK [workstations : software | authy | enable autostart] *********************************************************************************************************************************
+2024-12-21 15:38:11,722 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:11,731 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,737 p=103364 u=bill n=ansible | TASK [workstations : software | bitwarden | install package] ******************************************************************************************************************************
+2024-12-21 15:38:11,751 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk]
+2024-12-21 15:38:11,761 p=103364 u=bill n=ansible | skipping: [ubuntu_test_desk_3]
+2024-12-21 15:38:11,766 p=103364 u=bill n=ansible | TASK [workstations : software | install caffeine] *****************************************************************************************************************************************
+2024-12-21 15:38:15,582 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:38:15,903 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:38:15,908 p=103364 u=bill n=ansible | TASK [workstations : software | install multimedia codecs] ********************************************************************************************************************************
+2024-12-21 15:39:43,371 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk_3]
+2024-12-21 15:39:45,040 p=103364 u=bill n=ansible | changed: [ubuntu_test_desk]
+2024-12-21 15:39:45,046 p=103364 u=bill n=ansible | TASK [workstations : software | boto | install package] ***********************************************************************************************************************************
+2024-12-21 15:39:45,192 p=103364 u=bill n=ansible | fatal: [ubuntu_test_desk]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 15:39:45,194 p=103364 u=bill n=ansible | fatal: [ubuntu_test_desk_3]: FAILED! => {"changed": false, "module_stderr": "sudo: unknown user bill\nsudo: error initializing audit plugin sudoers_audit\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}
+2024-12-21 15:39:45,200 p=103364 u=bill n=ansible | TASK [workstations : set_fact] ************************************************************************************************************************************************************
+2024-12-21 15:39:45,210 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk]
+2024-12-21 15:39:45,217 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_2]
+2024-12-21 15:39:45,223 p=103364 u=bill n=ansible | ok: [ubuntu_test_desk_3]
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | PLAY RECAP ********************************************************************************************************************************************************************************
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | test_lxc                   : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=1    ignored=0   
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | test_media_h               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | test_media_p               : ok=35   changed=2    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | ubuntu_test_desk           : ok=50   changed=5    unreachable=0    failed=0    skipped=17   rescued=1    ignored=0   
+2024-12-21 15:39:45,280 p=103364 u=bill n=ansible | ubuntu_test_desk_2         : ok=38   changed=1    unreachable=0    failed=0    skipped=4    rescued=1    ignored=0   
+2024-12-21 15:39:45,281 p=103364 u=bill n=ansible | ubuntu_test_desk_3         : ok=50   changed=5    unreachable=0    failed=0    skipped=17   rescued=1    ignored=0   

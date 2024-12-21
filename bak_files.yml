@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Directory containing .bak files
+SOURCE_DIR="/home/bill/git/homelab"
+
+# Directory to move .bak files to
+BACKUP_DIR="/home/bill/git/.bak"
+
+# Create backup directory if it doesn't exist
+mkdir -p "$BACKUP_DIR"
+
+# Find and move all .bak files
+find "$SOURCE_DIR" -type f -name "*.bak" -exec mv {} "$BACKUP_DIR" \;
+
+echo "All .bak files have been moved to $BACKUP_DIR."

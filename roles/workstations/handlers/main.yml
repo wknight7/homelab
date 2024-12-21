@@ -4,13 +4,13 @@
 - name: gnome_tracker_clean_cache
   tags: gnome,tracker
   file:
-    path: /home/jay/.cache/tracker
+    path: /home/bill/.cache/tracker
     state: absent
 
 - name: gnome_tracker_clean_local_cache
   tags: gnome,tracker
   file:
-    path: /home/jay/.local/share/tracker
+    path: /home/bill/.local/share/tracker
     state: absent
 
 - name: enable_gnome_extensions
@@ -18,5 +18,5 @@
 
 - name: update_xdg
   tags: users,config,xdg
-  become_user: jay
+  become_user: bill
   command: /usr/bin/xdg-user-dirs-update

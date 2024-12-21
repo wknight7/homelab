@@ -6,7 +6,7 @@
 
 - name: system setup | tweaks | flatpak | add flathub remote
   tags: packages,flatpak,workstation-packages
-  become_user: jay
+  become_user: bill
   flatpak_remote:
     name: flathub
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
@@ -60,16 +60,6 @@
     - ansible_distribution == "Archlinux"
     - gpu is defined
     - gpu == "vbox"
-
-
-- name: system setup | tweaks | add exceptions for earlyoom
-  tags: system,system-setup,tweaks
-  lineinfile:
-      dest: /etc/default/earlyoom
-      regexp: '^EARLYOOM_ARGS="-r 60"'
-      line: "EARLYOOM_ARGS=\"-m 5 -r 60 --avoid '(^|/)(init|Xorg|ssh|kdenlive*)$'\""
-  notify: restart_earlyoom
-
 
 # distro-specific tasks for ubuntu
 - name: system setup | tweaks | disable apport in config on ubuntu-based hosts
