@@ -116,3 +116,7 @@
   dconf:
     key: "/org/gnome/gnome-screenshot/auto-save-directory"
     value: "'/home/bill'"
+
+- name: gnome | appearance | dconf update
+  command: dconf update
+  become_user: bill

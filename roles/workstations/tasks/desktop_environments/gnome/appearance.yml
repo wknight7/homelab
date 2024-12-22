@@ -61,3 +61,7 @@
 #  dconf:
 #    key: "/org/gnome/shell/extensions/user-theme/name"
 #    value: "'Shades-of-gray'"
+
+- name: gnome | appearance | dconf update
+  command: dconf update
+  become_user: bill

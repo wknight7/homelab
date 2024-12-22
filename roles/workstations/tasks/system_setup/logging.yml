@@ -1,0 +1,8 @@
+- name: Log current settings
+  debug:
+    msg: "Current setting for key {{ item.key }} is {{ item.value }}"
+  with_items: 
+    - { key: "/org/gnome/desktop/background/picture-uri", value: "{{ dconf.read('/org/gnome/desktop/background/picture-uri') }}" }
+    - { key: "/org/gnome/desktop/screensaver/picture-uri", value: "{{ dconf.read('/org/gnome/desktop/screensaver/picture-uri') }}" }
+  tags: logging,settings
+  when: is_vm == "True"

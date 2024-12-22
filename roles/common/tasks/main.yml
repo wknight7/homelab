@@ -3,11 +3,6 @@
   include_vars: group_vars/vault.yml
   tags: always
 
-# Debugging task
-- name: Debug bill_password
-  debug:
-    msg: "The password is {{ bill_password }}"
-
 # Load distro-specific variables (if needed)
 - include_vars: "{{ ansible_distribution }}.yml"
   tags: always
@@ -16,17 +11,20 @@
   # Make sure users exist on the system
   - import_tasks: users/bill.yml
   - import_tasks: users/hal.yml
- 
+
   # Set up the ansible environment
   - import_tasks: ansible_setup.yml
 
+  # Install Python3 and pip3
+  - import_tasks: system_setup/python_pip.yml
+
   # install software
   - import_tasks: software/packages.yml
- 
+
   # Perform remaining tasks:
-  - import_tasks: system_setup/clock.yml 
+  - import_tasks: system_setup/clock.yml
   - import_tasks: system_setup/locale.yml
-  - import_tasks: system_setup/logging.yml 
+  - import_tasks: system_setup/logging.yml
   - import_tasks: system_setup/openssh.yml
 
   rescue:

@@ -1,0 +1,11 @@
+- name: Detect VM environment
+  set_fact:
+    is_vm: "{{ 'True' if ansible_virtualization_role == 'guest' else 'False' }}"
+  tags: system,settings
+
+- name: Adjust settings for VM environment
+  shell: >
+    # Add VM-specific adjustments here
+    echo "Running VM specific adjustments"
+  when: is_vm == "True"
+  tags: system,settings

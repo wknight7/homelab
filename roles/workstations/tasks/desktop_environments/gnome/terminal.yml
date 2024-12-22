@@ -21,3 +21,7 @@
     #- { key: use-theme-colors, value: "false" }
     #- { key: visible-name, value: "'Main'" }
     #- { key: font, value: "'Fira Mono Regular 12'" }
+
+- name: gnome | appearance | dconf update
+  command: dconf update
+  become_user: bill

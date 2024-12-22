@@ -30,36 +30,20 @@
     state: present
   when: ansible_distribution != "Archlinux"
 
-
-# distro-specific tasks for arch
-- name: system setup | tweaks | install xorg (archlinux)
-  tags: distro,distro-setup,packages,system,system-packages,workstation-packages
-  package:
-    name: xorg-server
-  when: ansible_distribution == "Archlinux"
-
-- name: system setup | tweaks | install nvidia gpu packages (arch)
+# Install Nvidia GPU packages only if not in a VM
+- name: system setup | tweaks | install nvidia gpu packages (ubuntu)
   tags: distro,distro-setup,packages,nvidia,system,system-packages,workstation-packages
   package:
     name:
       - nvidia
       - nvidia-lts
       - nvidia-utils
-  when:
-    - ansible_distribution == "Archlinux"
+  when: 
+    - ansible_distribution == "Ubuntu"
     - gpu is defined
     - gpu == "nvidia"
+    - not (ansible_virtualization_type|string in ['kvm', 'qemu'])
 
-- name: system setup | tweaks | install vbox gpu packages (arch)
-  tags: distro,distro-setup,packages,system,system-packages,vbox,workstation-packages
-  package:
-    name:
-      - virtualbox-guest-utils
-      - xf86-video-vmware
-  when:
-    - ansible_distribution == "Archlinux"
-    - gpu is defined
-    - gpu == "vbox"
 
 # distro-specific tasks for ubuntu
 - name: system setup | tweaks | disable apport in config on ubuntu-based hosts
