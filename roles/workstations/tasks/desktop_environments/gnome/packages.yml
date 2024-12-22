@@ -8,7 +8,7 @@
       - "{{ gdm_package }}"
       - gedit
       - gnome-backgrounds
-      - gnome-books
+#      - gnome-books
       - gnome-boxes
       - gnome-control-center
       - gnome-disk-utility

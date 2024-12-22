@@ -18,7 +18,6 @@ web_browser: flatpak run org.mozilla.firefox
 
 # Application selection
 audacity: true
-authy: true
 autofs: true
 chromium: true
 darktable: true

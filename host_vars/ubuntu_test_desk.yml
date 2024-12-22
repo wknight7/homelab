@@ -18,7 +18,6 @@ web_browser: flatpak run org.mozilla.firefox
 
 # Application selection
 audacity: true
-authy: true
 autofs: true
 chromium: true
 darktable: true
@@ -49,3 +48,11 @@ xonotic: true
 # Desktop environment selection
 gnome: true
 mate: false
+
+# Define NFS mounts
+nfs_mounts:
+  - { server: "192.168.86.90", remote_path: "/mnt/Data/media", path: "/home/bill/media" }  
+  - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Code", path: "/home/bill/code" }
+  - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Configs", path: "/home/bill/.config" }
+  - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Documents", path: "/home/bill/documents" }
+  - { server: "192.168.86.90", remote_path: "/mnt/ssd-files/home/bill/Downloads", path: "/home/bill/downloads" }

@@ -60,8 +60,7 @@
 
   ## install software
   - import_tasks: software/audacious.yml
-  - import_tasks: software/audacity.yml
-  - import_tasks: software/authy.yml
+  - import_tasks: software/audacity.yml 
   - import_tasks: software/bitwarden.yml
   - import_tasks: software/caffeine.yml
   - import_tasks: software/codecs.yml

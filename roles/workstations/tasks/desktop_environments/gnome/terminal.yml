@@ -24,4 +24,4 @@
 
 - name: gnome | appearance | dconf update
   command: dconf update
-  become_user: bill
+  become_user: root

@@ -34,8 +34,8 @@
     - { dir: desktop }
     - { dir: documents }
     - { dir: downloads }
-    - { dir: projects }
-    - { dir: templates }
+    - { dir: code }
+    - { dir: media }
 
 - name: users | bill | copy user-dirs.dirs
   tags: dotfiles,dotfiles-bill

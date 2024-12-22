@@ -8,7 +8,7 @@
     - steam is defined
     - steam == true
 
-- name: software | steam | steam | enable multilib (arch)
+- name: software | steam | enable multilib (arch)
   tags: steam,steam,multilib
   blockinfile:
     state: present
@@ -32,21 +32,50 @@
     - multilib.changed
     - ansible_distribution == "Archlinux"
 
-# As of 2020-09-30, multiarch is still required to be enabled in Debian and Ubuntu
-# Note: Not required in Pop OS, apparently
 - name: steam | add multiarch (debian, ubuntu)
   tags: steam,steam,multiarch
   lineinfile:
-      dest: /var/lib/dpkg/arch
-      regexp: "^i386"
-      line: "i386"
-      create: yes
+    dest: /var/lib/dpkg/arch
+    regexp: "^i386"
+    line: "i386"
+    create: yes
   when:
     - ansible_distribution in ['Debian', 'Ubuntu']
     - steam is defined
     - steam == true
 
-# For Debian and Ubuntu, set up acceptance of steam license before continuing
+- name: software | steam | ensure i386 architecture support
+  tags: steam,steam
+  command: dpkg --add-architecture i386
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - steam is defined
+    - steam == true
+
+- name: software | steam | update apt cache
+  tags: steam,steam
+  apt:
+    update_cache: yes
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - steam is defined
+    - steam == true
+
+- name: software | steam | install i386 libraries
+  tags: steam,steam
+  apt:
+    name:
+      - libgl1-mesa-dri:i386
+      - libgl1-mesa-glx:i386
+    state: present
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - steam is defined
+    - steam == true
+
 - name: software | steam | accept license
   tags: gaming,steam
   debconf:
@@ -55,35 +84,39 @@
     value: "I AGREE"
     vtype: "select"
   when:
-    - ansible_distribution in ["Debian", "Ubuntu"]
+    - ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
     - steam is defined
     - steam == true
 
-- name: software | steam | install package
+- name: software | steam | install steam
   tags: steam,steam
-  package:
-    state: latest
-    name: "{{ steam_package }}"
+  apt:
+    name: steam
+    state: present
+  become: true
   when:
+    - ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
     - steam is defined
     - steam == true
 
 - name: software | steam | install steam-devices package (debian, ubuntu, etc)
   tags: steam,steam
-  package:
-    state: latest
+  apt:
     name: steam-devices
+    state: present
+  become: true
   when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
     - steam is defined
     - steam == true
 
 - name: install vulkan drivers (debian, ubuntu, etc)
   tags: drivers,steam
-  package:
-    state: latest
+  apt:
     name: mesa-vulkan-drivers
+    state: present
+  become: true
   when:
-    - ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - ansible_distribution in ['Debian', 'Pop!_OS', 'Ubuntu']
     - steam is defined
     - steam == true
