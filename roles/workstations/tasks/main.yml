@@ -67,6 +67,7 @@
 #  - import_tasks: software/boto.yml
   - import_tasks: software/chromium.yml
   - import_tasks: software/darktable.yml
+  - import_tasks: software/expressvpn.yml
   - import_tasks: software/firefox.yml
   - import_tasks: software/foliate.yml
 #  - import_tasks: software/google_chrome.yml
@@ -95,6 +96,7 @@
  # - import_tasks: software/virtualbox.yml
  # - import_tasks: software/vivaldi.yml
  # - import_tasks: software/vlc.yml
+  - import_tasks: software/vscode.yml
  # - import_tasks: software/xonotic.yml
 
   rescue:

@@ -1,0 +1,70 @@
+- name: software | expressvpn | copy ExpressVPN deb package
+  copy:
+    src: files/expressvpn_3.80.0.7-1_amd64.deb
+    dest: /tmp/expressvpn.deb
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+
+- name: software | expressvpn | install ExpressVPN deb package
+  apt:
+    deb: /tmp/expressvpn.deb
+    state: present
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+
+- name: software | expressvpn | install expect
+  apt:
+    name: expect
+    state: present
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+
+- name: software | expressvpn | copy expect script
+  copy:
+    src: files/expressvpn_activate.expect
+    dest: /tmp/expressvpn_activate.expect
+    mode: '0755'
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+
+- name: software | expressvpn | check if ExpressVPN is installed
+  stat:
+    path: /usr/bin/expressvpn
+  register: expressvpn_installed
+
+- name: software | expressvpn | activate ExpressVPN
+  shell: /usr/bin/expect /tmp/expressvpn_activate.expect "{{ expressvpn_activation_code }}"
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+    - expressvpn_activation_code is defined
+    - not expressvpn_installed.stat.exists
+
+- name: software | expressvpn | connect to Smart Location
+  command: expressvpn connect smart
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true
+    - not expressvpn_installed.stat.exists
+
+- name: software | expressvpn | ensure dependencies are installed
+  command: apt-get install -f -y
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - expressvpn is defined
+    - expressvpn == true

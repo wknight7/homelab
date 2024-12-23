@@ -21,6 +21,7 @@ audacity: true
 autofs: true
 chromium: true
 darktable: true
+expressvpn: true
 firefox: true
 foliate: true
 games: true
@@ -43,6 +44,7 @@ vagrant: true
 virtualbox: true
 vivaldi: true
 vlc: true
+vscode: true
 xonotic: true
 
 # Desktop environment selection

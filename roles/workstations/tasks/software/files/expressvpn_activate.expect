@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+
+set timeout -1
+set activation_code [lindex $argv 0]
+
+spawn expressvpn activate
+
+expect "Enter activation code:"
+send "$activation_code\r"
+
+expect "Help improve ExpressVPN: Share crash reports, speed tests, usability diagnostics, and whether VPN connection attempts succeed. These reports never contain personally identifiable information. (Y/n)"
+send "Y\r"
+
+expect eof

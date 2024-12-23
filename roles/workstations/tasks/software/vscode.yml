@@ -1,0 +1,26 @@
+- name: software | vscode | copy VSCode deb package
+  copy:
+    src: files/code_1.96.2-1734607745_amd64.deb
+    dest: /tmp/code.deb
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - vscode is defined
+    - vscode == true
+
+- name: software | vscode | install VSCode deb package
+  apt:
+    deb: /tmp/code.deb
+    state: present
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - vscode is defined
+    - vscode == true
+
+- name: software | vscode | ensure dependencies are installed
+  command: apt-get install -f -y
+  become: true
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - vscode is defined
+    - vscode == true
