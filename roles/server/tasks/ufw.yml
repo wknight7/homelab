@@ -1,0 +1,111 @@
+- name: ufw | install package
+  tags: ufw
+  package:
+    state: latest
+    name: ufw
+  notify:
+    - restart_ufw
+
+# plex
+- name: ufw | plex | allow plex
+  tags: ufw
+  ufw:
+    comment: plex
+    rule: allow
+    port: '32400'
+    proto: tcp
+  when:
+    - plex_server is defined
+    - plex_server == true
+
+# openssh
+- name: ufw | openssh | allow ssh (external)
+  tags: ufw
+  ufw:
+    comment: ssh from home network
+    rule: allow
+    port: ssh
+    src: '172.14.59.123/32'
+  
+- name: ufw | openssh | allow ssh (internal)
+  tags: ufw
+  ufw:
+    comment: ssh
+    rule: allow
+    port: ssh
+    src: '192.168.86.0/24'
+
+# web server
+- name: ufw | web server | allow http (80)
+  tags: ufw
+  ufw:
+    comment: http
+    rule: allow
+    port: '80'
+    proto: tcp
+  when:
+    - web_server is defined
+    - web_server == true
+
+- name: ufw | web server | allow http (8080)
+  tags: ufw
+  ufw:
+    comment: http_8080
+    rule: allow
+    port: '8080'
+    proto: tcp
+  when:
+    - web_server_8080 is defined
+    - web_server_8080 == true
+
+- name: ufw | web server | allow https
+  tags: ufw
+  ufw:
+    comment: https
+    rule: allow
+    port: '443'
+    proto: tcp
+  when:
+    - web_server is defined
+    - web_server == true
+
+# calibre-web
+- name: ufw | calibre-web | allow calibre-web
+  tags: ufw
+  ufw:
+    comment: calibre-web
+    rule: allow
+    port: '8083'
+    proto: tcp
+  when:
+    - calibre_web is defined
+    - calibre_web == true
+
+# paperless-ngx
+- name: ufw | paperless-ngx | allow paperless-ngx
+  tags: ufw
+  ufw:
+    comment: paperless-ngx
+    rule: allow
+    port: '8000'
+    proto: tcp
+  when:
+    - paperless_ngx is defined
+    - paperless_ngx == true
+
+# photoprism
+- name: ufw | photoprism | allow photoprism
+  tags: ufw
+  ufw:
+    comment: photoprism
+    rule: allow
+    port: '2342'
+    proto: tcp
+  when:
+    - photoprism is defined
+    - photoprism == true
+
+# all rules set, enable
+- name: ufw | enable firewall
+  ufw:
+    state: enabled

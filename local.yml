@@ -1,5 +1,5 @@
 # tasks to complete before running roles
-- hosts: all
+- hosts: workstations,server
   tags: always
   become: true
   vars_files:
@@ -12,23 +12,23 @@
       when: ansible_distribution in ["Debian", "Ubuntu"]
 
 # run roles
-- hosts: all
-  tags: base
-  become: true
-  roles:
-    - common
-
-- hosts: workstations
-  tags: workstation
-  become: true
-  roles:
-    - workstations
-
-# - hosts: server
-#   tags: server
+# - hosts: workstations,server
+#   tags: base
 #   become: true
 #   roles:
-#     - server
+#     - common
+
+# - hosts: workstations
+#   tags: workstation
+#   become: true
+#   roles:
+#     - workstations
+
+- hosts: server
+  tags: server
+  become: true
+  roles:
+    - server
 
 # # end of run cleanup and reporting
 # - hosts: all
