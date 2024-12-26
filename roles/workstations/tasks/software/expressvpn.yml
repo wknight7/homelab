@@ -1,3 +1,9 @@
+---
+- name: software | expressvpn | check if ExpressVPN is installed
+  stat:
+    path: /usr/bin/expressvpn
+  register: expressvpn_installed
+
 - name: software | expressvpn | copy ExpressVPN deb package
   copy:
     src: files/expressvpn_3.80.0.7-1_amd64.deb
@@ -6,6 +12,7 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - expressvpn is defined
     - expressvpn == true
+    - not expressvpn_installed.stat.exists
 
 - name: software | expressvpn | install ExpressVPN deb package
   apt:
@@ -16,6 +23,7 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - expressvpn is defined
     - expressvpn == true
+    - not expressvpn_installed.stat.exists
 
 - name: software | expressvpn | install expect
   apt:
@@ -26,6 +34,7 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - expressvpn is defined
     - expressvpn == true
+    - not expressvpn_installed.stat.exists
 
 - name: software | expressvpn | copy expect script
   copy:
@@ -36,11 +45,7 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - expressvpn is defined
     - expressvpn == true
-
-- name: software | expressvpn | check if ExpressVPN is installed
-  stat:
-    path: /usr/bin/expressvpn
-  register: expressvpn_installed
+    - not expressvpn_installed.stat.exists
 
 - name: software | expressvpn | activate ExpressVPN
   shell: /usr/bin/expect /tmp/expressvpn_activate.expect "{{ expressvpn_activation_code }}"
@@ -68,3 +73,4 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - expressvpn is defined
     - expressvpn == true
+    - not expressvpn_installed.stat.exists

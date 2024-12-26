@@ -25,9 +25,7 @@
     authorized_key: 
       user: bill
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOkdzXCp480fWqPU0pMP4BLtrSEG/V399GAXr+Y4ZTVK bill"
-    notify: 
-      - Ensure .ssh directory exists
-
+    
   - name: add sudoers file for bill
     tags: always
     copy:

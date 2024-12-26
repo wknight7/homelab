@@ -1,13 +1,14 @@
 [workstations]
-ubuntu_test_desk ansible_host=192.168.86.102 container_id=116 vm_type=vm
-ubuntu_test_desk_2 ansible_host=192.168.86.104 container_id=121 vm_type=vm
-ubuntu_test_desk_3 ansible_host=192.168.86.83 container_id=103 vm_type=vm
+ubuntu_test_1 ansible_host=192.168.86.107 container_id=120 vm_type=vm
+ubuntu_test_2 ansible_host=192.168.86.108 container_id=121 vm_type=vm
 
 [server]
-test_lxc ansible_host=192.168.86.103 container_id=112
-test_media_h ansible_host=192.168.86.76 container_id=124
-test_media_p ansible_host=192.168.86.97 container_id=125
+docs_test ansible_host=192.168.86.51 container_id=103
+media_h_test ansible_host=192.168.86.96 container_id=112
+media_p_test ansible_host=192.168.86.106 container_id=116
 
 [proxmox]
 proxmox_server ansible_host=192.168.86.143
 
+[lxc]
+lxc_test ansible_host=192.168.86.109 container_id=124

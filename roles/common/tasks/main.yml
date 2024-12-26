@@ -27,6 +27,7 @@
   - import_tasks: system_setup/locale.yml
   - import_tasks: system_setup/logging.yml
   - import_tasks: system_setup/openssh.yml
+  - import_tasks: system_setup/cron.yml
 
   rescue:
     - set_fact: task_failed=true

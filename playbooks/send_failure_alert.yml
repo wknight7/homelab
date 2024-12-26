@@ -1,0 +1,54 @@
+---
+- block:
+  - name: send failure notification via email
+    tags: always
+    mail:
+      host: "smtp.gmail.com"
+      port: 587
+      username: "billknig@gmail.com"
+      password: "tsbwcppjapdkjleh"
+      to: "billknig@gmail.com"
+      subject: "⚠️ Ansible provision failed on {{ ansible_hostname }}"
+      body: |
+        Hello,
+
+        The Ansible provision on {{ ansible_hostname }} has failed.
+
+        Task:  {{ ansible_failed_task.name }}
+        Action: {{ ansible_failed_task.action }}
+        Error Message: {{ ansible_failed_result | to_nice_json }}
+
+        Please check the logs for more details.
+
+        Regards,
+        Hal 9000
+    changed_when: False
+
+  rescue:
+    - name: send failure notification via email (fallback)
+      tags: always
+      mail:
+        host: "smtp.gmail.com"
+        port: 587
+        username: "billknig@gmail.com"
+        password: "tsbwcppjapdkjleh"
+        to: "billknig@gmail.com"
+        subject: "⚠️ Ansible provision failed on {{ ansible_hostname }} - Fallback"
+        body: |
+          Hello,
+
+          The Ansible provision on {{ ansible_hostname }} has failed.
+
+          The specific error couldn't be shown, check the log.
+
+          Regards,
+          Your Automation System
+      changed_when: False
+
+- name: ansible job failed, clear cache later on to trigger another provision run
+  become: yes
+  at:
+    command: "if ! pgrep -f ansible-pull >/dev/null; then rm -rf /home/hal/.ansible; fi"
+    count: 60
+    units: minutes
+

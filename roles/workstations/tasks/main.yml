@@ -6,29 +6,6 @@
   ## User configs
   - import_tasks: users/bill.yml
 
-## desktop environments
-
-  # - include_tasks: desktop_environments/mate/appearance.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/caja.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/keybindings.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/packages.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/peripherals.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/terminal.yml
-  #   when: mate is defined and mate == true
-
-  # - include_tasks: desktop_environments/mate/workspace_settings.yml
-  #   when: mate is defined and mate == true
-
   - include_tasks: desktop_environments/gnome/appearance.yml
     when: gnome is defined and gnome == true
 
@@ -57,6 +34,9 @@
   # - import_tasks: system_setup/autofs.yml
   # - import_tasks: system_setup/scripts.yml
   - import_tasks: system_setup/tweaks.yml
+  - import_tasks: system_setup/common.yml
+  - import_tasks: system_setup/fstab.yml
+  - import_tasks: system_setup/logging.yml
 
   ## install software
   - import_tasks: software/audacious.yml

@@ -1,0 +1,24 @@
+---
+- name: notify healthchecks.io that the job ran
+  uri:
+    url: https://hc-ping.com/{{ healthcheck_uuid }}
+  changed_when: False
+  when: healthcheck_uuid is defined
+
+- name: send completion notification via email
+  tags: always
+  mail:
+    host: "smtp.gmail.com"
+    port: 587
+    username: "billknig@gmail.com"
+    password: "tsbwcppjapdkjleh"
+    to: "billknig@gmail.com"
+    subject: "✔️ Ansible provision finished on {{ ansible_hostname }}"
+    body: |
+      Hello,
+
+      The Ansible provision on {{ ansible_hostname }} has successfully completed.
+
+      Regards,
+      Hal 9000
+  changed_when: False
