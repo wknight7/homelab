@@ -105,6 +105,17 @@
     - photoprism is defined
     - photoprism == true
 
+- name: ufw | lazy_librarian | allow LazyLibrarian
+  tags: ufw
+  ufw:
+    comment: lazy_librarian
+    rule: allow
+    port: '5299'  # Assuming LazyLibrarian uses this port
+    proto: tcp
+  when:
+    - lazy_librarian is defined
+    - lazy_librarian == true
+
 # all rules set, enable
 - name: ufw | enable firewall
   ufw:

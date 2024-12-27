@@ -1,0 +1,165 @@
+---
+- name: Ensure LXC container is stopped
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: pct stop {{ container_id }}
+  when: container_id is defined
+
+- name: Ensure the host directory exists for /media/downloads/books
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  file:
+    path: "/media/downloads/books"
+    state: directory
+  when: container_id is defined
+
+- name: Ensure LXC config file exists
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  stat:
+    path: "/etc/pve/lxc/{{ container_id }}.conf"
+  register: lxc_config
+  when: container_id is defined
+
+- name: Debug LXC config file before adding user mappings
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: cat /etc/pve/lxc/{{ container_id }}.conf
+  register: lxc_config_before
+  when: container_id is defined
+
+- name: Debug LXC config content before adding user mappings
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  debug:
+    msg: "{{ lxc_config_before.stdout }}"
+  when: container_id is defined
+
+- name: Read user mapping file
+  include_vars: /home/bill/git/homelab/roles/server/files/user_mapping.yml
+  when:
+    - hostvars[inventory_hostname].user_maps is defined
+    - hostvars[inventory_hostname].user_maps == true
+
+- name: Debug user mappings variable
+  debug:
+    var: user_mappings
+  when:
+    - hostvars[inventory_hostname].user_maps is defined
+    - hostvars[inventory_hostname].user_maps == true
+
+- name: Append user mappings to LXC config file
+  block:
+    - name: Append user mappings to LXC config file
+      delegate_to: "{{ groups['proxmox'][0] }}"
+      lineinfile:
+        path: "/etc/pve/lxc/{{ container_id }}.conf"
+        create: yes
+        insertafter: EOF
+        line: "{{ item }}"
+      loop: "{{ user_mappings }}"
+      when: lxc_config.stat.exists
+  when:
+    - container_id is defined
+    - hostvars[inventory_hostname].user_maps is defined
+    - hostvars[inventory_hostname].user_maps == true
+
+- name: Debug LXC config file after adding user mappings
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: cat /etc/pve/lxc/{{ container_id }}.conf
+  register: lxc_config_after
+  when: container_id is defined
+
+- name: Debug LXC config content after adding user mappings
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  debug:
+    msg: "{{ lxc_config_after.stdout }}"
+  when: container_id is defined
+
+- name: Mount the LXC container filesystem
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: pct mount {{ container_id }}
+  when: container_id is defined
+
+- name: Ensure correct ownership for home directories
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: >
+    chown -R {{ item.owner }}:{{ item.group }} /var/lib/lxc/{{ container_id }}/rootfs/{{ item.path }}
+  with_items:
+    - { path: /home/bill, owner: bill, group: bill }
+    - { path: /home/hal, owner: hal, group: hal }
+  when: container_id is defined
+
+- name: Extract LazyLibrarian directory from systemd service file
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  shell: "grep ExecStart= /var/lib/lxc/{{ container_id }}/rootfs/etc/systemd/system/lazylibrarian.service | sed 's/.*python3 \\(.*\\)\\/LazyLibrarian.py.*/\\1/'"
+  register: lazy_dir
+  when: container_id is defined
+
+- name: Change ownership of LazyLibrarian directory
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: >
+    chown -R {{ item.owner }}:{{ item.group }} /var/lib/lxc/{{ container_id }}/rootfs{{ lazy_dir.stdout }}
+  with_items:
+    - { owner: "{{ app_user }}", group: "media" }
+  when:
+    - container_id is defined
+    - lazy_dir.stdout != ""
+
+- name: Create necessary directories inside the LXC container's root filesystem
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  file:
+    path: "/var/lib/lxc/{{ container_id }}/rootfs/{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items: "{{ directories_to_create }}"
+  when:
+    - directories_to_create is defined
+    - directories_to_create | length > 0
+
+- name: Unmount the LXC container filesystem
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: pct unmount {{ container_id }}
+  when: container_id is defined
+
+- name: Set mount_points fact if defined
+  set_fact:
+    mount_points: "{{ hostvars[inventory_hostname].mount_points | default([]) }}"
+  when: not ansible_check_mode
+
+- name: Debug mount_points variable
+  debug:
+    var: mount_points
+  when: not ansible_check_mode
+
+- name: Append mountpoints to LXC containers
+  block:
+    - name: Append mountpoints to LXC containers
+      delegate_to: "{{ groups['proxmox'][0] }}"
+      lineinfile:
+        path: "/etc/pve/lxc/{{ container_id }}.conf"
+        line: "{{ item.mount_point }}"
+        state: present
+      loop: "{{ mount_points }}"
+      loop_control:
+        loop_var: item
+      when:
+        - vm_type is not defined or vm_type != 'vm'
+        - lxc_config.stat.exists
+      register: mountpoints_changed
+  when:
+    - container_id is defined
+    - mount_points is defined
+    - mount_points | length > 0
+
+- name: Ensure LXC container is started
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: pct start {{ container_id }}
+  when: container_id is defined
+
+- name: Restart LXC container if changes detected
+  delegate_to: "{{ groups['proxmox'][0] }}"
+  command: pct reboot {{ container_id }}
+  when:
+    - mountpoints_changed is defined and mountpoints_changed.changed
+    - vm_type is not defined or vm_type != 'vm'
+    - container_id is defined
+    - mount_points is defined
+    - mount_points | length > 0

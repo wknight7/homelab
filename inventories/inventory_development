@@ -6,6 +6,7 @@ ubuntu_test_2 ansible_host=192.168.86.108 container_id=121 vm_type=vm
 docs_test ansible_host=192.168.86.51 container_id=103
 media_h_test ansible_host=192.168.86.96 container_id=112
 media_p_test ansible_host=192.168.86.106 container_id=116
+lazy_librarian ansible_host=192.168.86.25 container_id=126
 
 [proxmox]
 proxmox_server ansible_host=192.168.86.143

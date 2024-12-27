@@ -20,6 +20,16 @@
     var: lxc_config
   when: container_id is defined
 
+- name: Create necessary directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  with_items: "{{ directories_to_create }}"
+  when:
+    - directories_to_create is defined
+    - directories_to_create | length > 0
+
 - name: Set mount_points fact if defined
   set_fact:
     mount_points: "{{ hostvars[inventory_hostname].mount_points | default([]) }}"

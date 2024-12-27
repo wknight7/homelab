@@ -1,0 +1,56 @@
+- name: Ensure dependencies are installed
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - python3
+    - python3-pip
+    - git
+  when: lazy_librarian is defined and lazy_librarian == true
+
+- name: Clone LazyLibrarian repository
+  git:
+    repo: https://gitlab.com/LazyLibrarian/LazyLibrarian.git
+    dest: /opt/LazyLibrarian
+    accept_hostkey: yes
+    version: HEAD
+    force: yes
+  when: lazy_librarian is defined and lazy_librarian == true
+
+- name: Install required Python packages
+  pip:
+    name:
+      - irc
+      - soupsieve
+      - python-Levenshtein
+    state: present
+  when: lazy_librarian is defined and lazy_librarian == true
+
+- name: Run LazyLibrarian in daemon mode
+  command: python3 /opt/LazyLibrarian/LazyLibrarian.py -d
+  when: lazy_librarian is defined and lazy_librarian == true
+
+- name: Create systemd service for LazyLibrarian
+  copy:
+    dest: /etc/systemd/system/lazylibrarian.service
+    content: |
+      [Unit]
+      Description=LazyLibrarian Service
+      After=network.target
+
+      [Service]
+      User={{ app_user }}
+      Group=media
+      ExecStart=/usr/bin/python3 /opt/LazyLibrarian/LazyLibrarian.py -d
+      Restart=on-failure
+
+      [Install]
+      WantedBy=multi-user.target
+  when: lazy_librarian is defined and lazy_librarian == true
+
+- name: Enable and start LazyLibrarian service
+  systemd:
+    name: lazylibrarian
+    enabled: yes
+    state: started
+  when: lazy_librarian is defined and lazy_librarian == true

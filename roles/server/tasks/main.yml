@@ -5,7 +5,10 @@
 - block:  
   - import_tasks: ufw.yml
   - import_tasks: qemu-agent.yml
-  - import_tasks: mounts.yml
+  - import_tasks: lxc_conf.yml
+  
+## install software
+  - import_tasks: software/lazy_librarian.yml
 
   - include_tasks: unattended_upgrades.yml
     when:
