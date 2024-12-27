@@ -1,0 +1,66 @@
+---
+# General variables specific to ubuntu_test_desk
+branch: master
+
+ansible_cron_minute: "*/5"
+ssh_port: 22
+ssh_users: "bill hal"
+
+# Platform-specific variables
+ansible_python_interpreter: /usr/bin/python3
+microcode_amd_install: false
+microcode_intel_install: false
+
+# App defaults
+gui_editor: gvim
+terminal_emulator: terminator
+web_browser: flatpak run org.mozilla.firefox
+
+# Application selection
+audacity: true
+#authy: true  # Authy is a free mobile app that provides two-factor authentication (2FA) to protect your online accounts
+# autofs: true  # Autofs is a kernel file system that automatically mounts and unmounts file systems on demand
+chromium: true
+darktable: true # Darktable is a free, open-source photography application 
+expressvpn: true
+firefox: true
+#foliate: true  # Foliate is a free and open-source program for reading e-books in Linux
+games: true
+#glimpse: true   # forked version of the image editing software GIMP
+#keepassxc: true  # KeePassXC is a modern, secure, and open-source password manager that stores and manages your most sensitive information
+libreoffice: true
+#lutris: true  # Lutris on Ubuntu is a free, open-source gaming platform that allows users to easily install and manage a wide variety of video games on their Linux (Ubuntu) system
+#minecraft: true
+steam: true
+#syncthing: true  # Syncthing is a continuous file synchronization program. It synchronizes files between two or more computers in real time, safely protected from prying eyes.
+thunderbird: true
+#todoist: true
+ulauncher: false  # fast application launcher for Linux. It's written in Python using GTK+, and features: App Search (fuzzy matching), Calculator, Extensions, Shortcuts, File browser mode and Custom Color Themes. App Search. File Browser.
+vlc: true
+vscode: true
+xonotic: true
+
+# Desktop environment selection
+gnome: true
+mate: false
+
+# Define NFS mounts
+nfs_mounts:
+  - src: "192.168.86.90:/mnt/Data/media"
+    dest: "/home/bill/media"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Code"
+    dest: "/home/bill/code"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Configs"
+    dest: "/home/bill/.config"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Documents"
+    dest: "/home/bill/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Downloads"
+    dest: "/home/bill/downloads"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/paperless"
+    dest: "/home/bill/paperless"
+    opts: "rw"

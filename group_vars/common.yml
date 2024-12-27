@@ -9,14 +9,4 @@ common_packages:
   - build-essential
   - ubuntu-minimal
 
-managed_users:
-  - name: bill
-    password: "{{ user_passwords.bill }}"
-    state: present
-    home: /home/bill
-    groups: ['docs', 'media']
-  - name: hal
-    uid: 1999
-    state: present
-    groups: ['sudo']
-    home: /home/hal
+

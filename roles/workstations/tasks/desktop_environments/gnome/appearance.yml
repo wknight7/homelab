@@ -7,6 +7,12 @@
     group: root
     mode: 0644
 
+# - name: users | bill | set user photo
+#   become_user: bill
+#   dconf:
+#     key: "/org/gnome/login-screen/logo"
+#     value: "'file:///var/lib/AccountsService/icons/bill.png'"
+
 - name: gnome | appearance | set wallpaper
   tags: gnome,gnome-wallpaper
   become_user: bill
@@ -44,23 +50,167 @@
     key: "/org/gnome/desktop/screensaver/picture-options"
     value: "'zoom'"
 
-#- name: gnome | appearance | gnome | appearance | set icon theme
-#  become_user: bill
-#  dconf:
-#    key: "/org/gnome/desktop/interface/icon-theme"
-#    value: "'Moka-Minimal'"
+- name: gnome | appearance | gnome | appearance | set icon theme
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/interface/icon-theme"
+    value: "'Moka-Minimal'"
 
-#- name: gnome | appearance | set GTK theme
-#  become_user: bill
-#  dconf:
-#    key: "/org/gnome/desktop/interface/gtk-theme"
-#    value: "'Shades-of-gray'"
+- name: gnome | appearance | set GTK theme
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Shades-of-gray'"
 
-#- name: gnome | appearance | set shell theme
-#  become_user: bill
-#  dconf:
-#    key: "/org/gnome/shell/extensions/user-theme/name"
-#    value: "'Shades-of-gray'"
+- name: gnome | appearance | set shell theme
+  become_user: bill
+  dconf:
+    key: "/org/gnome/shell/extensions/user-theme/name"
+    value: "'Shades-of-gray'"
+
+- name: gnome | appearance | set clock format
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-format"
+    value: "'12h'"
+
+- name: gnome | appearance | show weekday in clock
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-show-weekday"
+    value: "true"
+
+- name: gnome | mouse | set accel profile
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
+    value: "'adaptive'"
+
+- name: gnome | mouse | enable natural scroll
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
+    value: "true"
+
+- name: gnome | mouse | set speed
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/mouse/speed"
+    value: "0.6"
+
+- name: gnome | touchpad | enable natural scroll
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
+    value: "true"
+
+- name: gnome | touchpad | set speed
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/speed"
+    value: "0.6"
+
+- name: gnome | touchpad | enable two-finger scrolling
+  become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+    value: "true"
+
+- name: gnome | gedit | set editor scheme
+  become_user: bill
+  dconf:
+    key: "/org/gnome/gedit/preferences/editor/scheme"
+    value: "'Yaru'"
+
+- name: gnome | screenshot | set auto-save directory
+  become_user: bill
+  dconf:
+    key: "/org/gnome/gnome-screenshot/auto-save-directory"
+    value: "'/home/bill'"
+
+- name: gnome | nautilus | set default folder viewer
+  become_user: bill
+  dconf:
+    key: "/org/gnome/nautilus/preferences/default-folder-viewer"
+    value: "'icon-view'"
+
+- name: gnome | nautilus | set initial window size
+  become_user: bill
+  dconf:
+    key: "/org/gnome/nautilus/window-state/initial-size"
+    value: "(890, 550)"
+
+- name: gnome | settings-daemon | enable night light
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    value: "true"
+
+- name: gnome | settings-daemon | set night light schedule from
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-from"
+    value: "23.0"
+
+- name: gnome | settings-daemon | set night light schedule to
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-to"
+    value: "7.5"
+
+- name: gnome | settings-daemon | set power button action
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/power-button-action"
+    value: "'suspend'"
+
+- name: gnome | settings-daemon | set AC sleep timeout
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout"
+    value: "2700"
+
+- name: gnome | settings-daemon | set AC sleep type
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+    value: "'suspend'"
+
+- name: gnome | settings-daemon | set battery sleep timeout
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout"
+    value: "1500"
+
+- name: gnome | settings-daemon | set battery sleep type
+  become_user: bill
+  dconf:
+    key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
+    value: "'suspend'"
+
+- name: gnome | shell | enable extensions
+  become_user: bill
+  dconf:
+    key: "/org/gnome/shell/enabled-extensions"
+    value: "['ding@rastersoft.com', 'ubuntu-dock@ubuntu.com', 'tiling-assistant@ubuntu.com']"
+
+- name: gnome | shell | set favorite apps
+  become_user: bill
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: "['firefox_firefox.desktop', 'org.gnome.Nautilus.desktop', 'snap-store_snap-store.desktop', 'org.gnome.Terminal.desktop', 'code.desktop', 'org.gnome.Calculator.desktop']"
+
+- name: gnome | shell extensions | set multi monitor
+  become_user: bill
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/multi-monitor"
+    value: "true"
+
+- name: gnome | shell extensions | hide mounts
+  become_user: bill
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/show-mounts"
+    value: "false"
 
 - name: gnome | appearance | dconf update
   command: dconf update

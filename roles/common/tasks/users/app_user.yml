@@ -5,7 +5,8 @@
     state: present
     system: yes
     create_home: no
-
+  when: app_user is defined 
+  
 - name: Add app user to specified groups
   user:
     name: "{{ app_user }}"

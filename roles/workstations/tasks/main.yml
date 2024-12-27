@@ -5,6 +5,7 @@
 - block:
   ## User configs
   - import_tasks: users/bill.yml
+  - import_tasks: users/lily.yml
 
   - include_tasks: desktop_environments/gnome/appearance.yml
     when: gnome is defined and gnome == true
@@ -12,8 +13,8 @@
   # - include_tasks: desktop_environments/gnome/keybindings.yml
   #   when: gnome is defined and gnome == true
 
-  # - include_tasks: desktop_environments/gnome/nautilus.yml
-  #   when: gnome is defined and gnome == true
+  - include_tasks: desktop_environments/gnome/nautilus.yml
+    when: gnome is defined and gnome == true
 
   - include_tasks: desktop_environments/gnome/packages.yml
     when: gnome is defined and gnome == true

@@ -1,0 +1,85 @@
+---
+- name: users | lily | remove unwanted directories from home directory
+  file:
+    path: /home/lily/{{ item }}
+    state: absent
+  with_items:
+    - '&&'
+    - '0700'
+    - 'lily:lily'
+    - 'chmod'
+    - 'chown'
+    - 'hal:hal'
+    - 'Public'
+    - 'Templates'
+    - 'Videos'
+    - 'Documents'
+    - 'Desktop'
+    - 'Music'
+    - 'Pictures'
+    - 'Downloads'
+    - 'bin'
+
+- name: users | lily | create desired directories
+  file:
+    path: /home/lily/{{ item.dir }}
+    state: directory
+    owner: lily
+    group: lily
+    mode: 0700
+  with_items:
+    - { dir: '.ansible' }
+    - { dir: '.bash' }
+    - { dir: 'code' }
+    - { dir: '.config' }
+    - { dir: .config/autostart }
+    - { dir: .config/bpytop }
+    - { dir: .config/gtk-3.0 }
+    - { dir: .config/terminator }
+    - { dir: 'desktop' }
+    - { dir: 'documents' }
+    - { dir: 'downloads' }
+    - { dir: 'git' }
+    - { dir: .local }
+    - { dir: .local/share }
+    - { dir: .local/share/applications }
+    - { dir: .bin }
+    - { dir: 'media' }
+    - { dir: projects }
+
+
+- name: users | lily | copy user-dirs.dirs
+  tags: dotfiles,dotfiles-lily
+  copy:
+    src: users/bill/user-dirs.dirs
+    dest: /home/lily/.config/user-dirs.dirs
+    owner: lily
+    group: lily
+    mode: 0600
+  notify: update_xdg
+
+# - name: users | lily | copy personal config files
+#   tags: dotfiles,dotfiles-lily
+#   copy:
+#     src: users/lily/{{ item.src }}
+#     dest: /home/lily/{{ item.dest }}
+#     owner: lily
+#     group: lily
+#     mode: 0600
+#   with_items:
+#     - { src: 'asunder', dest: '.asunder' }
+#     - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
+#     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
+#     - { src: 'gvimrc', dest: '.gvimrc' }
+#     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
+#     - { src: 'ssh_client_config', dest: '.ssh/config' }
+#     - { src: 'terminator_config', dest: '.config/terminator/config' }
+
+# - name: users | lily | copy profile image
+#   tags: dotfiles,dotfiles-lily
+#   copy:
+#     src: users/lily/profile_image.png
+#     dest: /var/lib/AccountsService/icons/lily.png
+#     owner: root
+#     group: root
+#     mode: 0644

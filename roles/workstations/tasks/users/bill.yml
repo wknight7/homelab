@@ -1,20 +1,31 @@
-- name: users | bill | remove preinstalled clutter from home directory
+---
+- name: users | bill | remove unwanted directories from home directory
+  become: yes
+#  become_user: bill
   file:
     path: /home/bill/{{ item }}
     state: absent
   with_items:
-    - examples.desktop
-    - Desktop
-    - Documents
-    - Downloads
-    - Music
-    - Pictures
-    - Public
-    - Templates
-    - Videos
+    - '&&'
+    - '0700'
+    - 'bill:bill'
+    - 'chmod'
+    - 'chown'
+    - 'hal:hal'
+    - 'Public'
+    - 'Templates'
+    - 'Videos'
+    - 'Documents'
+    - 'Desktop'
+    - 'Music'
+    - 'Pictures'
+    - 'Downloads'
+    - 'bin'
 
-- name: users | bill | create personal config directories
-  tags: dotfiles,dotfiles-bill
+
+- name: users | bill | create desired directories
+  become: yes
+  become_user: bill
   file:
     path: /home/bill/{{ item.dir }}
     state: directory
@@ -22,30 +33,37 @@
     group: bill
     mode: 0700
   with_items:
-    - { dir: .config }
+    - { dir: '.ansible' }
+    - { dir: '.bash' }
+    - { dir: 'code' }
+    - { dir: '.config' }
     - { dir: .config/autostart }
     - { dir: .config/bpytop }
     - { dir: .config/gtk-3.0 }
     - { dir: .config/terminator }
+    - { dir: 'desktop' }
+    - { dir: 'documents' }
+    - { dir: 'downloads' }
+    - { dir: 'git' }
     - { dir: .local }
     - { dir: .local/share }
     - { dir: .local/share/applications }
-    - { dir: bin }
-    - { dir: desktop }
-    - { dir: documents }
-    - { dir: downloads }
-    - { dir: code }
-    - { dir: media }
+    - { dir: .bin }
+    - { dir: 'media' }
+    - { dir: projects }
 
-- name: users | bill | copy user-dirs.dirs
-  tags: dotfiles,dotfiles-bill
-  copy:
-    src: users/bill/user-dirs.dirs
-    dest: /home/bill/.config/user-dirs.dirs
-    owner: bill
-    group: bill
-    mode: 0600
-  notify: update_xdg
+
+# - name: users | bill | copy user-dirs.dirs
+#   become: yes
+# #  become_user: bill
+#   tags: dotfiles,dotfiles-bill
+#   copy:
+#     src: users/bill/user-dirs.dirs
+#     dest: /home/bill/.config/user-dirs.dirs
+#     owner: bill
+#     group: bill
+#     mode: 0600
+#   notify: update_xdg
 
 # - name: users | bill | copy personal config files
 #   tags: dotfiles,dotfiles-bill
@@ -60,16 +78,56 @@
 #     - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
 #     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
 #     - { src: 'gvimrc', dest: '.gvimrc' }
-#     - { src: 'linode-cli', dest: '.config/linode-cli' }
 #     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
 #     - { src: 'ssh_client_config', dest: '.ssh/config' }
 #     - { src: 'terminator_config', dest: '.config/terminator/config' }
 
-- name: users | bill | copy profile image
-  tags: dotfiles,dotfiles-bill
+- name: Copy the new user photo to the appropriate directory
   copy:
-    src: users/bill/profile_image.png
+    src: /home/bill/git/homelab/roles/workstations/files/users/bill/profile_image.png
     dest: /var/lib/AccountsService/icons/bill.png
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
+  become: yes
+
+- name: Copy the user photo to GNOME user settings directory
+  copy:
+    src: /var/lib/AccountsService/icons/bill.png
+    dest: /home/bill/.face
+    owner: bill
+    group: bill
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: bill
+
+- name: Copy the user photo to GNOME user settings icon
+  copy:
+    src: /var/lib/AccountsService/icons/bill.png
+    dest: /home/bill/.face.icon
+    owner: bill
+    group: bill
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: bill
+
+- name: Set the user photo using dconf
+  become: yes
+  become_user: bill
+  dconf:
+    key: "/org/gnome/login-screen/logo"
+    value: "'file:///var/lib/AccountsService/icons/bill.png'"
+
+- name: Copy ~/.ssh/ contents to the remote host
+  become: yes
+  synchronize:
+    src: /home/bill/.ssh/
+    dest: /home/bill/.ssh/
+    mode: push
+    owner: yes
+    group: yes
+    perms: yes
+  delegate_to: localhost
+  tags: ssh
