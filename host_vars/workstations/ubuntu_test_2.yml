@@ -16,6 +16,13 @@ gui_editor: gvim
 terminal_emulator: terminator
 web_browser: flatpak run org.mozilla.firefox
 
+# groups to create
+groups_to_create:
+  - media
+  - ansible
+  - data
+  - docs
+
 # Application selection
 audacity: true
 #authy: true  # Authy is a free mobile app that provides two-factor authentication (2FA) to protect your online accounts
@@ -55,12 +62,37 @@ nfs_mounts:
   - src: "192.168.86.90:/mnt/ssd-files/home/bill/Configs"
     dest: "/home/bill/.config"
     opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Documents"
-    dest: "/home/bill/documents"
-    opts: "rw"
   - src: "192.168.86.90:/mnt/ssd-files/home/bill/Downloads"
     dest: "/home/bill/downloads"
     opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/paperless"
-    dest: "/home/bill/paperless"
+  - src: "192.168.86.90:/mnt/ssd-files/docs"
+    dest: "/home/bill/documents"
     opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/projects"
+    dest: "/home/bill/projects"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/Data/media"
+    dest: "/home/lily/media"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/Downloads"
+    dest: "/home/lily/downloads"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/docs"
+    dest: "/home/lily/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/projects"
+    dest: "/home/lily/projects"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/Data/media"
+    dest: "/home/loretta/media"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/Downloads"
+    dest: "/home/loretta/downloads"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/docs"
+    dest: "/home/loretta/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/projects"
+    dest: "/home/loretta/projects"
+    opts: "rw"
+ 

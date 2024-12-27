@@ -2,10 +2,25 @@
 - include_vars: "{{ ansible_distribution }}.yml"
   tags: always
 
+# Load vault variables
+- name: Load vault variables
+  include_vars: group_vars/vault.yml
+  tags: always
+
+# Load group variables
+- name: Load group variables
+  include_vars: group_vars/groups.yml
+  tags: always
+
 - block:
+
+  ## add groups
+  - import_tasks: groups.yml
+
   ## User configs
   - import_tasks: users/bill.yml
   - import_tasks: users/lily.yml
+  - import_tasks: users/loretta.yml
 
   - include_tasks: desktop_environments/gnome/appearance.yml
     when: gnome is defined and gnome == true

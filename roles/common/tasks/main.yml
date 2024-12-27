@@ -10,7 +10,7 @@
 
 # Load group variables
 - name: Load group variables
-  include_vars: roles/common/vars/groups.yml
+  include_vars: group_vars/groups.yml
   tags: always
 
 - block:

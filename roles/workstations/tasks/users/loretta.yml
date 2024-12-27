@@ -1,12 +1,30 @@
 ---
-- name: users | lily | remove unwanted directories from home directory
+- name: users | loretta | create group
+  tags: groups,loretta,users
+  group:
+    name: loretta
+    state: present
+
+- name: users | loretta | create user
+  tags: loretta,sudo,users
+  user:
+    name: loretta
+    group: loretta
+    uid: 1003
+    groups: adm,{{ sudo_group }},media,docs
+    state: present
+    comment: "Loretta Knight"
+    password: "{{ loretta_password | password_hash('sha512') }}"
+    shell: /bin/bash
+    
+- name: users | loretta | remove unwanted directories from home directory
   file:
-    path: /home/lily/{{ item }}
+    path: /home/loretta/{{ item }}
     state: absent
   with_items:
     - '&&'
     - '0700'
-    - 'lily:lily'
+    - 'loretta:loretta'
     - 'chmod'
     - 'chown'
     - 'hal:hal'
@@ -20,13 +38,15 @@
     - 'Downloads'
     - 'bin'
 
-- name: users | lily | create desired directories
+- name: users | loretta | create desired directories
+  become: yes
+  become_user: loretta
   file:
-    path: /home/lily/{{ item.dir }}
+    path: /home/loretta/{{ item.dir }}
     state: directory
-    owner: lily
-    group: lily
-    mode: 0700
+    owner: loretta
+    group: loretta
+    mode: 0770
   with_items:
     - { dir: '.ansible' }
     - { dir: '.bash' }
@@ -44,27 +64,21 @@
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
-    - { dir: 'media' }
     - { dir: projects }
 
+- name: create link to media
+  file:
+    path: /home/loretta/media
+    state: link
+    src: /media
 
-- name: users | lily | copy user-dirs.dirs
-  tags: dotfiles,dotfiles-lily
-  copy:
-    src: users/loretta/user-dirs.dirs
-    dest: /home/lily/.config/user-dirs.dirs
-    owner: lily
-    group: lily
-    mode: 0600
-  notify: update_xdg
-
-# - name: users | lily | copy personal config files
-#   tags: dotfiles,dotfiles-lily
+# - name: users | loretta | copy personal config files
+#   tags: dotfiles,dotfiles-loretta
 #   copy:
-#     src: users/lily/{{ item.src }}
-#     dest: /home/lily/{{ item.dest }}
-#     owner: lily
-#     group: lily
+#     src: users/loretta/{{ item.src }}
+#     dest: /home/loretta/{{ item.dest }}
+#     owner: loretta
+#     group: loretta
 #     mode: 0600
 #   with_items:
 #     - { src: 'asunder', dest: '.asunder' }
@@ -75,19 +89,19 @@
 #     - { src: 'ssh_client_config', dest: '.ssh/config' }
 #     - { src: 'terminator_config', dest: '.config/terminator/config' }
 
-# - name: users | lily | copy profile image
-#   tags: dotfiles,dotfiles-lily
+# - name: users | loretta | copy profile image
+#   tags: dotfiles,dotfiles-loretta
 #   copy:
-#     src: users/lily/profile_image.png
-#     dest: /var/lib/AccountsService/icons/lily.png
+#     src: users/loretta/profile_image.png
+#     dest: /var/lib/AccountsService/icons/loretta.png
 #     owner: root
 #     group: root
 #     mode: 0644
 
 - name: Copy the new user photo to the appropriate directory
   copy:
-    src: /home/loretta/git/homelab/roles/workstations/files/users/loretta/profile_image.png
-    dest: /var/lib/AccountsService/icons/loretta.png
+    src: /home/bill/git/homelab/roles/workstations/files/users/loretta/profile_image.JPEG
+    dest: /var/lib/AccountsService/icons/loretta.JPEG
     owner: root
     group: root
     mode: '0644'
@@ -95,7 +109,7 @@
 
 - name: Copy the user photo to GNOME user settings directory
   copy:
-    src: /var/lib/AccountsService/icons/loretta.png
+    src: /var/lib/AccountsService/icons/loretta.JPEG
     dest: /home/loretta/.face
     owner: loretta
     group: loretta
@@ -106,7 +120,7 @@
 
 - name: Copy the user photo to GNOME user settings icon
   copy:
-    src: /var/lib/AccountsService/icons/loretta.png
+    src: /var/lib/AccountsService/icons/loretta.JPEG
     dest: /home/loretta/.face.icon
     owner: loretta
     group: loretta
@@ -120,4 +134,4 @@
   become_user: loretta
   dconf:
     key: "/org/gnome/login-screen/logo"
-    value: "'file:///var/lib/AccountsService/icons/loretta.png'"
+    value: "'file:///var/lib/AccountsService/icons/loretta.JPEG'"

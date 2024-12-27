@@ -21,6 +21,7 @@
     - 'Pictures'
     - 'Downloads'
     - 'bin'
+    - "media"
 
 
 - name: users | bill | create desired directories
@@ -49,9 +50,13 @@
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
-    - { dir: 'media' }
     - { dir: "projects" }
 
+- name: create link to media
+  file:
+    path: /home/bill/media
+    state: link
+    src: /media
 
 # - name: users | bill | copy user-dirs.dirs
 #   become: yes

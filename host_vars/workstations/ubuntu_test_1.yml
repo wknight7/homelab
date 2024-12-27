@@ -11,6 +11,13 @@ ansible_python_interpreter: /usr/bin/python3
 microcode_amd_install: false
 microcode_intel_install: false
 
+# groups to create
+groups_to_create:
+  - media
+  - ansible
+  - data
+  - docs
+
 # App defaults
 gui_editor: gvim
 terminal_emulator: terminator
@@ -47,7 +54,7 @@ mate: false
 # Define NFS mounts
 nfs_mounts:
   - src: "192.168.86.90:/mnt/Data/media"
-    dest: "/home/bill/media"
+    dest: "/media"
     opts: "rw"
   - src: "192.168.86.90:/mnt/ssd-files/home/bill/Code"
     dest: "/home/bill/code"
@@ -55,12 +62,30 @@ nfs_mounts:
   - src: "192.168.86.90:/mnt/ssd-files/home/bill/Configs"
     dest: "/home/bill/.config"
     opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Documents"
-    dest: "/home/bill/documents"
-    opts: "rw"
   - src: "192.168.86.90:/mnt/ssd-files/home/bill/Downloads"
     dest: "/home/bill/downloads"
     opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/paperless"
-    dest: "/home/bill/paperless"
+  - src: "192.168.86.90:/mnt/ssd-files/docs"
+    dest: "/home/bill/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/projects"
+    dest: "/home/bill/projects"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/Downloads"
+    dest: "/home/lily/downloads"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/Documents"
+    dest: "/home/lily/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/lily/projects"
+    dest: "/home/lily/projects"
+    opts: "rw" 
+  - src: "192.168.86.90:/mnt/ssd-files/home/loretta/Downloads"
+    dest: "/home/loretta/downloads"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/loretta/Documents"
+    dest: "/home/loretta/documents"
+    opts: "rw"
+  - src: "192.168.86.90:/mnt/ssd-files/home/loretta/projects"
+    dest: "/home/loretta/projects"
     opts: "rw"

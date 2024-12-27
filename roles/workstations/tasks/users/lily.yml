@@ -1,4 +1,22 @@
 ---
+- name: users | lily | create group
+  tags: groups,lily,users
+  group:
+    name: lily
+    state: present
+
+- name: users | lily | create user
+  tags: lily,sudo,users
+  user:
+    name: lily
+    group: lily
+    uid: 1002
+    groups: adm,{{ sudo_group }},media,docs
+    state: present
+    comment: "Lily Knight"
+    password: "{{ lily_password | password_hash('sha512') }}"
+    shell: /bin/bash
+    
 - name: users | lily | remove unwanted directories from home directory
   file:
     path: /home/lily/{{ item }}
@@ -19,8 +37,11 @@
     - 'Pictures'
     - 'Downloads'
     - 'bin'
+    - 'media'
 
 - name: users | lily | create desired directories
+  become: yes
+  become_user: lily
   file:
     path: /home/lily/{{ item.dir }}
     state: directory
@@ -44,19 +65,14 @@
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
-    - { dir: 'media' }
     - { dir: projects }
 
-
-- name: users | lily | copy user-dirs.dirs
-  tags: dotfiles,dotfiles-lily
-  copy:
-    src: users/lily/user-dirs.dirs
-    dest: /home/lily/.config/user-dirs.dirs
-    owner: lily
-    group: lily
-    mode: 0600
-  notify: update_xdg
+- name: create link to media
+  file:
+    path: /home/lily/media
+    state: link
+    src: /media
+  
 
 # - name: users | lily | copy personal config files
 #   tags: dotfiles,dotfiles-lily
@@ -78,16 +94,16 @@
 # - name: users | lily | copy profile image
 #   tags: dotfiles,dotfiles-lily
 #   copy:
-#     src: users/lily/profile_image.png
-#     dest: /var/lib/AccountsService/icons/lily.png
+#     src: users/lily/profile_image.JPEG
+#     dest: /var/lib/AccountsService/icons/lily.JPEG
 #     owner: root
 #     group: root
 #     mode: 0644
 
 - name: Copy the new user photo to the appropriate directory
   copy:
-    src: /home/lily/git/homelab/roles/workstations/files/users/lily/profile_image.png
-    dest: /var/lib/AccountsService/icons/lily.png
+    src: /home/bill/git/homelab/roles/workstations/files/users/lily/profile_image.JPEG
+    dest: /var/lib/AccountsService/icons/lily.JPEG
     owner: root
     group: root
     mode: '0644'
@@ -95,7 +111,7 @@
 
 - name: Copy the user photo to GNOME user settings directory
   copy:
-    src: /var/lib/AccountsService/icons/lily.png
+    src: /var/lib/AccountsService/icons/lily.JPEG
     dest: /home/lily/.face
     owner: lily
     group: lily
@@ -106,7 +122,7 @@
 
 - name: Copy the user photo to GNOME user settings icon
   copy:
-    src: /var/lib/AccountsService/icons/lily.png
+    src: /var/lib/AccountsService/icons/lily.JPEG
     dest: /home/lily/.face.icon
     owner: lily
     group: lily
@@ -120,4 +136,4 @@
   become_user: lily
   dconf:
     key: "/org/gnome/login-screen/logo"
-    value: "'file:///var/lib/AccountsService/icons/lily.png'"
+    value: "'file:///var/lib/AccountsService/icons/lily.JPEG'"

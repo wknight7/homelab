@@ -18,27 +18,8 @@
   register: lxc_config
   when: container_id is defined
 
-- name: Debug LXC config file before adding user mappings
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  command: cat /etc/pve/lxc/{{ container_id }}.conf
-  register: lxc_config_before
-  when: container_id is defined
-
-- name: Debug LXC config content before adding user mappings
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  debug:
-    msg: "{{ lxc_config_before.stdout }}"
-  when: container_id is defined
-
 - name: Read user mapping file
   include_vars: /home/bill/git/homelab/roles/server/files/user_mapping.yml
-  when:
-    - hostvars[inventory_hostname].user_maps is defined
-    - hostvars[inventory_hostname].user_maps == true
-
-- name: Debug user mappings variable
-  debug:
-    var: user_mappings
   when:
     - hostvars[inventory_hostname].user_maps is defined
     - hostvars[inventory_hostname].user_maps == true
@@ -58,18 +39,6 @@
     - container_id is defined
     - hostvars[inventory_hostname].user_maps is defined
     - hostvars[inventory_hostname].user_maps == true
-
-- name: Debug LXC config file after adding user mappings
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  command: cat /etc/pve/lxc/{{ container_id }}.conf
-  register: lxc_config_after
-  when: container_id is defined
-
-- name: Debug LXC config content after adding user mappings
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  debug:
-    msg: "{{ lxc_config_after.stdout }}"
-  when: container_id is defined
 
 - name: Mount the LXC container filesystem
   delegate_to: "{{ groups['proxmox'][0] }}"
@@ -122,11 +91,6 @@
 - name: Set mount_points fact if defined
   set_fact:
     mount_points: "{{ hostvars[inventory_hostname].mount_points | default([]) }}"
-  when: not ansible_check_mode
-
-- name: Debug mount_points variable
-  debug:
-    var: mount_points
   when: not ansible_check_mode
 
 - name: Append mountpoints to LXC containers
