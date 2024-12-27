@@ -50,7 +50,7 @@
     - { dir: .local/share/applications }
     - { dir: .bin }
     - { dir: 'media' }
-    - { dir: projects }
+    - { dir: "projects" }
 
 
 # - name: users | bill | copy user-dirs.dirs
