@@ -1,8 +1,26 @@
-- name: gnome | appearance | copy wallpaper file
+- name: gnome | appearance | copy wallpaper file lily
+  tags: gnome,gnome-wallpaper
+  copy:
+    src: gnome/wallpaper_lily.JPEG
+    dest: /usr/share/backgrounds/lily-wallpaper.JPEG
+    owner: root
+    group: root
+    mode: 0644
+
+- name: gnome | appearance | copy wallpaper file bill
   tags: gnome,gnome-wallpaper
   copy:
     src: gnome/wallpaper.png
     dest: /usr/share/backgrounds/bill-wallpaper.png
+    owner: root
+    group: root
+    mode: 0644
+
+- name: gnome | appearance | copy wallpaper file loretta
+  tags: gnome,gnome-wallpaper
+  copy:
+    src: gnome/wallpaper_loretta.JPEG
+    dest: /usr/share/backgrounds/loretta-wallpaper.JPEG
     owner: root
     group: root
     mode: 0644
@@ -13,16 +31,44 @@
 #     key: "/org/gnome/login-screen/logo"
 #     value: "'file:///var/lib/AccountsService/icons/bill.png'"
 
-- name: gnome | appearance | set wallpaper
+- name: gnome | appearance | set wallpaper bill
   tags: gnome,gnome-wallpaper
   become_user: bill
   dconf:
     key: "/org/gnome/desktop/background/picture-uri"
     value: "'file:///usr/share/backgrounds/bill-wallpaper.png'"
 
-- name: gnome | appearance | set wallpaper position
+- name: gnome | appearance | set wallpaper lily
+  tags: gnome,gnome-wallpaper
+  become_user: lily
+  dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/lily-wallpaper.png'"
+
+- name: gnome | appearance | set wallpaper loretta
+  tags: gnome,gnome-wallpaper
+  become_user: loretta
+  dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/loretta-wallpaper.png'"
+
+- name: gnome | appearance | set wallpaper position bill
   tags: gnome,gnome-wallpaper
   become_user: bill
+  dconf:
+    key: "/org/gnome/desktop/background/picture-options"
+    value: "'zoom'"
+
+- name: gnome | appearance | set wallpaper position lily
+  tags: gnome,gnome-wallpaper
+  become_user: lily
+  dconf:
+    key: "/org/gnome/desktop/background/picture-options"
+    value: "'zoom'"
+
+- name: gnome | appearance | set wallpaper position loretta
+  tags: gnome,gnome-wallpaper
+  become_user: loretta
   dconf:
     key: "/org/gnome/desktop/background/picture-options"
     value: "'zoom'"

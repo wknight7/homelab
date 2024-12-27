@@ -51,7 +51,7 @@
 - name: users | lily | copy user-dirs.dirs
   tags: dotfiles,dotfiles-lily
   copy:
-    src: users/bill/user-dirs.dirs
+    src: users/loretta/user-dirs.dirs
     dest: /home/lily/.config/user-dirs.dirs
     owner: lily
     group: lily
@@ -83,3 +83,41 @@
 #     owner: root
 #     group: root
 #     mode: 0644
+
+- name: Copy the new user photo to the appropriate directory
+  copy:
+    src: /home/loretta/git/homelab/roles/workstations/files/users/loretta/profile_image.png
+    dest: /var/lib/AccountsService/icons/loretta.png
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Copy the user photo to GNOME user settings directory
+  copy:
+    src: /var/lib/AccountsService/icons/loretta.png
+    dest: /home/loretta/.face
+    owner: loretta
+    group: loretta
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: loretta
+
+- name: Copy the user photo to GNOME user settings icon
+  copy:
+    src: /var/lib/AccountsService/icons/loretta.png
+    dest: /home/loretta/.face.icon
+    owner: loretta
+    group: loretta
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: loretta
+
+- name: Set the user photo using dconf
+  become: yes
+  become_user: loretta
+  dconf:
+    key: "/org/gnome/login-screen/logo"
+    value: "'file:///var/lib/AccountsService/icons/loretta.png'"

@@ -51,7 +51,7 @@
 - name: users | lily | copy user-dirs.dirs
   tags: dotfiles,dotfiles-lily
   copy:
-    src: users/bill/user-dirs.dirs
+    src: users/lily/user-dirs.dirs
     dest: /home/lily/.config/user-dirs.dirs
     owner: lily
     group: lily
@@ -83,3 +83,41 @@
 #     owner: root
 #     group: root
 #     mode: 0644
+
+- name: Copy the new user photo to the appropriate directory
+  copy:
+    src: /home/lily/git/homelab/roles/workstations/files/users/lily/profile_image.png
+    dest: /var/lib/AccountsService/icons/lily.png
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+
+- name: Copy the user photo to GNOME user settings directory
+  copy:
+    src: /var/lib/AccountsService/icons/lily.png
+    dest: /home/lily/.face
+    owner: lily
+    group: lily
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: lily
+
+- name: Copy the user photo to GNOME user settings icon
+  copy:
+    src: /var/lib/AccountsService/icons/lily.png
+    dest: /home/lily/.face.icon
+    owner: lily
+    group: lily
+    mode: '0644'
+    remote_src: yes
+  become: yes
+  become_user: lily
+
+- name: Set the user photo using dconf
+  become: yes
+  become_user: lily
+  dconf:
+    key: "/org/gnome/login-screen/logo"
+    value: "'file:///var/lib/AccountsService/icons/lily.png'"
