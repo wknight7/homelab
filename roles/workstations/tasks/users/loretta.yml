@@ -4,6 +4,7 @@
   group:
     name: loretta
     state: present
+    gid: 1003
 
 - name: users | loretta | create user
   tags: loretta,sudo,users

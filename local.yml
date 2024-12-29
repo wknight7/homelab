@@ -14,7 +14,7 @@
     - name: Include host variables dynamically
       include_vars: "{{ item }}"
       with_items:
-        - "host_vars/{{ group_names[0] }}/{{ inventory_hostname }}.yml"
+        - "host_vars/{{ inventory_hostname }}.yml"
       tags: always
 
 #run roles
