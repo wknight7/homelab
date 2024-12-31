@@ -1,9 +1,9 @@
-[common]
+[lxc]
 cloudflared ansible_host=192.168.86.81 container_id=107
 trilium ansible_host=192.168.86.60 container_id=102
 wg ansible_host=192.168.86.56 container_id=101
 
-[servers]
+[server]
 sab ansible_host=192.168.86.86 container_id=119
 radarr ansible_host=192.168.86.79 container_id=104
 sonarr ansible_host=192.168.86.66 container_id=105
