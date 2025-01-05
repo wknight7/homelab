@@ -1,0 +1,276 @@
+OK I a getting very, very frustrated.  Lazylibrarian remains unable to write to the ebook directory, or the download directory.  We have been at this for DAYS!
+We have created other LXC containers with no problems at all.  
+As a reminder... ebooks are stored on truenas and shared via NFS to Proxmox.  
+Then the shared directory in Proxmox is mounted to the LXC via the lxc conf file.  
+
+See here the directory, ownership, and permissions of the directories in Truenas:  
+
+/mnt/Data
+bill@truenas --> 🔴 / ls
+total 34K
+drwxrwxr-x   5 bill media    5 2025-01-03 14:36 media/
+
+/mnt/Data/media
+bill@truenas --> 🔴 / ls
+total 12K
+drwxrwxr-x 5 bill media 5 2024-12-26 14:49 downloads/
+drwxrwxr-x 9 bill media 9 2025-01-03 16:34 storage/
+
+/mnt/Data/media/storage
+bill@truenas --> 🔴 / ls
+total 99K
+drwxrwxr-x 319 librarian librarian 324 2025-01-03 15:38 books/
+
+/mnt/Data/media/downloads/complete
+bill@truenas --> 🔴 / ls
+total 110K
+drwxrwxr-x  3 librarian librarian  4 2025-01-05 10:28 books/
+
+See here the relevant users and groups in truenas:  
+
+bill@truenas --> 🔴 / id bill
+uid=1000(bill) gid=1000(bill) groups=1000(bill),0(root),950(admin),1776(media),1787(docs)
+
+bill@truenas --> 🔴 / id librarian
+uid=1995(librarian) gid=65534(nogroup) groups=65534(nogroup),1776(media)
+
+I don't know if you need it, but here is the nfs.conf on truenas:  
+
+bill@truenas --> 🔴 / cat nfs.conf
+#
+# This is a general configuration for the
+# NFS daemons and tools
+#
+[general]
+pipefs-directory=/run/rpc_pipefs
+#
+[nfsrahead]
+# nfs=15000
+# nfs4=16000
+#
+[exports]
+# rootdir=/export
+#
+[exportfs]
+# debug=0
+#
+[gssd]
+# verbosity=0
+# rpc-verbosity=0
+# use-memcache=0
+# use-machine-creds=1
+# use-gss-proxy=0
+# avoid-dns=1
+# limit-to-legacy-enctypes=0
+# context-timeout=0
+# rpc-timeout=5
+# keytab-file=/etc/krb5.keytab
+# cred-cache-directory=
+# preferred-realm=
+# set-home=1
+# upcall-timeout=30
+# cancel-timed-out-upcalls=0
+#
+[lockd]
+# port=0
+# udp-port=0
+#
+[exportd]
+# debug="all|auth|call|general|parse"
+# manage-gids=n
+# state-directory-path=/var/lib/nfs
+# threads=1
+# cache-use-ipaddr=n
+# ttl=1800
+[mountd]
+# debug="all|auth|call|general|parse"
+manage-gids=y
+# descriptors=0
+# port=0
+# threads=1
+# reverse-lookup=n
+# state-directory-path=/var/lib/nfs
+# ha-callout=
+# cache-use-ipaddr=n
+# ttl=1800
+#
+[nfsdcld]
+# debug=0
+# storagedir=/var/lib/nfs/nfsdcld
+#
+[nfsdcltrack]
+# debug=0
+# storagedir=/var/lib/nfs/nfsdcltrack
+#
+[nfsd]
+# debug=0
+# threads=8
+# host=
+# port=0
+# grace-time=90
+# lease-time=90
+# udp=n
+# tcp=y
+# vers3=y
+# vers4=y
+# vers4.0=y
+# vers4.1=y
+# vers4.2=y
+# rdma=n
+# rdma-port=20049
+
+[statd]
+# debug=0
+# port=0
+# outgoing-port=0
+# name=
+# state-directory-path=/var/lib/nfs/statd
+# ha-callout=
+# no-notify=0
+#
+[sm-notify]
+# debug=0
+# force=0
+# retry-time=900
+# outgoing-port=
+# outgoing-addr=
+# lift-grace=y
+#
+[svcgssd]
+# principal=
+
+Here is the exports file entry from truenas for the media share:  
+
+bill@truenas --> 🔴 / cat exports
+
+"/mnt/Data/media"\
+	*(sec=sys,rw,no_subtree_check)
+
+Then here is the fstab file in Proxmox:  
+
+bill@pve --> 🔴 / cat /etc/fstab
+# <file system> <mount point> <type> <options> <dump> <pass>
+/dev/pve/root / ext4 errors=remount-ro 0 1
+UUID=1DCB-26CE /boot/efi vfat defaults 0 1
+/dev/pve/swap none swap sw 0 0
+proc /proc proc defaults 0 0
+# BEGIN ANSIBLE MANAGED BLOCK
+# Begin managed fstab entries
+192.168.86.90:/mnt/ssd-files/docs /mnt/docs nfs defaults 0 0
+192.168.86.90:/mnt/Data/media /media nfs defaults 0 0
+192.168.86.90:/mnt/ssd-files/fileshare/trilium-data /mnt/trilium nfs defaults 0 0
+# End managed fstab entries
+# END ANSIBLE MANAGED BLOCK
+
+Here are relevant users and groups in Proxmox:   
+
+bill@pve --> 🔴 / id bill
+uid=1000(bill) gid=1000(bill) groups=1000(bill),0(root),33(www-data),1776(media),1787(docs)
+
+bill@pve --> 🔴 / id librarian
+uid=1995(librarian) gid=1995(librarian) groups=1995(librarian),1776(media)
+
+Here is the lazylibrarian conf file in Proxmox:  
+
+bill@pve --> 🔴 / cat /etc/pve/lxc/126.conf 
+arch: amd64
+cores: 2
+features: nesting=1
+hostname: lazylibrarian
+memory: 2048
+mp0: /media/downloads/complete/books,mp=/media/downloads
+mp1: /media/storage/books,mp=/media/books
+net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:50:D8:A0,ip=dhcp,type=veth
+ostype: ubuntu
+rootfs: local-lvm:vm-126-disk-0,size=8G
+swap: 2048
+unprivileged: 1
+lxc.idmap: u 0 100000 1000
+lxc.idmap: u 1000 1000 2000
+lxc.idmap: u 65534 165534 1
+lxc.idmap: g 0 100000 100
+lxc.idmap: g 100 100 1
+lxc.idmap: g 101 100100 899
+lxc.idmap: g 1000 1000 2000
+lxc.idmap: g 65534 165534 1
+
+See here the directory, ownership, and permissions of the directories in Proxmox:
+
+/media
+bill@pve --> 🔴 / ls
+total 12K
+drwxr-x--- 3 bill media 3 2025-01-03 17:36 bill/
+drwxrwxr-x 5 bill media 5 2024-12-26 17:49 downloads/
+drwxrwxr-x 9 bill media 9 2025-01-03 19:34 storage/
+
+/media/downloads
+bill@pve --> 🔴 / ls
+total 44K
+drwxrwxr-x 2 bill media 2 2024-12-26 17:49 books/
+
+/media/storage
+bill@pve --> 🔴 / ls
+total 99K
+drwxrwxr-x 319 librarian librarian 324 2025-01-03 18:38 books/
+
+See here the directory, ownership, and permissions of the directories in the lazylibrarian LXC:
+
+/media
+bill@lazylibrarian --> 🔴 / ls
+total 65K
+drwxrwxr-x 319 librarian librarian 324 2025-01-03 18:38 books/
+drwxrwxr-x   3 librarian librarian   3 2025-01-02 15:19 downloads/
+
+/opt
+bill@lazylibrarian --> 🔴 / ls
+total 4.0K
+drwxr-xr-x 13 librarian librarian 4.0K 2025-01-05 13:06 LazyLibrarian/
+
+See here that user librarian can touch a new file in both directories:  
+
+bill@lazylibrarian --> 🔴 / sudo su - librarian
+$ cd /^L
+-sh: 1: cd: can't cd to /
+
+$ cd /media/downloads
+$ touch test1
+$ ls /media/downloads
+ll_temp  test1
+$ cd /media/books
+$ touch aaatest1
+$ ls -la /media/books
+-rw-rw-r--   1 librarian librarian       0 Jan  5 13:29  aaatest1
+
+Here is our systemd file for lazylibrarian:  
+
+bill@lazylibrarian --> 🔴 / cat /etc/systemd/system/lazylibrarian.service 
+[Unit]
+Description=LazyLibrarian
+After=network.target
+
+[Service]
+User=librarian
+Group=librarian
+WorkingDirectory=/opt/LazyLibrarian
+ExecStart=/usr/bin/python3 /opt/LazyLibrarian/LazyLibrarian.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+Please note - this NFS share from truenas works just fine for our other LXCs, such as plex.  
+
+Can you please, PLEASE help me??  
+
+
+
+
+
+
+
+
+
+
+
+I have the LXC /media/downloads mounted to /media/downloads/complete/books... in PRoxmox /media/downloads/complete/books is owned by librarian:librarian.  
+Should that be sufficient, or do I have to change /media/downloads to librarian:librarian as well?

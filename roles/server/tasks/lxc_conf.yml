@@ -4,10 +4,10 @@
   command: pct stop {{ container_id }}
   when: container_id is defined
 
-- name: Ensure the host directory exists for /media/downloads/books
+- name: Ensure the host directory exists
   delegate_to: "{{ groups['proxmox'][0] }}"
   file:
-    path: "/media/downloads/books"
+    path: "{{ directories_to_create }}"
     state: directory
   when: container_id is defined
 
@@ -54,21 +54,21 @@
     - { path: /home/hal, owner: hal, group: hal }
   when: container_id is defined
 
-- name: Extract LazyLibrarian directory from systemd service file
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  shell: "grep ExecStart= /var/lib/lxc/{{ container_id }}/rootfs/etc/systemd/system/lazylibrarian.service | sed 's/.*python3 \\(.*\\)\\/LazyLibrarian.py.*/\\1/'"
-  register: lazy_dir
-  when: container_id is defined
+# - name: Extract LazyLibrarian directory from systemd service file
+#   delegate_to: "{{ groups['proxmox'][0] }}"
+#   shell: "grep ExecStart= /var/lib/lxc/{{ container_id }}/rootfs/etc/systemd/system/lazylibrarian.service | sed 's/.*python3 \\(.*\\)\\/LazyLibrarian.py.*/\\1/'"
+#   register: lazy_dir
+#   when: container_id is defined
 
-- name: Change ownership of LazyLibrarian directory
-  delegate_to: "{{ groups['proxmox'][0] }}"
-  command: >
-    chown -R {{ item.owner }}:{{ item.group }} /var/lib/lxc/{{ container_id }}/rootfs{{ lazy_dir.stdout }}
-  with_items:
-    - { owner: "{{ app_user }}", group: "media" }
-  when:
-    - container_id is defined
-    - lazy_dir.stdout != ""
+# - name: Change ownership of LazyLibrarian directory
+#   delegate_to: "{{ groups['proxmox'][0] }}"
+#   command: >
+#     chown -R {{ item.owner }}:{{ item.group }} /var/lib/lxc/{{ container_id }}/rootfs{{ lazy_dir.stdout }}
+#   with_items:
+#     - { owner: "{{ app_user }}", group: "media" }
+#   when:
+#     - container_id is defined
+#     - lazy_dir.stdout != ""
 
 - name: Create necessary directories inside the LXC container's root filesystem
   delegate_to: "{{ groups['proxmox'][0] }}"

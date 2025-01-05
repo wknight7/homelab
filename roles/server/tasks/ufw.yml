@@ -116,6 +116,31 @@
     - lazy_librarian is defined
     - lazy_librarian == true
 
+# calibre
+- name: ufw | calibre | allow calibre
+  tags: ufw
+  ufw:
+    comment: calibre
+    rule: allow
+    port: '8080'
+    proto: tcp
+  when:
+    - calibre is defined
+    - calibre == true
+
+# calibre-web
+- name: ufw | calibre-web | allow calibre-web
+  tags: ufw
+  ufw:
+    comment: calibre-web
+    rule: allow
+    port: '8083'
+    proto: tcp
+  when:
+    - calibre_web is defined
+    - calibre_web == true
+
+
 # all rules set, enable
 - name: ufw | enable firewall
   ufw:

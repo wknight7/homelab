@@ -33,9 +33,11 @@ groups_to_create:
   - media
   - ansible
   - data
+  - librarian
 
 # Application selection
 lazy_librarian: true
+calibre: true
 
 # Add container_id
-container_id: 126
+container_id: 113

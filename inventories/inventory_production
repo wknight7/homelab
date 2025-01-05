@@ -15,10 +15,11 @@
 #maintainerr ansible_host=192.168.86.105 container_id=117
 #bazarr ansible_host=192.168.86.101 container_id=118
 #paperless ansible_host=192.168.86.93 container_id=108
-lazy_librarian ansible_host=192.168.86.25 container_id=126
+lazy_librarian ansible_host=192.168.86.70 container_id=126
+books ansible_host=192.168.86.58 container_id=127 #vm
 
 [proxmox]
-#proxmox_ve ansible_host=192.168.86.143
+proxmox_server ansible_host=192.168.86.143
 #proxmox_backup ansible_host=192.168.86.33
 
 [workstations]

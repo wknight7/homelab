@@ -1,0 +1,31 @@
+---
+# General variables specific to ubuntu_test_desk
+branch: master
+
+ansible_cron_minute: "40"
+ssh_port: 22
+ssh_users: "bill hal"
+app_user: calibre
+app_user_groups:
+  - media
+
+# Platform-specific variables
+ansible_python_interpreter: /usr/bin/python3
+microcode_amd_install: false
+microcode_intel_install: false
+
+# groups to create
+groups_to_create:
+  - media
+  - ansible
+
+# Define NFS mounts
+nfs_mounts:
+  - src: "192.168.86.90:/mnt/Data/media"
+    dest: "/media"
+    opts: "rw"
+
+# Application selection
+calibre: true
+calibre_web: true 
+lazy_librarian: true 

@@ -13,3 +13,5 @@ group_definitions:
     gid: 1997
   - name: git
     gid: 1996
+  - name: librarian
+    gid: 1995
