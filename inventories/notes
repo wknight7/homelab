@@ -1,266 +1,934 @@
-OK I a getting very, very frustrated.  Lazylibrarian remains unable to write to the ebook directory, or the download directory.  We have been at this for DAYS!
-We have created other LXC containers with no problems at all.  
-As a reminder... ebooks are stored on truenas and shared via NFS to Proxmox.  
-Then the shared directory in Proxmox is mounted to the LXC via the lxc conf file.  
+calibredb is the command line interface to the calibre database. It has several sub-commands, documented below.
 
-See here the directory, ownership, and permissions of the directories in Truenas:  
+calibredb can be used to manipulate either a calibre database specified by path or a calibre Content server running either on the local machine or over the internet. You can start a calibre Content server using either the calibre-server program or in the main calibre program click Connect/share  →  Start Content server. Since calibredb can make changes to your calibre libraries, you must setup authentication on the server first. There are two ways to do that:
 
-/mnt/Data
-bill@truenas --> 🔴 / ls
-total 34K
-drwxrwxr-x   5 bill media    5 2025-01-03 14:36 media/
+        If you plan to connect only to a server running on the same computer, you can simply use the --enable-local-write option of the Content server, to allow any program, including calibredb, running on the local computer to make changes to your calibre data. When running the server from the main calibre program, this option is in Preferences → Sharing over the net → Advanced.
 
-/mnt/Data/media
-bill@truenas --> 🔴 / ls
-total 12K
-drwxrwxr-x 5 bill media 5 2024-12-26 14:49 downloads/
-drwxrwxr-x 9 bill media 9 2025-01-03 16:34 storage/
+        If you want to enable access over the internet, then you should setup user accounts on the server and use the --username and --password options to calibredb to give it access. You can setup user authentication for calibre-server by using the --enable-auth option and using --manage-users to create the user accounts. If you are running the server from the main calibre program, use Preferences → Sharing over the net → Require username/password.
 
-/mnt/Data/media/storage
-bill@truenas --> 🔴 / ls
-total 99K
-drwxrwxr-x 319 librarian librarian 324 2025-01-03 15:38 books/
+To connect to a running Content server, pass the URL of the server to the --with-library option, see the documentation of that option for details and examples.
 
-/mnt/Data/media/downloads/complete
-bill@truenas --> 🔴 / ls
-total 110K
-drwxrwxr-x  3 librarian librarian  4 2025-01-05 10:28 books/
+Global Options
 
-See here the relevant users and groups in truenas:  
+--help, -h
 
-bill@truenas --> 🔴 / id bill
-uid=1000(bill) gid=1000(bill) groups=1000(bill),0(root),950(admin),1776(media),1787(docs)
+    show this help message and exit
 
-bill@truenas --> 🔴 / id librarian
-uid=1995(librarian) gid=65534(nogroup) groups=65534(nogroup),1776(media)
+--library-path, --with-library
 
-I don't know if you need it, but here is the nfs.conf on truenas:  
+    Path to the calibre library. Default is to use the path stored in the settings. You can also connect to a calibre Content server to perform actions on remote libraries. To do so use a URL of the form: http://hostname:port/#library_id for example, http://localhost:8080/#mylibrary. library_id is the library id of the library you want to connect to on the Content server. You can use the special library_id value of - to get a list of library ids available on the server. For details on how to setup access via a Content server, see https://manual.calibre-ebook.com/generated/en/calibredb.html.
 
-bill@truenas --> 🔴 / cat nfs.conf
-#
-# This is a general configuration for the
-# NFS daemons and tools
-#
-[general]
-pipefs-directory=/run/rpc_pipefs
-#
-[nfsrahead]
-# nfs=15000
-# nfs4=16000
-#
-[exports]
-# rootdir=/export
-#
-[exportfs]
-# debug=0
-#
-[gssd]
-# verbosity=0
-# rpc-verbosity=0
-# use-memcache=0
-# use-machine-creds=1
-# use-gss-proxy=0
-# avoid-dns=1
-# limit-to-legacy-enctypes=0
-# context-timeout=0
-# rpc-timeout=5
-# keytab-file=/etc/krb5.keytab
-# cred-cache-directory=
-# preferred-realm=
-# set-home=1
-# upcall-timeout=30
-# cancel-timed-out-upcalls=0
-#
-[lockd]
-# port=0
-# udp-port=0
-#
-[exportd]
-# debug="all|auth|call|general|parse"
-# manage-gids=n
-# state-directory-path=/var/lib/nfs
-# threads=1
-# cache-use-ipaddr=n
-# ttl=1800
-[mountd]
-# debug="all|auth|call|general|parse"
-manage-gids=y
-# descriptors=0
-# port=0
-# threads=1
-# reverse-lookup=n
-# state-directory-path=/var/lib/nfs
-# ha-callout=
-# cache-use-ipaddr=n
-# ttl=1800
-#
-[nfsdcld]
-# debug=0
-# storagedir=/var/lib/nfs/nfsdcld
-#
-[nfsdcltrack]
-# debug=0
-# storagedir=/var/lib/nfs/nfsdcltrack
-#
-[nfsd]
-# debug=0
-# threads=8
-# host=
-# port=0
-# grace-time=90
-# lease-time=90
-# udp=n
-# tcp=y
-# vers3=y
-# vers4=y
-# vers4.0=y
-# vers4.1=y
-# vers4.2=y
-# rdma=n
-# rdma-port=20049
+--password
 
-[statd]
-# debug=0
-# port=0
-# outgoing-port=0
-# name=
-# state-directory-path=/var/lib/nfs/statd
-# ha-callout=
-# no-notify=0
-#
-[sm-notify]
-# debug=0
-# force=0
-# retry-time=900
-# outgoing-port=
-# outgoing-addr=
-# lift-grace=y
-#
-[svcgssd]
-# principal=
+    Password for connecting to a calibre Content server. To read the password from standard input, use the special value: <stdin>. To read the password from a file, use: <f:/path/to/file> (i.e. <f: followed by the full path to the file and a trailing >). The angle brackets in the above are required, remember to escape them or use quotes for your shell.
 
-Here is the exports file entry from truenas for the media share:  
+--timeout
 
-bill@truenas --> 🔴 / cat exports
+    The timeout, in seconds, when connecting to a calibre library over the network. The default is two minutes.
 
-"/mnt/Data/media"\
-	*(sec=sys,rw,no_subtree_check)
+--username
 
-Then here is the fstab file in Proxmox:  
+    Username for connecting to a calibre Content server
 
-bill@pve --> 🔴 / cat /etc/fstab
-# <file system> <mount point> <type> <options> <dump> <pass>
-/dev/pve/root / ext4 errors=remount-ro 0 1
-UUID=1DCB-26CE /boot/efi vfat defaults 0 1
-/dev/pve/swap none swap sw 0 0
-proc /proc proc defaults 0 0
-# BEGIN ANSIBLE MANAGED BLOCK
-# Begin managed fstab entries
-192.168.86.90:/mnt/ssd-files/docs /mnt/docs nfs defaults 0 0
-192.168.86.90:/mnt/Data/media /media nfs defaults 0 0
-192.168.86.90:/mnt/ssd-files/fileshare/trilium-data /mnt/trilium nfs defaults 0 0
-# End managed fstab entries
-# END ANSIBLE MANAGED BLOCK
+--version¶
+    show program's version number and exit
 
-Here are relevant users and groups in Proxmox:   
+list
 
-bill@pve --> 🔴 / id bill
-uid=1000(bill) gid=1000(bill) groups=1000(bill),0(root),33(www-data),1776(media),1787(docs)
+calibredb list [options]
 
-bill@pve --> 🔴 / id librarian
-uid=1995(librarian) gid=1995(librarian) groups=1995(librarian),1776(media)
+List the books available in the calibre database.
 
-Here is the lazylibrarian conf file in Proxmox:  
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
 
-bill@pve --> 🔴 / cat /etc/pve/lxc/126.conf 
-arch: amd64
-cores: 2
-features: nesting=1
-hostname: lazylibrarian
-memory: 2048
-mp0: /media/downloads/complete/books,mp=/media/downloads
-mp1: /media/storage/books,mp=/media/books
-net0: name=eth0,bridge=vmbr0,firewall=1,hwaddr=BC:24:11:50:D8:A0,ip=dhcp,type=veth
-ostype: ubuntu
-rootfs: local-lvm:vm-126-disk-0,size=8G
-swap: 2048
-unprivileged: 1
-lxc.idmap: u 0 100000 1000
-lxc.idmap: u 1000 1000 2000
-lxc.idmap: u 65534 165534 1
-lxc.idmap: g 0 100000 100
-lxc.idmap: g 100 100 1
-lxc.idmap: g 101 100100 899
-lxc.idmap: g 1000 1000 2000
-lxc.idmap: g 65534 165534 1
+--ascending
 
-See here the directory, ownership, and permissions of the directories in Proxmox:
+    Sort results in ascending order
 
-/media
-bill@pve --> 🔴 / ls
-total 12K
-drwxr-x--- 3 bill media 3 2025-01-03 17:36 bill/
-drwxrwxr-x 5 bill media 5 2024-12-26 17:49 downloads/
-drwxrwxr-x 9 bill media 9 2025-01-03 19:34 storage/
+--fields, -f
 
-/media/downloads
-bill@pve --> 🔴 / ls
-total 44K
-drwxrwxr-x 2 bill media 2 2024-12-26 17:49 books/
+    The fields to display when listing books in the database. Should be a comma separated list of fields. Available fields: author_sort, authors, comments, cover, formats, identifiers, isbn, languages, last_modified, pubdate, publisher, rating, series, series_index, size, tags, template, timestamp, title, uuid Default: title,authors. The special field "all" can be used to select all fields. In addition to the builtin fields above, custom fields are also available as *field_name, for example, for a custom field #rating, use the name: *rating
 
-/media/storage
-bill@pve --> 🔴 / ls
-total 99K
-drwxrwxr-x 319 librarian librarian 324 2025-01-03 18:38 books/
+--for-machine
 
-See here the directory, ownership, and permissions of the directories in the lazylibrarian LXC:
+    Generate output in JSON format, which is more suitable for machine parsing. Causes the line width and separator options to be ignored.
 
-/media
-bill@lazylibrarian --> 🔴 / ls
-total 65K
-drwxrwxr-x 319 librarian librarian 324 2025-01-03 18:38 books/
-drwxrwxr-x   3 librarian librarian   3 2025-01-02 15:19 downloads/
+--limit
+    The maximum number of results to display. Default: all
 
-/opt
-bill@lazylibrarian --> 🔴 / ls
-total 4.0K
-drwxr-xr-x 13 librarian librarian 4.0K 2025-01-05 13:06 LazyLibrarian/
+--line-width, -w
 
-See here that user librarian can touch a new file in both directories:  
+    The maximum width of a single line in the output. Defaults to detecting screen size.
 
-bill@lazylibrarian --> 🔴 / sudo su - librarian
-$ cd /^L
--sh: 1: cd: can't cd to /
+--prefix
 
-$ cd /media/downloads
-$ touch test1
-$ ls /media/downloads
-ll_temp  test1
-$ cd /media/books
-$ touch aaatest1
-$ ls -la /media/books
--rw-rw-r--   1 librarian librarian       0 Jan  5 13:29  aaatest1
+    The prefix for all file paths. Default is the absolute path to the library folder.
 
-Here is our systemd file for lazylibrarian:  
+--search, -s
 
-bill@lazylibrarian --> 🔴 / cat /etc/systemd/system/lazylibrarian.service 
-[Unit]
-Description=LazyLibrarian
-After=network.target
+    Filter the results by the search query. For the format of the search query, please see the search related documentation in the User Manual. Default is to do no filtering.
 
-[Service]
-User=librarian
-Group=librarian
-WorkingDirectory=/opt/LazyLibrarian
-ExecStart=/usr/bin/python3 /opt/LazyLibrarian/LazyLibrarian.py
-Restart=always
+--separator
 
-[Install]
-WantedBy=multi-user.target
+    The string used to separate fields. Default is a space.
 
-Please note - this NFS share from truenas works just fine for our other LXCs, such as plex.  
+--sort-by
 
-Can you please, PLEASE help me??  
+    The field by which to sort the results. You can specify multiple fields by separating them with commas. Available fields: author_sort, authors, comments, cover, formats, identifiers, isbn, languages, last_modified, pubdate, publisher, rating, series, series_index, size, tags, template, timestamp, title, uuid Default: id
+
+--template
+
+    The template to run if "template" is in the field list. Note that templates are ignored while connecting to a calibre server. Default: None
+
+--template_file, -t
+
+    Path to a file containing the template to run if "template" is in the field list. Default: None
+
+--template_heading
+
+    Heading for the template column. Default: template. This option is ignored if the option --for-machine is set
+
+add
+
+calibredb add [options] file1 file2 file3 ...
+
+Add the specified files as books to the database. You can also specify folders, see the folder related options below.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--authors, -a
+
+    Set the authors of the added book(s)
+
+--automerge, -m
+
+    If books with similar titles and authors are found, merge the incoming formats (files) automatically into existing book records. A value of "ignore" means duplicate formats are discarded. A value of "overwrite" means duplicate formats in the library are overwritten with the newly added files. A value of "new_record" means duplicate formats are placed into a new book record.
+
+--cover, -c
+
+    Path to the cover to use for the added book
+
+--duplicates, -d
+
+    Add books to database even if they already exist. Comparison is done based on book titles and authors. Note that the --automerge option takes precedence.
+
+--empty, -e
+
+    Add an empty book (a book with no formats)
+
+--identifier, -I
+
+    Set the identifiers for this book, e.g. -I asin:XXX -I isbn:YYY
+
+--isbn, -i
+
+    Set the ISBN of the added book(s)
+
+--languages, -l
+
+    A comma separated list of languages (best to use ISO639 language codes, though some language names may also be recognized)
+
+--series, -s
+
+    Set the series of the added book(s)
+
+--series-index, -S
+
+    Set the series number of the added book(s)
+
+--tags, -T
+
+    Set the tags of the added book(s)
+
+--title, -t
+
+    Set the title of the added book(s)
+
+Adding From Folders
+
+Options to control the adding of books from folders. By default only files that have extensions of known e-book file types are added.
+
+--add
+
+    A filename (glob) pattern, files matching this pattern will be added when scanning folders for files, even if they are not of a known e-book file type. Can be specified multiple times for multiple patterns.
+
+--ignore
+
+    A filename (glob) pattern, files matching this pattern will be ignored when scanning folders for files. Can be specified multiple times for multiple patterns. For example: *.pdf will ignore all PDF files
+
+--one-book-per-directory, -1
+
+    Assume that each folder has only a single logical book and that all files in it are different e-book formats of that book
+
+--recurse, -r
+
+    Process folders recursively
+
+remove
+
+calibredb remove ids
+
+Remove the books identified by ids from the database. ids should be a comma separated list of id numbers (you can get id numbers by using the search command). For example, 23,34,57-85 (when specifying a range, the last number in the range is not included).
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--permanent
+
+    Do not use the Recycle Bin
+
+add_format
+
+calibredb add_format [options] id ebook_file
+
+Add the e-book in ebook_file to the available formats for the logical book identified by id. You can get id by using the search command. If the format already exists, it is replaced, unless the do not replace option is specified.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--as-extra-data-file
+
+    Add the file as an extra data file to the book, not an ebook format
+
+--dont-replace
+
+    Do not replace the format if it already exists
+
+remove_format
+
+calibredb remove_format [options] id fmt
+
+Remove the format fmt from the logical book identified by id. You can get id by using the search command. fmt should be a file extension like LRF or TXT or EPUB. If the logical book does not have fmt available, do nothing.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+show_metadata
+
+calibredb show_metadata [options] id
+
+Show the metadata stored in the calibre database for the book identified by id. id is an id number from the search command.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--as-opf
+
+    Print metadata in OPF form (XML)
+
+set_metadata
+
+calibredb set_metadata [options] book_id [/path/to/metadata.opf]
+
+Set the metadata stored in the calibre database for the book identified by book_id from the OPF file metadata.opf. book_id is a book id number from the search command. You can get a quick feel for the OPF format by using the –as-opf switch to the show_metadata command. You can also set the metadata of individual fields with the –field option. If you use the –field option, there is no need to specify an OPF file.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--field, -f
+
+    The field to set. Format is field_name:value, for example: --field tags:tag1,tag2. Use --list-fields to get a list of all field names. You can specify this option multiple times to set multiple fields. Note: For languages you must use the ISO639 language codes (e.g. en for English, fr for French and so on). For identifiers, the syntax is --field identifiers:isbn:XXXX,doi:YYYYY. For boolean (yes/no) fields use true and false or yes and no.
+
+--list-fields, -l
+
+    List the metadata field names that can be used with the --field option
+
+export
+
+calibredb export [options] ids
+
+Export the books specified by ids (a comma separated list) to the filesystem. The export operation saves all formats of the book, its cover and metadata (in an OPF file). Any extra data files associated with the book are also saved. You can get id numbers from the search command.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--all
+
+    Export all books in database, ignoring the list of ids.
+
+--dont-asciiize
+
+    Have calibre convert all non English characters into English equivalents for the file names. This is useful if saving to a legacy filesystem without full support for Unicode filenames. Specifying this switch will turn this behavior off.
+
+--dont-save-cover
+
+    Normally, calibre will save the cover in a separate file along with the actual e-book files. Specifying this switch will turn this behavior off.
+
+--dont-save-extra-files
+
+    Save any data files associated with the book when saving the book Specifying this switch will turn this behavior off.
+
+--dont-update-metadata
+
+    Normally, calibre will update the metadata in the saved files from what is in the calibre library. Makes saving to disk slower. Specifying this switch will turn this behavior off.
+
+--dont-write-opf
+
+    Normally, calibre will write the metadata into a separate OPF file along with the actual e-book files. Specifying this switch will turn this behavior off.
+
+--formats
+
+    Comma separated list of formats to save for each book. By default all available formats are saved.
+
+--progress
+
+    Report progress
+
+--replace-whitespace
+
+    Replace whitespace with underscores.
+
+--single-dir
+
+    Export all books into a single folder
+
+--template
+
+    The template to control the filename and folder structure of the saved files. Default is "{author_sort}/{title}/{title} - {authors}" which will save books into a per-author subfolder with filenames containing title and author. Available controls are: {author_sort, authors, id, isbn, languages, last_modified, pubdate, publisher, rating, series, series_index, tags, timestamp, title}
+
+--timefmt
+
+    The format in which to display dates. %d - day, %b - month, %m - month number, %Y - year. Default is: %b, %Y
+
+--to-dir
+
+    Export books to the specified folder. Default is .
+
+--to-lowercase
+
+    Convert paths to lowercase.
+
+catalog
+
+calibredb catalog /path/to/destination.(csv|epub|mobi|xml...) [options]
+
+Export a catalog in format specified by path/to/destination extension. Options control how entries are displayed in the generated catalog output. Note that different catalog formats support different sets of options. To see the different options, specify the name of the output file and then the –help option.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--ids, -i
+
+    Comma-separated list of database IDs to catalog. If declared, --search is ignored. Default: all
+
+--search, -s
+
+    Filter the results by the search query. For the format of the search query, please see the search-related documentation in the User Manual. Default: no filtering
+
+--verbose, -v
+
+    Show detailed output information. Useful for debugging
+
+Epub Options
+
+--catalog-title
+
+    Title of generated catalog used as title in metadata. Default: 'My Books' Applies to: AZW3, EPUB, MOBI output formats
+
+--cross-reference-authors
+
+    Create cross-references in Authors section for books with multiple authors. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--debug-pipeline
+
+    Save the output from different stages of the conversion pipeline to the specified folder. Useful if you are unsure at which stage of the conversion process a bug is occurring. Default: 'None' Applies to: AZW3, EPUB, MOBI output formats
+
+--exclude-genre
+
+    Regex describing tags to exclude as genres. Default: '[.+]|^+$' excludes bracketed tags, e.g. '[Project Gutenberg]', and '+', the default tag for read books. Applies to: AZW3, EPUB, MOBI output formats
+
+--exclusion-rules
+
+    Specifies the rules used to exclude books from the generated catalog. The model for an exclusion rule is either ('<rule name>','Tags','<comma-separated list of tags>') or ('<rule name>','<custom column>','<pattern>'). For example: (('Archived books','#status','Archived'),) will exclude a book with a value of 'Archived' in the custom column 'status'. When multiple rules are defined, all rules will be applied. Default: "(('Catalogs','Tags','Catalog'),)" Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-authors
+
+    Include 'Authors' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-descriptions
+
+    Include 'Descriptions' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-genres
+
+    Include 'Genres' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-recently-added
+
+    Include 'Recently Added' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-series
+
+    Include 'Series' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--generate-titles
+
+    Include 'Titles' section in catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+--genre-source-field
+
+    Source field for 'Genres' section. Default: 'Tags' Applies to: AZW3, EPUB, MOBI output formats
+
+--header-note-source-field
+
+    Custom field containing note text to insert in Description header. Default: '' Applies to: AZW3, EPUB, MOBI output formats
+
+--merge-comments-rule
+
+    #<custom field>:[before|after]:[True|False] specifying: <custom field> Custom field containing notes to merge with comments [before|after] Placement of notes with respect to comments [True|False] - A horizontal rule is inserted between notes and comments Default: '::' Applies to: AZW3, EPUB, MOBI output formats
+
+--output-profile
+
+    Specifies the output profile. In some cases, an output profile is required to optimize the catalog for the device. For example, 'kindle' or 'kindle_dx' creates a structured Table of Contents with Sections and Articles. Default: 'None' Applies to: AZW3, EPUB, MOBI output formats
+
+--prefix-rules
+
+    Specifies the rules used to include prefixes indicating read books, wishlist items and other user-specified prefixes. The model for a prefix rule is ('<rule name>','<source field>','<pattern>','<prefix>'). When multiple rules are defined, the first matching rule will be used. Default: "(('Read books','tags','+','✓'),('Wishlist item','tags','Wishlist','×'))" Applies to: AZW3, EPUB, MOBI output formats
+
+--preset
+
+    Use a named preset created with the GUI catalog builder. A preset specifies all settings for building a catalog. Default: 'None' Applies to: AZW3, EPUB, MOBI output formats
+
+--thumb-width
+
+    Size hint (in inches) for book covers in catalog. Range: 1.0 - 2.0 Default: '1.0' Applies to: AZW3, EPUB, MOBI output formats
+
+--use-existing-cover
+
+    Replace existing cover when generating the catalog. Default: 'False' Applies to: AZW3, EPUB, MOBI output formats
+
+saved_searches
+
+calibredb saved_searches [options] (list|add|remove)
+
+Manage the saved searches stored in this database. If you try to add a query with a name that already exists, it will be replaced.
+
+Syntax for adding:
+
+calibredb saved_searches add search_name search_expression
+
+Syntax for removing:
+
+calibredb saved_searches remove search_name
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+add_custom_column
+
+calibredb add_custom_column [options] label name datatype
+
+Create a custom column. label is the machine friendly name of the column. Should not contain spaces or colons. name is the human friendly name of the column. datatype is one of: bool, comments, composite, datetime, enumeration, float, int, rating, series, text
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--display
+
+    A dictionary of options to customize how the data in this column will be interpreted. This is a JSON string. For enumeration columns, use --display"{\ "enum_values\ ":[\ "val1\ ", \ "val2\ "]}" There are many options that can go into the display variable.The options by column type are: composite: composite_template, composite_sort, make_category,contains_html, use_decorations datetime: date_format enumeration: enum_values, enum_colors, use_decorations int, float: number_format text: is_names, use_decorations The best way to find legal combinations is to create a custom column of the appropriate type in the GUI then look at the backup OPF for a book (ensure that a new OPF has been created since the column was added). You will see the JSON for the "display" for the new column in the OPF.
+
+--is-multiple
+
+    This column stores tag like data (i.e. multiple comma separated values). Only applies if datatype is text.
+
+custom_columns
+
+calibredb custom_columns [options]
+
+List available custom columns. Shows column labels and ids.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--details, -d
+
+    Show details for each column.
+
+remove_custom_column
+
+calibredb remove_custom_column [options] label
+
+Remove the custom column identified by label. You can see available columns with the custom_columns command.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--force, -f
+
+    Do not ask for confirmation
+
+set_custom
+
+calibredb set_custom [options] column id value
+
+Set the value of a custom column for the book identified by id. You can get a list of ids using the search command. You can get a list of custom column names using the custom_columns command.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--append, -a
+
+    If the column stores multiple values, append the specified values to the existing ones, instead of replacing them.
+
+restore_database
+
+calibredb restore_database [options]
+
+Restore this database from the metadata stored in OPF files in each folder of the calibre library. This is useful if your metadata.db file has been corrupted.
+
+WARNING: This command completely regenerates your database. You will lose all saved searches, user categories, plugboards, stored per-book conversion settings, and custom recipes. Restored metadata will only be as accurate as what is found in the OPF files.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--really-do-it, -r
+
+    Really do the recovery. The command will not run unless this option is specified.
+
+check_library
+
+calibredb check_library [options]
+
+Perform some checks on the filesystem representing a library. Reports are invalid_titles, extra_titles, invalid_authors, extra_authors, missing_formats, extra_formats, extra_files, missing_covers, extra_covers, failed_folders
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--csv, -c
+
+    Output in CSV
+
+--ignore_extensions, -e
+
+    Comma-separated list of extensions to ignore. Default: all
+
+--ignore_names, -n
+
+    Comma-separated list of names to ignore. Default: all
+
+--report, -r
+
+    Comma-separated list of reports. Default: all
+
+--vacuum-fts-db
+
+    Vacuum the full text search database. This can be very slow and memory intensive, depending on the size of the database.
+
+list_categories
+
+calibredb list_categories [options]
+
+Produce a report of the category information in the database. The information is the equivalent of what is shown in the Tag browser.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--categories, -r
+
+    Comma-separated list of category lookup names. Default: all
+
+--csv, -c
+
+    Output in CSV
+
+--dialect
+
+    The type of CSV file to produce. Choices: excel, excel-tab, unix
+
+--item_count, -i
+
+    Output only the number of items in a category instead of the counts per item within the category
+
+--width, -w
+
+    The maximum width of a single line in the output. Defaults to detecting screen size.
+
+backup_metadata
+
+calibredb backup_metadata [options]
+
+Backup the metadata stored in the database into individual OPF files in each books folder. This normally happens automatically, but you can run this command to force re-generation of the OPF files, with the –all option.
+
+Note that there is normally no need to do this, as the OPF files are backed up automatically, every time metadata is changed.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--all
+
+    Normally, this command only operates on books that have out of date OPF files. This option makes it operate on all books.
+
+clone
+
+calibredb clone path/to/new/library
+
+Create a clone of the current library. This creates a new, empty library that has all the same custom columns, Virtual libraries and other settings as the current library.
+
+The cloned library will contain no books. If you want to create a full duplicate, including all books, then simply use your filesystem tools to copy the library folder.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+embed_metadata
+
+calibredb embed_metadata [options] book_id
+
+Update the metadata in the actual book files stored in the calibre library from the metadata in the calibre database. Normally, metadata is updated only when exporting files from calibre, this command is useful if you want the files to be updated in place. Note that different file formats support different amounts of metadata. You can use the special value ‘all’ for book_id to update metadata in all books. You can also specify many book ids separated by spaces and id ranges separated by hyphens. For example: calibredb embed_metadata 1 2 10-15 23
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--only-formats, -f
+
+    Only update metadata in files of the specified format. Specify it multiple times for multiple formats. By default, all formats are updated.
+
+search
+
+calibredb search [options] search expression
+
+Search the library for the specified search term, returning a comma separated list of book ids matching the search expression. The output format is useful to feed into other commands that accept a list of ids as input.
+
+The search expression can be anything from calibre’s powerful search query language, for example: calibredb search author:asimov ‘title:”i robot”’
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--limit, -l
+
+    The maximum number of results to return. Default is all results.
+
+fts_index
+
+calibredb fts_index [options] enable/disable/status/reindex
+
+Control the Full text search indexing process.
+
+enable
+
+    Turns on FTS indexing for this library
+disable
+
+    Turns off FTS indexing for this library
+status
+
+    Shows the current indexing status
+reindex
+
+    Can be used to re-index either particular books or the entire library. To re-index particular books specify the book ids as additional arguments after the reindex command. If no book ids are specified the entire library is re-indexed.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--indexing-speed
+
+    The speed of indexing. Use fast for fast indexing using all your computers resources and slow for less resource intensive indexing. Note that the speed is reset to slow after every invocation.
+
+--wait-for-completion
+
+    Wait till all books are indexed, showing indexing progress periodically
+
+fts_search
+
+calibredb fts_search [options] search expression
+
+Do a full text search on the entire library or a subset of it.
+
+Whenever you pass arguments to calibredb that have spaces in them, enclose the arguments in quotation marks. For example: “/some path/with spaces”
+
+--do-not-match-on-related-words
+
+    Only match on exact words not related words. So correction will not match correcting.
+
+--include-snippets
+
+    Include snippets of the text surrounding each match. Note that this makes searching much slower.
+
+--indexing-threshold
+
+    How much of the library must be indexed before searching is allowed, as a percentage. Defaults to 90
+
+--match-end-marker
+
+    The marker used to indicate the end of a matched word inside a snippet
+
+--match-start-marker
+
+    The marker used to indicate the start of a matched word inside a snippet
+
+--output-format
+
+    The format to output the search results in. Either "text" for plain text or "json" for JSON output.
+
+--restrict-to
+
+    Restrict the searched books, either using a search expression or ids. For example: ids:1,2,3 to restrict by ids or search:tag:foo to restrict to books having the tag foo.
+
+
+
+
+
+
+
+OK so I failed to notice that you were advising me to mount the directories to the actual backup server... 
+
+I have done some reading and determined that I need to use proxmox-backup-client to backup directories from the proxmox server to the proxmox backup server.  
+
+I would like to back-up the following directories:  
+
+/mnt/docs
+/mnt/trilium
+/media/storage/photos
+
+Can you help me out by reading through the following and advising me how to do that?  
+
+Creating Backups
+
+This section explains how to create a backup from within the machine. This can be a physical host, a virtual machine, or a container. Such backups may contain file and image archives. There are no restrictions in this case.
+
+Note
+
+If you want to backup virtual machines or containers on Proxmox VE, see Proxmox VE Integration.
+
+For the following example, you need to have a backup server set up, have working credentials, and know the repository name. In the following examples, we use backup-server:store1.
+
+proxmox-backup-client backup root.pxar:/ --repository backup-server:store1
+Starting backup: host/elsa/2019-12-03T09:35:01Z
+Client name: elsa
+skip mount point: "/boot/efi"
+skip mount point: "/dev"
+skip mount point: "/run"
+skip mount point: "/sys"
+Uploaded 12129 chunks in 87 seconds (564 MB/s).
+End Time: 2019-12-03T10:36:29+01:00
+
+This will prompt you for a password, then upload a file archive named root.pxar containing all the files in the / directory.
+
+Caution
+
+Please note that proxmox-backup-client does not automatically include mount points. Instead, you will see a short skip mount point message for each of them. The idea is to create a separate file archive for each mounted disk. You can explicitly include them using the --include-dev option (i.e. --include-dev /boot/efi). You can use this option multiple times for each mount point that should be included.
+
+The --repository option can get quite long and is used by all commands. You can avoid having to enter this value by setting the environment variable PBS_REPOSITORY. Note that if you would like this to remain set over multiple sessions, you should instead add the below line to your .bashrc file.
+
+export PBS_REPOSITORY=backup-server:store1
+
+After this, you can execute all commands without having to specify the --repository option.
+
+A single backup is allowed to contain more than one archive. For example, if you want to back up two disks mounted at /mnt/disk1 and /mnt/disk2:
+
+proxmox-backup-client backup disk1.pxar:/mnt/disk1 disk2.pxar:/mnt/disk2
+
+This creates a backup of both disks.
+
+If you want to use a namespace for the backup target, you can add the --ns parameter:
+
+proxmox-backup-client backup disk1.pxar:/mnt/disk1 disk2.pxar:/mnt/disk2 --ns a/b/c
+
+The backup command takes a list of backup specifications, which include the archive name on the server, the type of the archive, and the archive source at the client. The format is:
+
+    <archive-name>.<type>:<source-path>
+
+Common types are .pxar for file archives and .img for block device images. To create a backup of a block device, run the following command:
+
+proxmox-backup-client backup mydata.img:/dev/mylvm/mydata
+
+
+
+
+
+So there don't appear to be an usable logs in either proxmox or proxmox backup.  However, here is some more info will this help?  
+
+The command-line client for Proxmox Backup Server is called proxmox-backup-client.
+Backup Repository Locations
+
+The client uses the following format to specify a datastore repository on the backup server (where username is specified in the form of user@realm):
+
+    [[username@]server[:port]:]datastore
+
+The default value for username is root@pam. If no server is specified, the default is the local host (localhost).
+
+You can specify a port if your backup server is only reachable on a non-default port (for example, with NAT and port forwarding configurations).
+
+Note that if the server uses an IPv6 address, you have to write it with square brackets (for example, [fe80::01]).
+
+You can pass the repository with the --repository command-line option, or by setting the PBS_REPOSITORY environment variable.
+
+The web interface provides copyable repository text in the datastore summary with the Show Connection Information button.
+
+Below are some examples of valid repositories and their corresponding real values:
+
+Example
+	
+
+User
+	
+
+Host:Port
+	
+
+Datastore
+
+mydatastore
+	
+
+root@pam
+	
+
+localhost:8007
+	
+
+mydatastore
+
+myhostname:mydatastore
+	
+
+root@pam
+	
+
+myhostname:8007
+	
+
+mydatastore
+
+user@pbs@myhostname:mydatastore
+	
+
+user@pbs
+	
+
+myhostname:8007
+	
+
+mydatastore
+
+user@pbs!token@host:store
+	
+
+user@pbs!token
+	
+
+host:8007
+	
+
+store
+
+192.168.55.55:1234:mydatastore
+	
+
+root@pam
+	
+
+192.168.55.55:1234
+	
+
+mydatastore
+
+[ff80::51]:mydatastore
+	
+
+root@pam
+	
+
+[ff80::51]:8007
+	
+
+mydatastore
+
+[ff80::51]:1234:mydatastore
+	
+
+root@pam
+	
+
+[ff80::51]:1234
+	
+
+mydatastore
+Environment Variables
+
+PBS_REPOSITORY
+
+    The default backup repository.
+PBS_PASSWORD
+
+    When set, this value is used as the password for the backup server. You can also set this to an API token secret.
+PBS_PASSWORD_FD, PBS_PASSWORD_FILE, PBS_PASSWORD_CMD
+
+    Like PBS_PASSWORD, but read data from an open file descriptor, a file name or from the stdout of a command, respectively. The first defined environment variable from the order above is preferred.
+PBS_ENCRYPTION_PASSWORD
+
+    When set, this value is used to access the secret encryption key (if protected by password).
+PBS_ENCRYPTION_PASSWORD_FD, PBS_ENCRYPTION_PASSWORD_FILE, PBS_ENCRYPTION_PASSWORD_CMD
+
+    Like PBS_ENCRYPTION_PASSWORD, but read data from an open file descriptor, a file name or from the stdout of a command, respectively. The first defined environment variable from the order above is preferred.
+PBS_FINGERPRINT
+
+    When set, this value is used to verify the server certificate (only used if the system CA certificates cannot validate the certificate).
+ALL_PROXY
+
+    When set, the client uses the specified HTTP proxy for all connections to the backup server. Currently only HTTP proxies are supported. Valid proxy configurations have the following format: [http://][user:password@]<host>[:port]. Default port is 1080, if not otherwise specified.
+
+Note
+
+The recommended solution for shielding hosts is using tunnels such as wireguard, instead of using an HTTP proxy.
+
+Note
+
+Passwords must be valid UTF-8 and may not contain newlines. For your convenience, Proxmox Backup Server only uses the first line as password, so you can add arbitrary comments after the first newline.
+Output Format
+
+Most commands that produce output support the --output-format parameter. This accepts the following values:
+
+text:
+
+    Text format (default). Structured data is rendered as a table.
+json:
+
+    JSON (single line).
+json-pretty:
+
+    JSON (multiple lines, nicely formatted).
+
+Also, the following environment variables can modify output behavior:
+
+PROXMOX_OUTPUT_FORMAT
+
+    Defines the default output format.
+PROXMOX_OUTPUT_NO_BORDER
+
+    If set (to any value), do not render table borders.
+PROXMOX_OUTPUT_NO_HEADER
+
+    If set (to any value), do not render table headers.
+
+Note
+
+The text format is designed to be human readable, and not meant to be parsed by automation tools. Please use the json format if you need to process the output.
+Creating Backups
+
+This section explains how to create a backup from within the machine. This can be a physical host, a virtual machine, or a container. Such backups may contain file and image archives. There are no restrictions in this case.
+
+Note
+
+If you want to backup virtual machines or containers on Proxmox VE, see Proxmox VE Integration.
+
+For the following example, you need to have a backup server set up, have working credentials, and know the repository name. In the following examples, we use backup-server:store1.
+
+proxmox-backup-client backup root.pxar:/ --repository backup-server:store1
+Starting backup: host/elsa/2019-12-03T09:35:01Z
+Client name: elsa
+skip mount point: "/boot/efi"
+skip mount point: "/dev"
+skip mount point: "/run"
+skip mount point: "/sys"
+Uploaded 12129 chunks in 87 seconds (564 MB/s).
+End Time: 2019-12-03T10:36:29+01:00
+
+This will prompt you for a password, then upload a file archive named root.pxar containing all the files in the / directory.
+
+Caution
+
+Please note that proxmox-backup-client does not automatically include mount points. Instead, you will see a short skip mount point message for each of them. The idea is to create a separate file archive for each mounted disk. You can explicitly include them using the --include-dev option (i.e. --include-dev /boot/efi). You can use this option multiple times for each mount point that should be included.
+
+The --repository option can get quite long and is used by all commands. You can avoid having to enter this value by setting the environment variable PBS_REPOSITORY. Note that if you would like this to remain set over multiple sessions, you should instead add the below line to your .bashrc file.
+
+export PBS_REPOSITORY=backup-server:store1
+
+After this, you can execute all commands without having to specify the --repository option.
+
+A single backup is allowed to contain more than one archive. For example, if you want to back up two disks mounted at /mnt/disk1 and /mnt/disk2:
+
+proxmox-backup-client backup disk1.pxar:/mnt/disk1 disk2.pxar:/mnt/disk2
+
+This creates a backup of both disks.
+
+If you want to use a namespace for the backup target, you can add the --ns parameter:
+
+proxmox-backup-client backup disk1.pxar:/mnt/disk1 disk2.pxar:/mnt/disk2 --ns a/b/c
+
+The backup command takes a list of backup specifications, which include the archive name on the server, the type of the archive, and the archive source at the client. The format is:
+
+    <archive-name>.<type>:<source-path>
+
+Common types are .pxar for file archives and .img for block device images. To create a backup of a block device, run the following command:
+
+proxmox-backup-client backup mydata.img:/dev/mylvm/mydata
 
 
 
@@ -270,7 +938,264 @@ Can you please, PLEASE help me??
 
 
 
+Option 1: Using cron Jobs
+
+    Open the crontab Editor:
+    
+    0 2 * * * proxmox-backup-client backup docs.pxar:/mnt/docs trilium.pxar:/mnt/trilium photos.pxar:/media/storage/photos --repository root@pam@192.168.86.33:store1 --fingerprint 05:a5:a7:89:a3:c2:56:5b:b0:af:30:80:fb:23:04:04:48:a9:78:69:35:85:89:e7:9d:83:ca:0a:6a:a7:43:b0
+
+Modify the Command for crontab
+
+    Save the Password: You can save the password to a file and set the environment variable PBS_PASSWORD to read from that file. Create a file to store the password:
+
+    echo 'your_password' > /etc/proxmox_backup_password
+    chmod 600 /etc/proxmox_backup_password
+
+Modify the crontab Command: Update the crontab entry to use the saved password and include the repository environment variable. Here’s how you can do it:
+
+Open the crontab editor:
+
+crontab -e
+
+Add the following line to schedule the backup (e.g., every day at 2 AM):
+
+0 2 * * * PBS_REPOSITORY=root@pam@192.168.86.33:store1 PBS_PASSWORD=$(cat /etc/proxmox_backup_password) proxmox-backup-client backup docs.pxar:/mnt/docs trilium.pxar:/mnt/trilium photos.pxar:/media/storage/photos --fingerprint 05:a5:a7:89:a3:c2:56:5b:b0:af:30:80:fb:23:04:04:48:a9:78:69:35:85:89:e7:9d:83:ca:0a:6a:a7:43:b0
 
 
-I have the LXC /media/downloads mounted to /media/downloads/complete/books... in PRoxmox /media/downloads/complete/books is owned by librarian:librarian.  
-Should that be sufficient, or do I have to change /media/downloads to librarian:librarian as well?
+I hope you can see the structure... basically year, then month, do you see how that works?  Can our system process add photos to this structure using the date the photo was taken, and create new directories as time goes by?  As you can probably tell it's been a while since I backed up my photos... 
+
+/media/storage/photos
+├── 2001
+│   └── 09
+├── 2003
+│   ├── 03
+│   └── 05
+├── 2004
+│   └── 12
+├── 2005
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2006
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2007
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 07
+│   ├── 09
+│   └── 12
+├── 2008
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2009
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2010
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2011
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2012
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2013
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2014
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2015
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2016
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2017
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2018
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2019
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2020
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2021
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2022
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 05
+│   ├── 06
+│   ├── 07
+│   ├── 08
+│   ├── 09
+│   ├── 10
+│   ├── 11
+│   └── 12
+├── 2023
+│   ├── 01
+│   ├── 02
+│   ├── 03
+│   ├── 04
+│   ├── 06
+│   └── 10
+├── 2024
+│   ├── 04
+│   └── 05
