@@ -1,0 +1,10 @@
+- hosts: ubuntu_test_1
+  become: true
+  tasks:
+    - name: Include nautilus.yml (delegated to localhost)
+      delegate_to: localhost
+      run_once: true
+      block: # The become directives must be inside a block
+        - include_tasks: /home/bill/git/homelab/roles/workstations/tasks/desktop_environments/gnome/nautilus.yml
+      become: true  # Become user on localhost (for the entire task)
+      become_user: bill # Set the user context on localhost (for the entire task)

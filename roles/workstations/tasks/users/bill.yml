@@ -1,7 +1,6 @@
 ---
 - name: users | bill | remove unwanted directories from home directory
   become: yes
-#  become_user: bill
   file:
     path: /home/bill/{{ item }}
     state: absent
@@ -15,7 +14,6 @@
     - 'Pictures'
     - 'Downloads'
     - "media"
-
 
 - name: users | bill | create desired directories
   become: yes
@@ -47,53 +45,13 @@
 - name: users | bill | copy personal config files
   tags: dotfiles,dotfiles-bill
   copy:
-    src: users/bill/{{ item.src }}
+    src: /home/bill/git/homelab/roles/common/templates/{{ item.src }}
     dest: /home/bill/{{ item.dest }}
     owner: bill
     group: bill
     mode: 0600
   with_items:
-    - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
-    - { src: 'ssh_client_config', dest: '.ssh/config' }
-    - { src: 'terminator_config', dest: '.config/terminator/config' }
-
-- name: Copy the new user photo to the appropriate directory
-  copy:
-    src: /home/bill/git/homelab/roles/workstations/files/users/bill/profile_image.png
-    dest: /var/lib/AccountsService/icons/bill.png
-    owner: root
-    group: root
-    mode: '0644'
-  become: yes
-
-- name: Copy the user photo to GNOME user settings directory
-  copy:
-    src: /var/lib/AccountsService/icons/bill.png
-    dest: /home/bill/.face
-    owner: bill
-    group: bill
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: bill
-
-- name: Copy the user photo to GNOME user settings icon
-  copy:
-    src: /var/lib/AccountsService/icons/bill.png
-    dest: /home/bill/.face.icon
-    owner: bill
-    group: bill
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: bill
-
-- name: Set the user photo using dconf
-  become: yes
-  become_user: bill
-  dconf:
-    key: "/org/gnome/login-screen/logo"
-    value: "'file:///var/lib/AccountsService/icons/bill.png'"
+    - { src: 'sshd_config.j2', dest: '.ssh/config' }
 
 - name: Copy ~/.ssh/ contents to the remote host
   become: yes
