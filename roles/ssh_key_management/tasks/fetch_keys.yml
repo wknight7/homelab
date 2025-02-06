@@ -1,0 +1,12 @@
+# fetch_keys.yml
+- name: Fetch 'bill's public key to control node
+  fetch:
+    src: "/home/bill/.ssh/bill_{{ ansible_hostname }}.pub"
+    dest: "keys/"
+    flat: yes
+
+- name: Debug fetch path
+  debug:
+    msg: "Fetching from /home/bill/.ssh/bill_{{ ansible_hostname }}.pub on {{ ansible_hostname }}"
+
+

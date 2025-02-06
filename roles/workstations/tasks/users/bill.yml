@@ -13,7 +13,13 @@
     - 'Music'
     - 'Pictures'
     - 'Downloads'
-    - "media"
+    - '&&'
+    - '0700'
+    - 'bill:bill'
+    - 'chmod'
+    - 'chown'
+    - 'hal:hal'
+    - 'projects'
 
 - name: users | bill | create desired directories
   become: yes
@@ -36,6 +42,14 @@
     - { dir: 'desktop' }
     - { dir: 'documents' }
     - { dir: 'downloads' }
+    - { dir: 'downloads/paperless' }
+    - [ dir: 'media' ]
+    - [ dir: 'media/books' ]
+    - [ dir: 'media/movies' ]
+    - [ dir: 'media/tv' ]
+    - [ dir: 'media/music' ]
+    - [ dir: 'media/photos' ]
+    - [ dir: 'media/home_videos' ]
     - { dir: 'git' }
     - { dir: .local }
     - { dir: .local/share }
@@ -54,7 +68,7 @@
     - { src: 'sshd_config.j2', dest: '.ssh/config' }
 
 - name: Copy ~/.ssh/ contents to the remote host
-  become: yes
+  become_user: bill
   synchronize:
     src: /home/bill/.ssh/
     dest: /home/bill/.ssh/

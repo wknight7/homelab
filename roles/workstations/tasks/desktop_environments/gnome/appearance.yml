@@ -1,302 +1,306 @@
-- name: Copy wallpaper for user {{ ansible_user }}
+# Copy wallpaper and lock screen background
+- name: Copy wallpaper for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: root
   copy:
     src: "files/gnome/{{ wallpaper_file }}"
     dest: "{{ wallpaper_path }}/{{ wallpaper_file }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
+    owner: root
+    group: root
     mode: 0644
 
-- name: Set wallpaper for user {{ ansible_user }}
+- name: Copy lock screen background for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: root
+  copy:
+    src: "files/gnome/{{ lockscreen_file }}"
+    dest: "{{ wallpaper_path }}/{{ lockscreen_file }}"
+    owner: root
+    group: root
+    mode: 0644
+
+# Set wallpaper and lock screen background
+- name: Set wallpaper for user {{ user_vars.username }}
+  become: true
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/background/picture-uri"
     value: "'file://{{ wallpaper_path }}/{{ wallpaper_file }}'"
 
-- name: Set wallpaper position for user {{ ansible_user }}
+- name: Set wallpaper position for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/background/picture-options"
     value: "'zoom'"
 
-- name: Copy lock screen background for user {{ ansible_user }}
+- name: Set lock screen background for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
-  copy:
-    src: "files/gnome/{{ lockscreen_file }}"
-    dest: "{{ wallpaper_path }}/{{ lockscreen_file }}"  # Store in user's wallpaper dir
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: 0644
-
-- name: Set lock screen background for user {{ ansible_user }}
-  become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/screensaver/picture-uri"
-    value: "'file://{{ wallpaper_path }}/{{ lockscreen_file }}'"  # User-specific path
+    value: "'file://{{ wallpaper_path }}/{{ lockscreen_file }}'"
 
-- name: Set lock screen background position for user {{ ansible_user }}
+- name: Set lock screen background position for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/screensaver/picture-options"
     value: "'zoom'"
 
-- name: Set user photo for user {{ ansible_user }}
-  become: true  # Become hal (or root)
-  become_user: "{{ ansible_user }}" # Switch to the user
+# Set user photo and icon theme
+- name: Copy user photo for user {{ user_vars.username }}
+  become: true
+  become_user: root
   copy:
-    src: "files/users/{{ ansible_user }}/{{ user_photo_file }}" # Path to the user's photo in your repo
-    dest: "{{ profile_image_path }}/{{ user_photo_file }}" # Standard location for user icons
-    owner: root # Usually owned by root
-    group: root # Usually owned by root
+    src: "/home/bill/git/homelab/roles/workstations/files/users/{{ user_vars.username }}/{{ user_photo_file }}"
+    dest: "{{ profile_image_path }}/{{ user_photo_file }}"
+    owner: root
+    group: root
     mode: 0644
 
 - name: Set user photo in login screen (if needed)
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/login-screen/logo"
     value: "'file://{{ profile_image_path }}/{{ user_photo_file }}'"
 
-- name: Set icon theme for user {{ ansible_user }}
+- name: Set icon theme for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/interface/icon-theme"
-    value: "'{{ icon_theme }}'" # Make icon theme configurable
+    value: "'{{ icon_theme }}'"
 
-- name: Set GTK theme for user {{ ansible_user }}
+
+- name: Set GTK theme for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/interface/gtk-theme"
     value: "'{{ gtk_theme }}'" # Make GTK theme configurable
 
-- name: Set shell theme for user {{ ansible_user }}
+- name: Set shell theme for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/shell/extensions/user-theme/name"
     value: "'{{ shell_theme }}'" # Make shell theme configurable
 
-- name: Set clock format for user {{ ansible_user }}
+- name: Set clock format for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/interface/clock-format"
     value: "'{{ clock_format }}'" # Make clock format configurable
 
-- name: Show weekday in clock for user {{ ansible_user }}
+- name: Show weekday in clock for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/interface/clock-show-weekday"
     value: "{{ show_weekday }}" # Make show weekday configurable
 
-- name: Set mouse accel profile for user {{ ansible_user }}
+- name: Set mouse accel profile for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/mouse/accel-profile"
     value: "'{{ mouse_accel_profile }}'" # Make mouse accel profile configurable
 
-- name: Enable natural scroll for mouse for user {{ ansible_user }}
+- name: Enable natural scroll for mouse for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
     value: "{{ mouse_natural_scroll }}" # Make mouse natural scroll configurable
 
-- name: Set mouse speed for user {{ ansible_user }}
+- name: Set mouse speed for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/mouse/speed"
     value: "{{ mouse_speed }}" # Make mouse speed configurable
 
-- name: Enable natural scroll for touchpad for user {{ ansible_user }}
+- name: Enable natural scroll for touchpad for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
     value: "{{ touchpad_natural_scroll }}" # Make touchpad natural scroll configurable
 
-- name: Set touchpad speed for user {{ ansible_user }}
+- name: Set touchpad speed for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/speed"
     value: "{{ touchpad_speed }}" # Make touchpad speed configurable
 
-- name: Enable two-finger scrolling for touchpad for user {{ ansible_user }}
+- name: Enable two-finger scrolling for touchpad for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
     value: "{{ touchpad_two_finger_scrolling }}" # Make two-finger scrolling configurable
 
-- name: Set gedit editor scheme for user {{ ansible_user }}
+- name: Set gedit editor scheme for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/gedit/preferences/editor/scheme"
     value: "'{{ gedit_scheme }}'" # Make gedit scheme configurable
 
-- name: Set screenshot auto-save directory for user {{ ansible_user }}
+- name: Set screenshot auto-save directory for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/gnome-screenshot/auto-save-directory"
     value: "'{{ downloads_path }}'" # Make downloads path configurable
 
-- name: Set nautilus default folder viewer for user {{ ansible_user }}
+- name: Set nautilus default folder viewer for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/nautilus/preferences/default-folder-viewer"
     value: "'{{ nautilus_default_folder_viewer }}'" # Make nautilus default folder viewer configurable
 
-- name: Set nautilus initial window size for user {{ ansible_user }}
+- name: Set nautilus initial window size for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/nautilus/window-state/initial-size"
     value: "({{ nautilus_initial_window_width }}, {{ nautilus_initial_window_height }})" # Make nautilus initial window size configurable
 
-- name: Enable night light for user {{ ansible_user }}
+- name: Enable night light for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
     value: "{{ night_light_enabled }}" # Make night light enabled configurable
 
-- name: Set night light schedule from for user {{ ansible_user }}
+- name: Set night light schedule from for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-from"
     value: "{{ night_light_schedule_from }}" # Make night light schedule from configurable
 
-- name: Set night light schedule to for user {{ ansible_user }}
+- name: Set night light schedule to for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/color/night-light-schedule-to"
     value: "{{ night_light_schedule_to }}" # Make night light schedule to configurable
 
-- name: Set power button action for user {{ ansible_user }}
+- name: Set power button action for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/power/power-button-action"
     value: "'{{ power_button_action }}'" # Make power button action configurable
 
-- name: Set AC sleep timeout for user {{ ansible_user }}
+- name: Set AC sleep timeout for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-timeout"
     value: "{{ ac_sleep_timeout }}" # Make AC sleep timeout configurable
 
-- name: Set AC sleep type for user {{ ansible_user }}
+- name: Set AC sleep type for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
     value: "'{{ ac_sleep_type }}'" # Make AC sleep type configurable
 
-- name: Set battery sleep timeout for user {{ ansible_user }}
+- name: Set battery sleep timeout for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-timeout"
     value: "{{ battery_sleep_timeout }}" # Make battery sleep timeout configurable
 
-- name: Set battery sleep type for user {{ ansible_user }}
+- name: Set battery sleep type for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-battery-type"
     value: "'{{ battery_sleep_type }}'" # Make battery sleep type configurable
 
-- name: Enable extensions for user {{ ansible_user }}
+- name: Enable extensions for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/shell/enabled-extensions"
     value: "{{ shell_enabled_extensions }}"  # Make extensions configurable
 
-- name: Set favorite apps for user {{ ansible_user }}
+- name: Set favorite apps for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/shell/favorite-apps"
     value: "{{ shell_favorite_apps }}" # Make favorite apps configurable
 
-- name: Set multi monitor for user {{ ansible_user }}
+- name: Set multi monitor for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/shell/extensions/dash-to-dock/multi-monitor"
     value: "{{ dash_to_dock_multi_monitor }}" # Make multi monitor configurable
 
-- name: Hide mounts for user {{ ansible_user }}
+- name: Hide mounts for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/shell/extensions/dash-to-dock/show-mounts"
     value: "{{ dash_to_dock_show_mounts }}" # Make show mounts configurable
 
-- name: Set terminal default size columns for user {{ ansible_user }}
+- name: Set terminal default size columns for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/default-size-columns"
     value: "{{ terminal_default_size_columns }}" # Make default size columns configurable
 
-- name: Set terminal scrollback unlimited for user {{ ansible_user }}
+- name: Set terminal scrollback unlimited for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/scrollback-unlimited"
     value: "{{ terminal_scrollback_unlimited }}" # Make scrollback unlimited configurable
 
-- name: Set terminal scrollbar policy for user {{ ansible_user }}
+- name: Set terminal scrollbar policy for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/scrollbar-policy"
     value: "'{{ terminal_scrollbar_policy }}'" # Make scrollbar policy configurable
 
-- name: Set GTK clock format for user {{ ansible_user }}
+- name: Set GTK clock format for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gtk/settings/file-chooser/clock-format"
     value: "'{{ gtk_clock_format }}'" # Make GTK clock format configurable
 
-- name: Set GTK date format for user {{ ansible_user }}
+- name: Set GTK date format for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gtk/settings/file-chooser/date-format"
     value: "'{{ gtk_date_format }}'" # Make GTK date format configurable
 
-- name: Set GTK show hidden for user {{ ansible_user }}
+- name: Set GTK show hidden for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gtk/settings/file-chooser/show-hidden"
     value: "{{ gtk_show_hidden }}" # Make GTK show hidden configurable
 
-- name: Set GTK sort directories first for user {{ ansible_user }}
+- name: Set GTK sort directories first for user {{ user_vars.username }}
   become: true
-  become_user: "{{ ansible_user }}"
+  become_user: "{{ user_vars.username }}"
   dconf:
     key: "/org/gtk/settings/file-chooser/sort-directories-first"
     value: "{{ gtk_sort_directories_first }}" # Make GTK sort directories first configurable

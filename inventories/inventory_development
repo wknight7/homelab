@@ -1,12 +1,10 @@
 [workstations]
-ubuntu_test_1 ansible_host=192.168.86.73 container_id=901 vm_type=vm
+ubuntu_test_1 ansible_host=192.168.86.126 container_id=901 vm_type=vm
+ubuntu_test_2 ansible_host=192.168.86.127 container_id=902 vm_type=vm
 
-
-; [server]
-; docs_test ansible_host=192.168.86.51 container_id=103
-; media_h_test ansible_host=192.168.86.96 container_id=112
-; media_p_test ansible_host=192.168.86.106 container_id=116
-; lazy_librarian ansible_host=192.168.86.25 container_id=126
+[server]
+lxc_test_1 ansible_host=192.168.86.70 container_id=801
+lxc_test_2 ansible_host=192.168.86.107 container_id=802
 
 ; [proxmox]
 ; proxmox_server ansible_host=192.168.86.143

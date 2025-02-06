@@ -1,0 +1,21 @@
+---
+- hosts: ubuntu_test_1
+  become: true  # If needed for all tasks in the play
+  tasks:
+    - name: Test task 1
+      debug:
+        msg: "This is a test task."
+
+    - name: Apply configurations for each user
+      loop:
+        - bill
+        - lily
+        - loretta
+      block:
+        - name: Test task inside loop
+          debug:
+            msg: "User: {{ item }}"
+
+    - name: Test task 2 (outside the loop)
+      debug:
+        msg: "This is another test task."

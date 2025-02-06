@@ -1,3 +1,5 @@
+---
+
 # Load distro-specific variables
 - include_vars: "{{ ansible_distribution }}.yml"
   tags: always
@@ -13,72 +15,87 @@
   tags: always
 
 - block:
+    ## add groups
+    - import_tasks: groups.yml
 
-  ## add groups
-  - import_tasks: groups.yml
+    ## User configs
+    - import_tasks: users/bill.yml
+    - import_tasks: users/lily.yml
+    - import_tasks: users/loretta.yml
 
-  ## User configs
-  - import_tasks: users/bill.yml
-  - import_tasks: users/lily.yml
-  - import_tasks: users/loretta.yml
+- name: Apply configurations for each user
+  become: true
+  block:
+    - include_tasks: user_configurations.yml
+      loop:
+        - bill
+        - lily
+        - loretta
+      loop_control:
+        loop_var: username
 
-  - name: Apply configurations for each user
-    become: true
-    loop:
-      - bill
-      - lily
-      - loretta
-    block:
-      - name: Include user-specific variables
-        include_vars:
-          file: "/home/bill/git/homelab/host_vars/{{ item }}.yml"
-          name: user_vars
+- include_tasks: desktop_environments/gnome/nautilus.yml
+  when: gnome is defined and gnome == true
 
-      - name: Apply configurations for user {{ item }}
-        become_user: "{{ user_vars.username }}"
-        block:
-          - include_tasks: desktop_environments/gnome/appearance.yml
-            vars:
-              wallpaper_file: "{{ user_vars.wallpaper_file }}"
-              lockscreen_file: "{{ user_vars.lockscreen_file }}"
-              user_photo_file: "{{ user_vars.user_photo_file }}"
+- include_tasks: desktop_environments/gnome/packages.yml
+  when: gnome is defined and gnome == true
 
-  - include_tasks: desktop_environments/gnome/nautilus.yml
-    when: gnome is defined and gnome == true
+- include_tasks: desktop_environments/gnome/peripherals.yml
+  when: gnome is defined and gnome == true
 
-  - include_tasks: desktop_environments/gnome/packages.yml
-    when: gnome is defined and gnome == true
+- include_tasks: desktop_environments/gnome/shell_settings.yml
+  when: gnome is defined and gnome == true
 
-  - include_tasks: desktop_environments/gnome/peripherals.yml
-    when: gnome is defined and gnome == true
+- include_tasks: desktop_environments/gnome/terminal.yml
+  when: gnome is defined and gnome == true
 
-  - include_tasks: desktop_environments/gnome/shell_settings.yml
-    when: gnome is defined and gnome == true
+- import_tasks: system_setup/tweaks.yml
+- import_tasks: system_setup/common.yml
+- import_tasks: system_setup/fstab.yml
+- import_tasks: system_setup/logging.yml
 
-  - include_tasks: desktop_environments/gnome/terminal.yml
-    when: gnome is defined and gnome == true
+## install software
+- import_tasks: software/audacious.yml
+- import_tasks: software/audacity.yml
+- import_tasks: software/bitwarden.yml
+- import_tasks: software/caffeine.yml
+- import_tasks: software/codecs.yml
+- import_tasks: software/chromium.yml
+- import_tasks: software/darktable.yml
+- import_tasks: software/expressvpn.yml
+- import_tasks: software/firefox.yml
+- import_tasks: software/foliate.yml
+- import_tasks: software/libreoffice.yml
+- import_tasks: software/misc_games.yml
+- import_tasks: software/misc_packages.yml
+- import_tasks: software/steam.yml
+- import_tasks: software/vscode.yml
 
-  - import_tasks: system_setup/tweaks.yml
-  - import_tasks: system_setup/common.yml
-  - import_tasks: system_setup/fstab.yml
-  - import_tasks: system_setup/logging.yml
-
-  ## install software
-  - import_tasks: software/audacious.yml
-  - import_tasks: software/audacity.yml
-  - import_tasks: software/bitwarden.yml
-  - import_tasks: software/caffeine.yml
-  - import_tasks: software/codecs.yml
-  - import_tasks: software/chromium.yml
-  - import_tasks: software/darktable.yml
-  - import_tasks: software/expressvpn.yml
-  - import_tasks: software/firefox.yml
-  - import_tasks: software/foliate.yml
-  - import_tasks: software/libreoffice.yml
-  - import_tasks: software/misc_games.yml
-  - import_tasks: software/misc_packages.yml
-  - import_tasks: software/steam.yml
-  - import_tasks: software/vscode.yml
-
+- name: Set task_failed fact if errors occur
+  block:
+    - import_tasks: system_setup/tweaks.yml
+    - import_tasks: system_setup/common.yml
+    - import_tasks: system_setup/fstab.yml
+    - import_tasks: system_setup/logging.yml
+    - import_tasks: software/audacious.yml
+    - import_tasks: software/bitwarden.yml
+    - import_tasks: software/caffeine.yml
+    - import_tasks: software/codecs.yml
+    - import_tasks: software/chromium.yml
+    - import_tasks: software/darktable.yml
+    - import_tasks: software/expressvpn.yml
+    - import_tasks: software/firefox.yml
+    - import_tasks: software/foliate.yml
+    - import_tasks: software/libreoffice.yml
+    - import_tasks: software/misc_games.yml
+    - import_tasks: software/misc_packages.yml
+    - import_tasks: software/steam.yml
+    - import_tasks: software/vscode.yml
   rescue:
-    - set_fact: task_failed=true
+    - set_fact:
+        task_failed: true
+
+
+
+
+

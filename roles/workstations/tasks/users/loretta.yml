@@ -4,14 +4,14 @@
   group:
     name: loretta
     state: present
-    gid: 1003
+    gid: 1004
 
 - name: users | loretta | create user
   tags: loretta,sudo,users
   user:
     name: loretta
     group: loretta
-    uid: 1003
+    uid: 1004
     groups: adm,{{ sudo_group }},media,docs
     state: present
     comment: "Loretta Knight"
@@ -48,10 +48,8 @@
     owner: loretta
     group: loretta
     mode: 0770
-  with_items:
-    - { dir: '.ansible' }
+  with_items:    
     - { dir: '.bash' }
-    - { dir: 'code' }
     - { dir: '.config' }
     - { dir: .config/autostart }
     - { dir: .config/bpytop }
@@ -59,19 +57,42 @@
     - { dir: .config/terminator }
     - { dir: 'desktop' }
     - { dir: 'documents' }
-    - { dir: 'downloads' }
-    - { dir: 'git' }
+    - { dir: 'downloads' }        
     - { dir: .local }
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
-    - { dir: projects }
 
-- name: create link to media
+- name: users | loretta | create media directories
+  become: yes
+  become_user: loretta
   file:
-    path: /home/loretta/media
-    state: link
-    src: /media
+    path: /home/loretta/{{ item.dir }}
+    state: directory
+    owner: loretta
+    group: media
+    mode: 0770
+  with_items:
+    - [ dir: 'media' ]
+    - [ dir: 'media/books' ]
+    - [ dir: 'media/movies' ]
+    - [ dir: 'media/tv' ]
+    - [ dir: 'media/music' ]
+    - [ dir: 'media/photos' ]
+    - [ dir: 'media/home_videos' ] 
+
+- name: users | loretta | create paperless directory
+  become: yes
+  become_user: loretta
+  file:
+    path: /home/loretta/{{ item.dir }}
+    state: directory
+    owner: loretta
+    group: docs
+    mode: 0770
+  with_items:
+    - { dir: 'downloads/paperless' } 
+
 
 # - name: users | loretta | copy personal config files
 #   tags: dotfiles,dotfiles-loretta
@@ -99,40 +120,3 @@
 #     group: root
 #     mode: 0644
 
-- name: Copy the new user photo to the appropriate directory
-  copy:
-    src: /home/bill/git/homelab/roles/workstations/files/users/loretta/profile_image.JPEG
-    dest: /var/lib/AccountsService/icons/loretta.JPEG
-    owner: root
-    group: root
-    mode: '0644'
-  become: yes
-
-- name: Copy the user photo to GNOME user settings directory
-  copy:
-    src: /var/lib/AccountsService/icons/loretta.JPEG
-    dest: /home/loretta/.face
-    owner: loretta
-    group: loretta
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: loretta
-
-- name: Copy the user photo to GNOME user settings icon
-  copy:
-    src: /var/lib/AccountsService/icons/loretta.JPEG
-    dest: /home/loretta/.face.icon
-    owner: loretta
-    group: loretta
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: loretta
-
-- name: Set the user photo using dconf
-  become: yes
-  become_user: loretta
-  dconf:
-    key: "/org/gnome/login-screen/logo"
-    value: "'file:///var/lib/AccountsService/icons/loretta.JPEG'"

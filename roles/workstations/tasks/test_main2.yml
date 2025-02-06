@@ -1,0 +1,5 @@
+---
+- hosts: ubuntu_test_1
+  tasks:
+    - debug:
+        msg: "Test"

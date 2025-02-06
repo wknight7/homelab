@@ -1,0 +1,9 @@
+{% for workstation in workstations %}
+Host {{ workstation }}
+    HostName {{ workstation }}
+    User bill
+    IdentityFile /home/bill/.ssh/bill-{{ workstation }}
+
+{% endfor %}
+
+

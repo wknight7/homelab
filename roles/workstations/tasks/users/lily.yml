@@ -3,6 +3,7 @@
   tags: groups,lily,users
   group:
     name: lily
+    gid: 1002
     state: present
 
 - name: users | lily | create user
@@ -37,7 +38,6 @@
     - 'Pictures'
     - 'Downloads'
     - 'bin'
-    - 'media'
 
 - name: users | lily | create desired directories
   become: yes
@@ -47,11 +47,9 @@
     state: directory
     owner: lily
     group: lily
-    mode: 0700
-  with_items:
-    - { dir: '.ansible' }
+    mode: 0770
+  with_items:    
     - { dir: '.bash' }
-    - { dir: 'code' }
     - { dir: '.config' }
     - { dir: .config/autostart }
     - { dir: .config/bpytop }
@@ -59,20 +57,41 @@
     - { dir: .config/terminator }
     - { dir: 'desktop' }
     - { dir: 'documents' }
-    - { dir: 'downloads' }
-    - { dir: 'git' }
+    - { dir: 'downloads' }        
     - { dir: .local }
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
-    - { dir: projects }
 
-- name: create link to media
+- name: users | lily | create media directories
+  become: yes
+  become_user: lily
   file:
-    path: /home/lily/media
-    state: link
-    src: /media
-  
+    path: /home/lily/{{ item.dir }}
+    state: directory
+    owner: lily
+    group: media
+    mode: 0770
+  with_items:
+    - [ dir: 'media' ]
+    - [ dir: 'media/books' ]
+    - [ dir: 'media/movies' ]
+    - [ dir: 'media/tv' ]
+    - [ dir: 'media/music' ]
+    - [ dir: 'media/photos' ]
+    - [ dir: 'media/home_videos' ] 
+
+- name: users | lily | create paperless directory
+  become: yes
+  become_user: lily
+  file:
+    path: /home/lily/{{ item.dir }}
+    state: directory
+    owner: lily
+    group: docs
+    mode: 0770
+  with_items:
+    - { dir: 'downloads/paperless' }
 
 # - name: users | lily | copy personal config files
 #   tags: dotfiles,dotfiles-lily

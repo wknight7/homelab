@@ -1,0 +1,9 @@
+- import_tasks: generate_keys.yml
+- import_tasks: fetch_keys.yml
+- import_tasks: distribute_keys.yml
+- import_tasks: update_known_hosts.yml
+- import_tasks: deploy_ssh_config.yml
+
+
+
+

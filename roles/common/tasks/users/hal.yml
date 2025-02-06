@@ -4,15 +4,7 @@
     uid: 1999
     groups: sudo
     state: present    
-    shell: /bin/bash
-    
-- name: users | hal | add public key
-  tags: dotfiles,hal,ssh,ssh-keys,users
-  authorized_key:
-    user: hal
-    key: "{{ item }}"
-  with_file:
-    - /home/bill/.ssh/hal2.pub
+    shell: /bin/bash    
 
 - name: users | hal | add sudoers file
   tags: settings,hal,sudo,system,users

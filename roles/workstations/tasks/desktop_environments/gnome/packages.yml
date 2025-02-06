@@ -4,7 +4,7 @@
   package:
     name:
       - eog
-      - file-roller
+ #     - file-roller
       - "{{ gdm_package }}"
       - gedit
       - gnome-backgrounds

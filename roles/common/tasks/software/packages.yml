@@ -29,6 +29,9 @@
       - wget
       - whois
       - zsh
+      - nfs-common
+      - cifs-utils
+      - at
 
 - name: Install bpytop using pipx
   command: pipx install bpytop

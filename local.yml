@@ -1,5 +1,5 @@
 # tasks to complete before running roles
-- hosts: lxc,workstations,server
+- hosts: lxc, workstations, server
   tags: always
   become: true
   vars_files:
@@ -17,14 +17,48 @@
         - "host_vars/{{ inventory_hostname }}.yml"
       tags: always
 
+    - name: Ensure Python 3, pip3, and pipx are installed
+      apt:
+        name:
+          - python3
+          - python3-pip
+          - pipx
+        state: present
+      tags: pip, packages
 
-#run roles
-- hosts: workstations,server,lxc
+    - name: Ensure psutil is installed
+      apt:
+        name: python3-psutil
+        state: present
+      tags: pip, packages
+
+# SSH key generation on workstations
+- hosts: workstations
+  become: true
+  roles:
+    - { role: ssh_key_management, tasks_from: generate_keys.yml }
+    - { role: ssh_key_management, tasks_from: fetch_keys.yml }
+
+# SSH key distribution to all hosts
+- hosts: all
+  become: true
+  roles:
+    - { role: ssh_key_management, tasks_from: distribute_keys.yml }
+
+# Update known_hosts only on workstations
+- hosts: workstations
+  become: true
+  roles:
+    - { role: ssh_key_management, tasks_from: update_known_hosts.yml }
+
+# run common role
+- hosts: workstations, server, lxc
   tags: base
   become: true
   roles:
     - common
 
+# run specific roles
 - hosts: workstations
   tags: workstation
   become: true
@@ -37,33 +71,34 @@
   roles:
     - server
 
-# # end of run cleanup and reporting
+# end of run cleanup and reporting
 - hosts: all
   become: true
   tasks:
-  - name: cleanup package cache (debian and ubuntu)
-    tags: always
-    apt:
-      autoclean: yes
-    changed_when: false
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - name: cleanup package cache (debian and ubuntu)
+      tags: always
+      apt:
+        autoclean: yes
+      changed_when: false
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-  - name: autoremove orphan packages (debian and ubuntu)
-    tags: always
-    apt:
-      autoremove: yes
-      purge: yes
-    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - name: autoremove orphan packages (debian and ubuntu)
+      tags: always
+      apt:
+        autoremove: yes
+        purge: yes
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
 
-  - name: send completion alert
-    include_tasks: playbooks/send_completion_alert.yml
-    tags: always
-    when:
-      - task_failed is not defined
+    - name: send completion alert
+      include_tasks: playbooks/send_completion_alert.yml
+      tags: always
+      when:
+        - task_failed is not defined
 
-  - name: send failure alert
-    include_tasks: playbooks/send_failure_alert.yml
-    tags: always
-    when:
-      - task_failed is defined
-      - task_failed == true
+    - name: send failure alert
+      include_tasks: playbooks/send_failure_alert.yml
+      tags: always
+      when:
+        - task_failed is defined
+        - task_failed == true
+
