@@ -1,31 +1,36 @@
 ---
-# General variables specific to ubuntu_test_desk
 branch: master
 
 ansible_cron_minute: "40"
 ssh_port: 22
 ssh_users: "bill hal"
-app_user: calibre
+app_user: bill
 app_user_groups:
   - media
 
-# Platform-specific variables
-ansible_python_interpreter: /usr/bin/python3
+# platform-specific
 microcode_amd_install: false
 microcode_intel_install: false
+proxmox_instance: false
+user_maps: true
 
-# groups to create
+# server
+unattended_upgrades: true
+web_server: false
+
+# list needed mount points
+mount_points:
+  - { mount_point: "mp0: /home/media/books,mp=/media/books" }
+  - { mount_point: "mp1: /home/media/books/downloads,mp=media/downloads" }
+
+  # groups to create
 groups_to_create:
   - media
-  - ansible
 
-# Define NFS mounts
-nfs_mounts:
-  - src: "192.168.86.90:/mnt/Data/media"
-    dest: "/media"
-    opts: "rw"
+# directories to create
+directories_to_create:
+  - { path: /media/books, owner: bill, group: media, mode: '0775' }
+  - { path: /media/downloads, owner: bill, group: media, mode: '0775' }
 
-# Application selection
-calibre: true
-calibre_web: true 
-lazy_librarian: true 
+# Add container_id
+container_id: 126

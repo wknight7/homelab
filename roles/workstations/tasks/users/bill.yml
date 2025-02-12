@@ -6,6 +6,7 @@
     state: absent
   with_items:
     - 'Public'
+    - 'Config'
     - 'Templates'
     - 'Videos'
     - 'Documents'
@@ -21,7 +22,7 @@
     - 'hal:hal'
     - 'projects'
 
-- name: users | bill | create desired directories
+- name: users | bill | create personal directories
   become: yes
   become_user: bill
   file:
@@ -41,8 +42,23 @@
     - { dir: .config/terminator }
     - { dir: 'desktop' }
     - { dir: 'documents' }
-    - { dir: 'downloads' }
-    - { dir: 'downloads/paperless' }
+    - { dir: 'downloads' }    
+    - { dir: 'git' }
+    - { dir: .local }
+    - { dir: .local/share }
+    - { dir: .local/share/applications }
+    - { dir: .bin }
+
+- name: users | bill | create media directories
+  become: yes
+  become_user: bill
+  file:
+    path: /home/bill/{{ item.dir }}
+    state: directory
+    owner: bill
+    group: media
+    mode: 0775
+  with_items:
     - [ dir: 'media' ]
     - [ dir: 'media/books' ]
     - [ dir: 'media/movies' ]
@@ -50,11 +66,18 @@
     - [ dir: 'media/music' ]
     - [ dir: 'media/photos' ]
     - [ dir: 'media/home_videos' ]
-    - { dir: 'git' }
-    - { dir: .local }
-    - { dir: .local/share }
-    - { dir: .local/share/applications }
-    - { dir: .bin }
+
+- name: users | bill | create paperless directories
+  become: yes
+  become_user: bill
+  file:
+    path: /home/bill/{{ item.dir }}
+    state: directory
+    owner: bill
+    group: docs
+    mode: 0775
+  with_items:
+    - { dir: 'downloads/paperless' }
 
 - name: users | bill | copy personal config files
   tags: dotfiles,dotfiles-bill

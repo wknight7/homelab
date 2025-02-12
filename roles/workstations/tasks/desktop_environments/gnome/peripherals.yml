@@ -1,16 +1,16 @@
-- name: gnome | peripherals | enable natural scrolling (mouse)
+- name: gnome | peripherals | enable reverse scrolling (mouse)
   tags: gnome,mouse,peripherals
   become_user: bill
   dconf:
     key: "/org/gnome/desktop/peripherals/mouse/natural-scroll"
-    value: "true"
+    value: "false"
 
-- name: gnome | peripherals | enable natural scrolling (touchpad)
+- name: gnome | peripherals | enable reverse scrolling (touchpad)
   tags: gnome,mouse,peripherals
   become_user: bill
   dconf:
     key: "/org/gnome/desktop/peripherals/touchpad/natural-scroll"
-    value: "true"
+    value: "false"
 
 - name: gnome | peripherals | enable cursor acceleration (mouse)
   tags: gnome,mouse,peripherals

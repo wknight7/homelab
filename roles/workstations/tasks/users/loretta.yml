@@ -26,8 +26,10 @@
     - '&&'
     - '0700'
     - 'loretta:loretta'
+    - 'code'
     - 'chmod'
     - 'chown'
+    - 'git'
     - 'hal:hal'
     - 'Public'
     - 'Templates'
@@ -37,6 +39,7 @@
     - 'Music'
     - 'Pictures'
     - 'Downloads'
+    - 'projects'
     - 'bin'
 
 - name: users | loretta | create desired directories
@@ -69,17 +72,19 @@
   file:
     path: /home/loretta/{{ item.dir }}
     state: directory
-    owner: loretta
+    owner: bill
     group: media
-    mode: 0770
+    mode: '0775'
   with_items:
-    - [ dir: 'media' ]
-    - [ dir: 'media/books' ]
-    - [ dir: 'media/movies' ]
-    - [ dir: 'media/tv' ]
-    - [ dir: 'media/music' ]
-    - [ dir: 'media/photos' ]
-    - [ dir: 'media/home_videos' ] 
+    - { dir: 'media' }
+    - { dir: 'media/books' }
+    - { dir: 'media/movies' }
+    - { dir: 'media/tv' }
+    - { dir: 'media/music' }
+    - { dir: 'media/photos' }
+    - { dir: 'media/home_videos' }
+  when: nfs_mounts is defined
+  ignore_errors: yes
 
 - name: users | loretta | create paperless directory
   become: yes
@@ -87,36 +92,9 @@
   file:
     path: /home/loretta/{{ item.dir }}
     state: directory
-    owner: loretta
+    owner: bill
     group: docs
-    mode: 0770
   with_items:
     - { dir: 'downloads/paperless' } 
-
-
-# - name: users | loretta | copy personal config files
-#   tags: dotfiles,dotfiles-loretta
-#   copy:
-#     src: users/loretta/{{ item.src }}
-#     dest: /home/loretta/{{ item.dest }}
-#     owner: loretta
-#     group: loretta
-#     mode: 0600
-#   with_items:
-#     - { src: 'asunder', dest: '.asunder' }
-#     - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
-#     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
-#     - { src: 'gvimrc', dest: '.gvimrc' }
-#     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
-#     - { src: 'ssh_client_config', dest: '.ssh/config' }
-#     - { src: 'terminator_config', dest: '.config/terminator/config' }
-
-# - name: users | loretta | copy profile image
-#   tags: dotfiles,dotfiles-loretta
-#   copy:
-#     src: users/loretta/profile_image.png
-#     dest: /var/lib/AccountsService/icons/loretta.png
-#     owner: root
-#     group: root
-#     mode: 0644
-
+  when: nfs_mounts is defined
+  ignore_errors: yes

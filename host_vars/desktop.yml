@@ -25,23 +25,14 @@ web_browser: flatpak run org.mozilla.firefox
 
 # Application selection
 audacity: true
-#authy: true  # Authy is a free mobile app that provides two-factor authentication (2FA) to protect your online accounts
-# autofs: true  # Autofs is a kernel file system that automatically mounts and unmounts file systems on demand
 chromium: true
 darktable: true # Darktable is a free, open-source photography application 
 expressvpn: true
 firefox: true
-#foliate: true  # Foliate is a free and open-source program for reading e-books in Linux
 games: true
-#glimpse: true   # forked version of the image editing software GIMP
-#keepassxc: true  # KeePassXC is a modern, secure, and open-source password manager that stores and manages your most sensitive information
 libreoffice: true
-#lutris: true  # Lutris on Ubuntu is a free, open-source gaming platform that allows users to easily install and manage a wide variety of video games on their Linux (Ubuntu) system
-#minecraft: true
 steam: true
-#syncthing: true  # Syncthing is a continuous file synchronization program. It synchronizes files between two or more computers in real time, safely protected from prying eyes.
 thunderbird: true
-#todoist: true
 ulauncher: false  # fast application launcher for Linux. It's written in Python using GTK+, and features: App Search (fuzzy matching), Calculator, Extensions, Shortcuts, File browser mode and Custom Color Themes. App Search. File Browser.
 vlc: true
 vscode: true
@@ -51,41 +42,77 @@ xonotic: true
 gnome: true
 mate: false
 
-# Define NFS mounts
+# Define NFS mounts.
 nfs_mounts:
-  - src: "192.168.86.90:/mnt/Data/media"
-    dest: "/media"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Code"
-    dest: "/home/bill/code"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Configs"
-    dest: "/home/bill/.config"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Downloads"
-    dest: "/home/bill/downloads"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/docs"
+  - src: "192.168.86.90:/mnt/Data/books"
+    dest: "/home/bill/media/books"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/movies"
+    dest: "/home/bill/media/movies"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/tv"
+    dest: "/home/bill/media/tv"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/music"
+    dest: "/home/bill/media/music"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/photos"
+    dest: "/home/bill/media/photos"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/home_videos"
+    dest: "/home/bill/media/home_videos"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/ssd-files/home/bill/Documents"
     dest: "/home/bill/documents"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/bill/projects"
-    dest: "/home/bill/projects"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/lily/Downloads"
-    dest: "/home/lily/downloads"
-    opts: "rw"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/ssd-files/docs/paper"
+    dest: "/home/bill/downloads/paperless"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/books"
+    dest: "/home/lily/media/books"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/movies"
+    dest: "/home/lily/media/movies"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/tv"
+    dest: "/home/lily/media/tv"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/music"
+    dest: "/home/lily/media/music"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/photos"
+    dest: "/home/lily/media/photos"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/home_videos"
+    dest: "/home/lily/media/home_videos"
+    opts: "rw,comment=x-gvfs-hide"
   - src: "192.168.86.90:/mnt/ssd-files/home/lily/Documents"
     dest: "/home/lily/documents"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/lily/projects"
-    dest: "/home/lily/projects"
-    opts: "rw" 
-  - src: "192.168.86.90:/mnt/ssd-files/home/loretta/Downloads"
-    dest: "/home/loretta/downloads"
-    opts: "rw"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/ssd-files/docs/paper"
+    dest: "/home/lily/downloads/paperless"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/books"
+    dest: "/home/loretta/media/books"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/movies"
+    dest: "/home/loretta/media/movies"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/tv"
+    dest: "/home/loretta/media/tv"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/music"
+    dest: "/home/loretta/media/music"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/photos"
+    dest: "/home/loretta/media/photos"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/Data/media/storage/home_videos"
+    dest: "/home/loretta/media/home_videos"
+    opts: "rw,comment=x-gvfs-hide"
   - src: "192.168.86.90:/mnt/ssd-files/home/loretta/Documents"
     dest: "/home/loretta/documents"
-    opts: "rw"
-  - src: "192.168.86.90:/mnt/ssd-files/home/loretta/projects"
-    dest: "/home/loretta/projects"
-    opts: "rw"
+    opts: "rw,comment=x-gvfs-hide"
+  - src: "192.168.86.90:/mnt/ssd-files/docs/paper"
+    dest: "/home/loretta/downloads/paperless"
+    opts: "rw,comment=x-gvfs-hide"

@@ -1,9 +1,5 @@
-{% for workstation in workstations %}
+{% for workstation in groups['workstations'] %}
 Host {{ workstation }}
-    HostName {{ workstation }}
-    User bill
-    IdentityFile /home/bill/.ssh/bill-{{ workstation }}
-
+  HostName {{ hostvars[workstation]['ansible_host'] | default(workstation) }}
+  User your_username
 {% endfor %}
-
-

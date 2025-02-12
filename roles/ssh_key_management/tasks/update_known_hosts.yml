@@ -6,8 +6,15 @@
     group: bill
     mode: '0700'
 
+- name: Build list of host addresses
+  set_fact:
+    host_addresses: "{{ host_addresses | default([]) + [(hostvars[item]['ansible_host'] | default(item))] }}"
+  with_items: "{{ groups['all'] }}"
+  run_once: true
+  delegate_to: localhost
+
 - name: Collect SSH host keys from all machines
-  shell: ssh-keyscan -H {{ groups['all'] | map('extract', hostvars, ['ansible_host']) | join(' ') }} 2>/dev/null
+  shell: ssh-keyscan -H {{ host_addresses | join(' ') }} 2>/dev/null
   register: ssh_host_keys
   changed_when: false
   failed_when: false
@@ -35,7 +42,6 @@
     group: bill
     mode: '0644'
   become: true
-#  become_user: bill
 
 - name: Remove temporary known_hosts file
   file:

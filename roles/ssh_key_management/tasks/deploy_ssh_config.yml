@@ -1,15 +1,9 @@
-- name: Update SSH client config on control machine
-  hosts: localhost
-  connection: local
-  become_user: bill
-  tasks:
-    - name: Generate SSH config from template
-      template:
-        src: ssh_config.j2
-        dest: /home/bill/.ssh/config
-        owner: bill
-        group: bill
-        mode: '0600'
-      loop: "{{ groups['workstations'] }}"
-      loop_control:
-        loop_var: ansible_hostname
+- name: Generate SSH config from template
+  template:
+    src: ssh_config.j2
+    dest: /home/bill/.ssh/config
+    owner: bill
+    group: bill
+    mode: '0600'
+  delegate_to: localhost
+  run_once: true

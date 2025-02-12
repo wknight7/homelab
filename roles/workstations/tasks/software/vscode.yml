@@ -7,6 +7,15 @@
     - vscode is defined
     - vscode == true
 
+- name: software | vscode | check if VSCode is installed
+  shell: dpkg -l | grep code
+  register: vscode_installed
+  ignore_errors: yes
+  when:
+    - ansible_distribution in ['Debian', 'Ubuntu']
+    - vscode is defined
+    - vscode == true
+
 - name: software | vscode | install VSCode deb package
   apt:
     deb: /tmp/code.deb
@@ -16,6 +25,7 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - vscode is defined
     - vscode == true
+    - vscode_installed.rc != 0
 
 - name: software | vscode | ensure dependencies are installed
   command: apt-get install -f -y
@@ -24,3 +34,4 @@
     - ansible_distribution in ['Debian', 'Ubuntu']
     - vscode is defined
     - vscode == true
+

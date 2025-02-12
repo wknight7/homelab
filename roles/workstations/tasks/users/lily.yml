@@ -65,21 +65,22 @@
 
 - name: users | lily | create media directories
   become: yes
-  become_user: lily
   file:
     path: /home/lily/{{ item.dir }}
     state: directory
-    owner: lily
+    owner: bill
     group: media
-    mode: 0770
+    mode: '0775'
   with_items:
-    - [ dir: 'media' ]
-    - [ dir: 'media/books' ]
-    - [ dir: 'media/movies' ]
-    - [ dir: 'media/tv' ]
-    - [ dir: 'media/music' ]
-    - [ dir: 'media/photos' ]
-    - [ dir: 'media/home_videos' ] 
+    - { dir: 'media' }
+    - { dir: 'media/books' }
+    - { dir: 'media/movies' }
+    - { dir: 'media/tv' }
+    - { dir: 'media/music' }
+    - { dir: 'media/photos' }
+    - { dir: 'media/home_videos' }
+  when: nfs_mounts is defined
+  ignore_errors: yes
 
 - name: users | lily | create paperless directory
   become: yes
@@ -87,72 +88,11 @@
   file:
     path: /home/lily/{{ item.dir }}
     state: directory
-    owner: lily
-    group: docs
-    mode: 0770
+    owner: bill
+    group: docs 
   with_items:
     - { dir: 'downloads/paperless' }
+  when: nfs_mounts is defined
+  ignore_errors: yes
 
-# - name: users | lily | copy personal config files
-#   tags: dotfiles,dotfiles-lily
-#   copy:
-#     src: users/lily/{{ item.src }}
-#     dest: /home/lily/{{ item.dest }}
-#     owner: lily
-#     group: lily
-#     mode: 0600
-#   with_items:
-#     - { src: 'asunder', dest: '.asunder' }
-#     - { src: 'bpytop.conf', dest: '.config/bpytop/bpytop.conf' }
-#     - { src: 'directory_bookmarks', dest: '.config/gtk-3.0/bookmarks' }
-#     - { src: 'gvimrc', dest: '.gvimrc' }
-#     - { src: 'mimeapps.list', dest: '.config/mimeapps.list' }
-#     - { src: 'ssh_client_config', dest: '.ssh/config' }
-#     - { src: 'terminator_config', dest: '.config/terminator/config' }
 
-# - name: users | lily | copy profile image
-#   tags: dotfiles,dotfiles-lily
-#   copy:
-#     src: users/lily/profile_image.JPEG
-#     dest: /var/lib/AccountsService/icons/lily.JPEG
-#     owner: root
-#     group: root
-#     mode: 0644
-
-- name: Copy the new user photo to the appropriate directory
-  copy:
-    src: /home/bill/git/homelab/roles/workstations/files/users/lily/profile_image.JPEG
-    dest: /var/lib/AccountsService/icons/lily.JPEG
-    owner: root
-    group: root
-    mode: '0644'
-  become: yes
-
-- name: Copy the user photo to GNOME user settings directory
-  copy:
-    src: /var/lib/AccountsService/icons/lily.JPEG
-    dest: /home/lily/.face
-    owner: lily
-    group: lily
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: lily
-
-- name: Copy the user photo to GNOME user settings icon
-  copy:
-    src: /var/lib/AccountsService/icons/lily.JPEG
-    dest: /home/lily/.face.icon
-    owner: lily
-    group: lily
-    mode: '0644'
-    remote_src: yes
-  become: yes
-  become_user: lily
-
-- name: Set the user photo using dconf
-  become: yes
-  become_user: lily
-  dconf:
-    key: "/org/gnome/login-screen/logo"
-    value: "'file:///var/lib/AccountsService/icons/lily.JPEG'"
