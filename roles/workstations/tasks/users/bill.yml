@@ -22,62 +22,37 @@
     - 'hal:hal'
     - 'projects'
 
-- name: users | bill | create personal directories
+- name: Set up Bill's directories
+  vars:
+    bill_directories:
+      - { path: '.ansible', mode: '0700', group: 'bill' }
+      - { path: '.bash', mode: '0700', group: 'bill' }
+      - { path: 'code', mode: '0700', group: 'bill' }
+      - { path: '.config', mode: '0700', group: 'bill' }
+      - { path: '.config/autostart', mode: '0700', group: 'bill' }
+      - { path: '.config/bpytop', mode: '0700', group: 'bill' }
+      - { path: '.config/gtk-3.0', mode: '0700', group: 'bill' }
+      - { path: '.config/terminator', mode: '0700', group: 'bill' }
+      - { path: 'desktop', mode: '0700', group: 'bill' }
+      - { path: 'documents', mode: '0700', group: 'bill' }
+      - { path: 'downloads', mode: '0700', group: 'bill' }
+      - { path: 'git', mode: '0700', group: 'bill' }
+      - { path: '.local', mode: '0700', group: 'bill' }
+      - { path: '.local/share', mode: '0700', group: 'bill' }
+      - { path: '.local/share/applications', mode: '0700', group: 'bill' }
+      - { path: '.bin', mode: '0700', group: 'bill' }
+      - { path: 'media', mode: '0775', group: 'media' } 
+      - { path: 'downloads/paperless', mode: '0775', group: 'docs' }
   become: yes
   become_user: bill
   file:
-    path: /home/bill/{{ item.dir }}
+    path: "/home/bill/{{ item.path }}"
     state: directory
     owner: bill
-    group: bill
-    mode: 0700
-  with_items:
-    - { dir: '.ansible' }
-    - { dir: '.bash' }
-    - { dir: 'code' }
-    - { dir: '.config' }
-    - { dir: .config/autostart }
-    - { dir: .config/bpytop }
-    - { dir: .config/gtk-3.0 }
-    - { dir: .config/terminator }
-    - { dir: 'desktop' }
-    - { dir: 'documents' }
-    - { dir: 'downloads' }    
-    - { dir: 'git' }
-    - { dir: .local }
-    - { dir: .local/share }
-    - { dir: .local/share/applications }
-    - { dir: .bin }
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  loop: "{{ bill_directories }}"
 
-- name: users | bill | create media directories
-  become: yes
-  become_user: bill
-  file:
-    path: /home/bill/{{ item.dir }}
-    state: directory
-    owner: bill
-    group: media
-    mode: 0775
-  with_items:
-    - [ dir: 'media' ]
-    - [ dir: 'media/books' ]
-    - [ dir: 'media/movies' ]
-    - [ dir: 'media/tv' ]
-    - [ dir: 'media/music' ]
-    - [ dir: 'media/photos' ]
-    - [ dir: 'media/home_videos' ]
-
-- name: users | bill | create paperless directories
-  become: yes
-  become_user: bill
-  file:
-    path: /home/bill/{{ item.dir }}
-    state: directory
-    owner: bill
-    group: docs
-    mode: 0775
-  with_items:
-    - { dir: 'downloads/paperless' }
 
 - name: users | bill | copy personal config files
   tags: dotfiles,dotfiles-bill

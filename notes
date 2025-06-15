@@ -1,0 +1,4 @@
+This is the output I got from the command:  
+
+<string>:1: DeprecationWarning: 'crypt' is deprecated and slated for removal in Python 3.13
+$6$/d1wxuXcWzHSg691$6Za5O0sSwJWe9EbVW4X7RwYTOjIxkuQyIL5s/lfbJzVevVfHfH17hbeUNiK43rH0Vi0YMKeT8brobReAqZIqb.

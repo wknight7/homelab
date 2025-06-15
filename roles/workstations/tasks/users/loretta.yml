@@ -26,10 +26,8 @@
     - '&&'
     - '0700'
     - 'loretta:loretta'
-    - 'code'
     - 'chmod'
     - 'chown'
-    - 'git'
     - 'hal:hal'
     - 'Public'
     - 'Templates'
@@ -39,8 +37,10 @@
     - 'Music'
     - 'Pictures'
     - 'Downloads'
-    - 'projects'
     - 'bin'
+    - 'code'
+    - 'git'
+    - 'projects' 
 
 - name: users | loretta | create desired directories
   become: yes
@@ -60,29 +60,20 @@
     - { dir: .config/terminator }
     - { dir: 'desktop' }
     - { dir: 'documents' }
-    - { dir: 'downloads' }        
+    - { dir: 'downloads' }    
     - { dir: .local }
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
 
-- name: users | loretta | create media directories
+- name: users | loretta | create media directory
   become: yes
-  become_user: loretta
   file:
-    path: /home/loretta/{{ item.dir }}
+    path: /home/loretta/media
     state: directory
     owner: bill
     group: media
-    mode: '0775'
-  with_items:
-    - { dir: 'media' }
-    - { dir: 'media/books' }
-    - { dir: 'media/movies' }
-    - { dir: 'media/tv' }
-    - { dir: 'media/music' }
-    - { dir: 'media/photos' }
-    - { dir: 'media/home_videos' }
+    mode: '0775'  
   when: nfs_mounts is defined
   ignore_errors: yes
 
@@ -90,11 +81,12 @@
   become: yes
   become_user: loretta
   file:
-    path: /home/loretta/{{ item.dir }}
+    path: /home/loretta/paperless 
     state: directory
     owner: bill
-    group: docs
-  with_items:
-    - { dir: 'downloads/paperless' } 
+    group: docs   
   when: nfs_mounts is defined
   ignore_errors: yes
+
+
+ 

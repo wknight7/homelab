@@ -38,6 +38,9 @@
     - 'Pictures'
     - 'Downloads'
     - 'bin'
+    - 'code'
+    - 'git'
+    - 'projects' 
 
 - name: users | lily | create desired directories
   become: yes
@@ -57,28 +60,20 @@
     - { dir: .config/terminator }
     - { dir: 'desktop' }
     - { dir: 'documents' }
-    - { dir: 'downloads' }        
+    - { dir: 'downloads' }    
     - { dir: .local }
     - { dir: .local/share }
     - { dir: .local/share/applications }
     - { dir: .bin }
 
-- name: users | lily | create media directories
+- name: users | lily | create media directory
   become: yes
   file:
-    path: /home/lily/{{ item.dir }}
+    path: /home/lily/media
     state: directory
     owner: bill
     group: media
-    mode: '0775'
-  with_items:
-    - { dir: 'media' }
-    - { dir: 'media/books' }
-    - { dir: 'media/movies' }
-    - { dir: 'media/tv' }
-    - { dir: 'media/music' }
-    - { dir: 'media/photos' }
-    - { dir: 'media/home_videos' }
+    mode: '0775'  
   when: nfs_mounts is defined
   ignore_errors: yes
 
@@ -86,12 +81,10 @@
   become: yes
   become_user: lily
   file:
-    path: /home/lily/{{ item.dir }}
+    path: /home/lily/paperless 
     state: directory
     owner: bill
-    group: docs 
-  with_items:
-    - { dir: 'downloads/paperless' }
+    group: docs   
   when: nfs_mounts is defined
   ignore_errors: yes
 
